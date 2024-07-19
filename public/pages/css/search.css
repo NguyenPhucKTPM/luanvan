@@ -1,0 +1,52 @@
+.action-menu .search-bar {
+    width: 35px;
+    height: 35px;
+    background: #0e4582;
+    border-radius: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: 0.3s width cubic-bezier(0, 0.75, 0.49, 0.99);
+    overflow: hidden; /* Ẩn phần tràn */
+}
+#header-wrap .action-menu {
+    display: inline-block;
+    align-items: baseline;
+}
+#header-wrap .search-button {
+    order: 1;
+    padding-right: 10px;
+    padding-left: 10px;
+    text-decoration: none;
+    color: red;
+}
+#header-wrap .search-bar form {
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+.search-bar.active {
+    width: 300px; 
+}
+.search-bar.active .search-input {
+    display: block;
+}
+.search-bar .search-input {
+    width: 250px;
+    border: 0;
+    margin-bottom: 0;
+    font-weight: 300;
+    padding-left: 20px;
+    background: #0e4582;
+    display: none; /* Ẩn input ban đầu */
+}
+.search-bar i {
+    font-size: 13px;
+    color: #fff;
+}
+.search-field {
+    border: none; 
+    outline: none; 
+    box-shadow: none;
+}

@@ -1,0 +1,36 @@
+@media (min-width: 1200px) {
+    .col-xl-9 {
+        flex: 0 0 auto;
+        width: 75%;
+    }
+}
+.card-body {
+    border: 1px solid #ebe9f1;
+    box-shadow: none;
+    border-radius: 5px ;
+}
+.info-card{
+    margin-left: 1rem;
+    margin-bottom: 10px;
+}
+.user-total-numbers {
+    margin-top: 2.428rem;
+}
+.user-info-title{
+    color: #0e4582;
+}
+.user-info-title {
+    width: 11.785rem;
+}
+.user-total-numbers .color-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2.714rem;
+    width: 2.714rem;
+    border-radius: 0.357rem;
+}
+.bg-light-primary {
+    background: rgba(85, 109, 247, 0.541) !important;
+    color: #0e4582 !important;
+}

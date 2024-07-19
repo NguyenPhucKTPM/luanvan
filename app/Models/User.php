@@ -2,11 +2,13 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class User extends Authenticatable
 {
@@ -18,11 +20,21 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'tenNguoiDung',
+        'ngaySinh',
+        'gioiTinh',
+        'diaChi',
+        'SDT',
         'email',
         'password',
+        'soViPham',
+        'id_TrangThai',
+        'id_VaiTro',
+        'ngayTaoNguoiDung',
+        'ngaySuaNguoiDung',
     ];
 
+    public $timestamps = false;
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -40,6 +52,37 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'password' => 'hashed',
     ];
+
+    /**
+     * Get the password for the user.
+     *
+     * @return string
+     */
+    public function getAuthPassword()
+    {
+        return $this->password;
+    }
+
+    /**
+     * Get the user name for the user.
+     *
+     * @return string
+     */
+    public function getAuthIdentifierName()
+    {
+        return 'email';
+    }
+
+    
+    protected $table = 'nguoiDung';
+    protected $primaryKey = 'id_NguoiDung'; 
+
+    public static function getInformationSessionUser($id){
+            return DB::table('nguoiDung')
+            -> join('vaiTro','nguoiDung.id_VaiTro','=','vaiTro.id_VaiTro')
+            -> join('trangThai','nguoiDung.id_TrangThai','=','trangThai.id_TrangThai')
+            ->where('nguoiDung.id_NguoiDung', $id)
+            ->first();       
+    }
 }
