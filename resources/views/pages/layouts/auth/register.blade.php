@@ -178,6 +178,18 @@
                                             {{$errors->first('gioiTinh')}}</span>
                                         @endif
                                     </div>
+                                    <!-- Vai trò -->
+                                    <div class="mb-1">
+                                        <label for="id_VaiTro" class="form-label">Chọn vai trò</label>
+                                        <select name="id_VaiTro" id="id_VaiTro" class="form-control">
+                                            <option value="4">Sinh viên</option>
+                                            <option value="3">Giảng viên</option>
+                                        </select>
+                                        @if($errors->has('id_VaiTro'))
+                                        <span class="error-message text-danger">*
+                                            {{$errors->first('id_VaiTro')}}</span>
+                                        @endif
+                                    </div>
 
                                     <!-- dia chi -->
                                     <div class="mb-1">

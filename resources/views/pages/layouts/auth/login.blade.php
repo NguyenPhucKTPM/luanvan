@@ -5,6 +5,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="shortcut icon" type="image/x-icon" href="pages/images/logo.png">
+    <title>{{$title}}</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0,minimal-ui">
     <meta name="description"
@@ -82,7 +83,7 @@
                                     <div class=" mb-1">
                                         <div class="d-flex justify-content-between">
                                             <label class="form-label" for="login-password">Mật khẩu</label>
-                                            <a href="page-auth-forgot-password-v1.html">
+                                            <a href="{{route('forgot')}}">
                                                 <small>Quên mật khẩu?</small>
                                             </a>
                                         </div>
@@ -118,7 +119,7 @@
 
                                 <p class="text-center mt-2">
                                     <span>Bạn chưa có tài khoản?</span>
-                                    <a href="#">
+                                    <a href="{{route('dang-ky')}}">
                                         <span>Đăng ký ngay tại đây</span>
                                     </a>
                                 </p>

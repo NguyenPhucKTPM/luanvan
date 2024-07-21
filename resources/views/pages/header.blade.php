@@ -55,6 +55,7 @@
                         aria-haspopup="true" aria-expanded="false">{{$user->tenNguoiDung}}</a>
                     <div class="dropdown-menu" aria-labelledby="taikhoan">
                         <a class="dropdown-item" href="{{route('thong-tin')}}">Xem thông tin</a>
+                        <a class="dropdown-item" href="{{route('newPassword')}}">Đổi mật khẩu</a>
                         <a class="dropdown-item" href="{{route('dang-xuat')}}">Đăng xuất</a>
                     </div>
                 </li>

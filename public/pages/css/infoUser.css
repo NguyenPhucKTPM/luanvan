@@ -11,7 +11,6 @@
 }
 .info-card{
     margin-left: 1rem;
-    margin-bottom: 10px;
 }
 .user-total-numbers {
     margin-top: 2.428rem;
@@ -33,4 +32,21 @@
 .bg-light-primary {
     background: rgba(85, 109, 247, 0.541) !important;
     color: #0e4582 !important;
+}
+.form-check-inline {
+    display: inline-block;
+    margin-right: 1rem;
+}
+.form-check-input:not(:disabled):checked {
+    box-shadow: 0 2px 4px 0 rgba(81, 119, 243, 0.596);
+}
+.form-check-input:checked[type="radio"] {
+    background-image: none;
+}
+.form-check-input:checked {
+    background-color: #0e4582;
+    border-color: #0e4582;
+}
+.form-check-input[type="radio"] {
+    border-radius: 50%;
 }

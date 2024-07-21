@@ -34,10 +34,11 @@ class RegisterRequest extends FormRequest
             ],
             'rePassword' => ['required', new ConfirmPassword],
             'tenNguoiDung' => 'required|string|max:255',
-            'ngaySinh' => 'required',
+            'ngaySinh' => 'required|date_format:Y-m-d',
             'SDT' => 'required|numeric|digits:10|unique:nguoiDung',
-            'gioiTinh' => 'required',
+            'gioiTinh' => 'required|in:Nam,Nữ',
             'diaChi' => 'required|string|max:255',
+            'id_VaiTro' => 'required|in:3,4',
         ];
     }
 
@@ -69,6 +70,7 @@ class RegisterRequest extends FormRequest
             'tenNguoiDung.max' => 'Tên người dùng không được vượt quá 255 ký tự.',
 
             'ngaySinh.required' => 'Ngày sinh là bắt buộc.',
+            'ngaySinh.date_format' => 'Ngày sinh phải có định dạng YYYY-MM-DD.',
 
             'SDT.required' => 'Số điện thoại là bắt buộc.',
             'SDT.numeric' => 'Số điện thoại phải là số.',
@@ -76,10 +78,14 @@ class RegisterRequest extends FormRequest
             'SDT.unique' => 'Số điện thoại đã tồn tại trong hệ thống.',
 
             'gioiTinh.required' => 'Giới tính là bắt buộc.',
+            'gioiTinh.in' => 'Giới tính phải là "Nam" hoặc "Nữ".',
             
             'diaChi.required' => 'Địa chỉ là bắt buộc.',
             'diaChi.string' => 'Địa chỉ phải là chuỗi ký tự.',
             'diaChi.max' => 'Địa chỉ không được vượt quá 255 ký tự.',
+
+            'id_VaiTro.required' => 'Bạn phải chọn vai trò.',
+            'id_VaiTro.in' => 'Chỉ được chọn là sinh viên hoặc giảng viên',
         ];
     }
 }
