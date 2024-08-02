@@ -4,6 +4,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\AuthController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\UserController;
+use App\Http\Controllers\Backend\CourseController;
+use App\Http\Controllers\Backend\FacultyController;
+
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,9 +49,22 @@ Route::middleware(['logged'])->group(function () {
 
 //khi chưa đăng nhập không được phép đến trang này
 Route::middleware(['checkLogin'])->group(function () {
-    Route::get('/thong-ke', [DashboardController::class, 'index'])->middleware('role:1,2')->name('dashboard');
-    Route::get('/danh-muc', [DashboardController::class, 'dm'])->name('categories');
 
+    //admin
+    Route::get('/thong-ke', [DashboardController::class, 'index'])->middleware('role:1,2')->name('dashboard');
+    Route::get('/danh-sach-nguoi-dung', [UserController::class, 'listUser'])->middleware('role:1')->name('listUser');
+        
+    Route::get('/danh-sach-khoa-hoc', [CourseController::class, 'listCourse'])->middleware('role:1')->name('listCourse');
+    Route::post('/them-khoa-hoc', [CourseController::class, 'addCourse'])->middleware('role:1')->name('addCourse');
+    Route::post('/sua-khoa-hoc', [CourseController::class, 'editCourse'])->middleware('role:1')->name('editCourse');
+    Route::delete('/xoa-khoa-hoc/{id}', [CourseController::class, 'deleteCourse'])->middleware('role:1')->name('deleteCourse');
+
+    Route::get('/danh-sach-khoa', [FacultyController::class, 'listFaculty'])->middleware('role:1')->name('listFaculty');
+    Route::post('/them-khoa', [FacultyController::class, 'addFaculty'])->middleware('role:1')->name('addFaculty');
+    Route::post('/sua-khoa', [FacultyController::class, 'editFaculty'])->middleware('role:1')->name('editFaculty');
+    Route::delete('/xoa-khoa/{id}', [FacultyController::class, 'deleteFaculty'])->middleware('role:1')->name('deleteFaculty');
+
+    
     Route::get('/chi-tiet-thong-tin', [UserController::class, 'myInfoSessionUser'])->name('thong-tin');
 
     Route::post('/gui-xac-nhan-email', [AuthController::class, 'sendEmailVerify'])->name('confirmEmail');
@@ -63,7 +80,7 @@ Route::middleware(['checkLogin'])->group(function () {
 
 
 
-Route::get('/a', [UserController::class, 'getInformationSessionUser']);
+Route::get('/aa', [DashboardController::class, 'a']);
 // Route::get('/aa', [UserController::class, 'test']);
 
 Route::get('/dang-xuat', [AuthController::class, 'logout'])->name('dang-xuat');

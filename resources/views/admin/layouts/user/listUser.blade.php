@@ -1,68 +1,6 @@
 @extends('admin.main')
 @section('layouts')
-<div class="content-header row">
-    <div class="content-header-left col-md-9 col-12 mb-2">
-        <div class="row breadcrumbs-top">
-            <div class="col-12">
-                <h2 class="content-header-title float-start mb-0">DataTables</h2>
-                <div class="breadcrumb-wrapper">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html">Home</a>
-                        </li>
-                        <li class="breadcrumb-item"><a href="#">Datatable</a>
-                        </li>
-                        <li class="breadcrumb-item active">Basic
-                        </li>
-                    </ol>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="content-header-right text-md-end col-md-3 col-12 d-md-block d-none">
-        <div class="mb-1 breadcrumb-right">
-            <div class="dropdown">
-                <button
-                    class="btn-icon btn btn-primary btn-round btn-sm dropdown-toggle waves-effect waves-float waves-light"
-                    type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><svg
-                        xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                        class="feather feather-grid">
-                        <rect x="3" y="3" width="7" height="7"></rect>
-                        <rect x="14" y="3" width="7" height="7"></rect>
-                        <rect x="14" y="14" width="7" height="7"></rect>
-                        <rect x="3" y="14" width="7" height="7"></rect>
-                    </svg></button>
-                <div class="dropdown-menu dropdown-menu-end"><a class="dropdown-item" href="app-todo.html"><svg
-                            xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                            class="feather feather-check-square me-1">
-                            <polyline points="9 11 12 14 22 4"></polyline>
-                            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
-                        </svg><span class="align-middle">Todo</span></a><a class="dropdown-item"
-                        href="app-chat.html"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
-                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                            stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-square me-1">
-                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-                        </svg><span class="align-middle">Chat</span></a><a class="dropdown-item"
-                        href="app-email.html"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
-                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                            stroke-linecap="round" stroke-linejoin="round" class="feather feather-mail me-1">
-                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
-                            </path>
-                            <polyline points="22,6 12,13 2,6"></polyline>
-                        </svg><span class="align-middle">Email</span></a><a class="dropdown-item"
-                        href="app-calendar.html"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
-                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                            stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar me-1">
-                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                            <line x1="16" y1="2" x2="16" y2="6"></line>
-                            <line x1="8" y1="2" x2="8" y2="6"></line>
-                            <line x1="3" y1="10" x2="21" y2="10"></line>
-                        </svg><span class="align-middle">Calendar</span></a></div>
-            </div>
-        </div>
-    </div>
-</div>
+
 <div class="content-body">
     <!-- Basic table -->
     <section id="basic-datatable">
@@ -121,6 +59,7 @@
                                 </div>
                             </div>
                         </div>
+
                         <table class="datatables-basic table dataTable no-footer dtr-column" id="DataTables_Table_0"
                             role="grid" aria-describedby="DataTables_Table_0_info" style="width: 1443px;">
                             <thead>
@@ -142,9 +81,10 @@
                                     <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
                                         colspan="1" style="width: 138px;"
                                         aria-label="Date: activate to sort column ascending">Date</th>
-                                    <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
-                                        colspan="1" style="width: 175px;"
-                                        aria-label="Salary: activate to sort column ascending">Salary</th>
+                                    <th class="sorting sorting_asc" tabindex="0" aria-controls="DataTables_Table_0"
+                                        rowspan="1" colspan="1" style="width: 175px;"
+                                        aria-label="Salary: activate to sort column descending" aria-sort="ascending">
+                                        Salary</th>
                                     <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
                                         colspan="1" style="width: 169px;"
                                         aria-label="Status: activate to sort column ascending">Status</th>
@@ -162,31 +102,29 @@
                                     </td>
                                     <td>
                                         <div class="d-flex justify-content-left align-items-center">
-                                            <div class="avatar  me-1"><span class="avatar-content">E</span>
-                                            </div>
+                                            <div class="avatar  me-1"><span class="avatar-content">S</span></div>
                                             <div class="d-flex flex-column"><span
-                                                    class="emp_name text-truncate fw-bold">ưewewew</span><small
-                                                    class="emp_post text-truncate text-muted">22222</small>
-                                            </div>
+                                                    class="emp_name text-truncate fw-bold">sedff</span><small
+                                                    class="emp_post text-truncate text-muted">dsfdsf</small></div>
                                         </div>
                                     </td>
-                                    <td>phuc@gmail.com</td>
-                                    <td>07/24/2024</td>
-                                    <td>$12</td>
+                                    <td class="sorting_1">dsfsd</td>
+                                    <td>07/02/2024</td>
+                                    <td>$df</td>
                                     <td><span class="badge rounded-pill  badge-light-info">Applied</span></td>
                                     <td>
                                         <div class="d-inline-flex"><a
                                                 class="pe-1 dropdown-toggle hide-arrow text-primary"
-                                                data-bs-toggle="dropdown" aria-expanded="false"><svg
-                                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                data-bs-toggle="dropdown"><svg xmlns="http://www.w3.org/2000/svg"
+                                                    width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                    stroke-linejoin="round"
                                                     class="feather feather-more-vertical font-small-4">
                                                     <circle cx="12" cy="12" r="1"></circle>
                                                     <circle cx="12" cy="5" r="1"></circle>
                                                     <circle cx="12" cy="19" r="1"></circle>
                                                 </svg></a>
-                                            <div class="dropdown-menu dropdown-menu-end" style=""><a href="javascript:;"
+                                            <div class="dropdown-menu dropdown-menu-end"><a href="javascript:;"
                                                     class="dropdown-item"><svg xmlns="http://www.w3.org/2000/svg"
                                                         width="24" height="24" viewBox="0 0 24 24" fill="none"
                                                         stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -231,11 +169,10 @@
                                                 </path>
                                             </svg></a>
                                     </td>
-
                                 </tr>
-
                             </tbody>
                         </table>
+
                         <div class="d-flex justify-content-between mx-0 row">
                             <div class="col-sm-12 col-md-6">
                                 <div class="dataTables_info" id="DataTables_Table_0_info" role="status"
@@ -289,9 +226,10 @@
                             <small class="form-text"> You can use letters, numbers &amp; periods </small>
                         </div>
                         <div class="mb-1">
-                            <label class="form-label" for="basic-icon-default-date">Joining Date</label>
-                            <input type="text" class="form-control dt-date flatpickr-input" id="basic-icon-default-date"
-                                placeholder="MM/DD/YYYY" aria-label="MM/DD/YYYY" readonly="readonly">
+                            <label class="form-label" for="fp-default">Joining Date</label>
+                            <input type="text" id="fp-default" name="ngaySinh"
+                                class="form-control flatpickr-basic flatpickr-input active" placeholder="YYYY-MM-DD"
+                                readonly="readonly">
                         </div>
                         <div class="mb-4">
                             <label class="form-label" for="basic-icon-default-salary">Salary</label>

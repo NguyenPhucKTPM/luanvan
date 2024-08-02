@@ -65,4 +65,9 @@ class UserController extends Controller
       $user->update($data);
       return redirect()->route('thay-doi')->with('success', 'Cập nhật thông tin thành công');
     }
-}
+    
+    //admin
+    public function listUser(){
+      return view('admin.layouts.user.listUser',['title' => 'Danh sách người dùng']);
+    }
+} 

@@ -1,4 +1,4 @@
-<swiper-container class="mySwiper" pagination="true" pagination-clickable="true" navigation="true" space-between="30"
+<!-- <swiper-container class="mySwiper" pagination="true" pagination-clickable="true" navigation="true" space-between="30"
     centered-slides="true" autoplay-delay="2500" autoplay-disable-on-interaction="false" loop="true">
     <swiper-slide>
         <img src="{{asset('pages/images/slide1.jpg')}}" alt="">
@@ -9,7 +9,7 @@
     <swiper-slide>
         <img src="{{asset('pages/images/slide3.png')}}" alt="">
     </swiper-slide>
-</swiper-container>
+</swiper-container> -->
 
 <section class="ftco-section ftco-no-pt ftco-no-pb">
     <div class="container">

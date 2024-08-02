@@ -1823,7 +1823,7 @@ textarea.form-control-lg {
   appearance: none; }
 
 .form-select:focus {
-  border-color: #7367f0;
+  border-color: #0e4582;
   outline: 0;
   box-shadow: 0 3px 10px 0 rgba(34, 41, 47, 0.1); }
 
