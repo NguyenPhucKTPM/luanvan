@@ -100,7 +100,10 @@ class AuthController extends Controller
         
         session(['verification_token' => $token]);
     
-        Mail::to($user->email)->send(new VerifyEmail($token))->subject('Xác nhận email');
+        Mail::send('email.verify', ['token' => $token], function ($message) use ($user) {
+            $message->to($user->email)
+                    ->subject('Xác nhận'); 
+        });
         return redirect()->route('thong-tin')->with('success', 'Email xác nhận đã được gửi');
      }
      
@@ -133,7 +136,8 @@ class AuthController extends Controller
         Session::put('verification_code_created_at', now());
         Session::put(['email' => $email]);
         Mail::send('email.sendCode', ['code' => $code], function ($message) use ($request) {
-            $message->to($request->email)->subject('Mã xác nhận');
+            $message->to($request->email)
+                    ->subject('Mã xác nhận');
         });
         return redirect()->route('code')->with('success', 'Mã xác nhận đã được gửi qua email: '.$request->email);
     }
@@ -161,7 +165,8 @@ class AuthController extends Controller
         $user->password = Hash::make($newPassword);
         $user->save();
         Mail::send('email.sendNewPassword', ['password' => $newPassword], function ($message) use ($user) {
-            $message->to($user->email)->subject('Mật khẩu mới');
+            $message->to($user->email)
+                    ->subject('Mật khẩu mới');
         });
         Session::forget('verification_code');
         Session::forget('verification_code_created_at');

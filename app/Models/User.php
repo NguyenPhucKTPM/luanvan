@@ -74,44 +74,76 @@ class User extends Authenticatable
         return 'email';
     }
 
-    
-    protected $table = 'nguoiDung';
-    protected $primaryKey = 'id_NguoiDung'; 
 
-    
-    public static function getInformationSessionUser($id){
-            return DB::table('nguoiDung')
-            ->join('vaiTro','nguoiDung.id_VaiTro','=','vaiTro.id_VaiTro')
-            ->join('trangThai','nguoiDung.id_TrangThai','=','trangThai.id_TrangThai')
+    protected $table = 'nguoiDung';
+    protected $primaryKey = 'id_NguoiDung';
+
+
+    public static function getInformationSessionUser($id)
+    {
+        return DB::table('nguoiDung')
+            ->join('vaiTro', 'nguoiDung.id_VaiTro', '=', 'vaiTro.id_VaiTro')
+            ->join('trangThai', 'nguoiDung.id_TrangThai', '=', 'trangThai.id_TrangThai')
             ->where('nguoiDung.id_NguoiDung', $id)
-            ->first();       
+            ->first();
     }
-    public static function getInformationSessionStudent($id){
+    public static function getInformationSessionStudent($id)
+    {
         return DB::table('nguoidung')
-        ->join('sinhvien','nguoiDung.id_NguoiDung','=','sinhvien.id_NguoiDung')
-        ->join('khoa','sinhvien.id_Khoa','=','khoa.id_Khoa')
-        ->join('khoaHoc','sinhvien.id_KhoaHoc','=','khoaHoc.id_KhoaHoc')
-        ->join('lop','sinhvien.id_Lop','=','lop.id_Lop')
-        ->where('nguoiDung.id_NguoiDung', $id)
-        ->select(
-            'nguoiDung.*',
-            'sinhVien.maSinhVien',
-            'khoa.tenKhoa',
-            'khoaHoc.tenKhoaHoc',
-            'lop.tenLop',
-        )
-        ->first(); 
+            ->join('sinhvien', 'nguoiDung.id_NguoiDung', '=', 'sinhvien.id_NguoiDung')
+            ->join('khoa', 'sinhvien.id_Khoa', '=', 'khoa.id_Khoa')
+            ->join('khoaHoc', 'sinhvien.id_KhoaHoc', '=', 'khoaHoc.id_KhoaHoc')
+            ->join('lop', 'sinhvien.id_Lop', '=', 'lop.id_Lop')
+            ->where('nguoiDung.id_NguoiDung', $id)
+            ->select(
+                'nguoiDung.*',
+                'sinhVien.maSinhVien',
+                'khoa.tenKhoa',
+                'khoa.id_Khoa',
+                'khoaHoc.tenKhoaHoc',
+                'khoaHoc.id_KhoaHoc',
+                'lop.tenLop',
+                'lop.id_Lop',
+            )
+            ->first();
     }
-    public static function getInformationSessionLecturers($id){
+    public static function getInformationSessionLecturers($id)
+    {
         return DB::table('nguoidung')
-        ->join('giangvien','nguoiDung.id_NguoiDung','=','giangvien.id_NguoiDung')
-        ->join('khoa','giangvien.id_Khoa','=','khoa.id_Khoa')
-        ->where('nguoiDung.id_NguoiDung', $id)
-        ->select(
-            'nguoiDung.*',
-            'giangvien.maGiangVien',
-            'khoa.tenKhoa',
-        )
-        ->first(); 
+            ->join('giangvien', 'nguoiDung.id_NguoiDung', '=', 'giangvien.id_NguoiDung')
+            ->join('khoa', 'giangvien.id_Khoa', '=', 'khoa.id_Khoa')
+            ->where('nguoiDung.id_NguoiDung', $id)
+            ->select(
+                'nguoiDung.*',
+                'giangvien.maGiangVien',
+                'khoa.tenKhoa',
+                'khoa.id_Khoa',
+            )
+            ->first();
+    }
+    public function getIdByRole()
+    {
+        $user = Auth::user();
+        $id = $user->id_NguoiDung;
+
+        if ($user->id_VaiTro == 2) {
+            $data = DB::table('thuThu')
+                ->where('id_NguoiDung', $id)
+                ->first();
+            $idUserByRole = $data->id_ThuThu;
+        }
+        if ($user->id_VaiTro == 3) {
+            $data = DB::table('giangVien')
+                ->where('id_NguoiDung', $id)
+                ->first();
+            $idUserByRole = $data->id_GiangVien;
+        }
+        if ($user->id_VaiTro == 4) {
+            $data = DB::table('sinhVien')
+                ->where('id_NguoiDung', $id)
+                ->first();
+            $idUserByRole = $data->id_SinhVien;
+        }
+        return $data ? $idUserByRole : null;
     }
 }

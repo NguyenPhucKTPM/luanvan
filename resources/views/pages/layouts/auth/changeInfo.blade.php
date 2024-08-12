@@ -92,6 +92,73 @@
                             </div>
 
                             <div class="w-100"></div>
+                            <!-- khoa, khóa học, lớp -->
+                            @if(isset($infoRole))
+                            <div class="{{$user -> id_VaiTro == 4 ? 'col-md-4' : 'col-md-12'}}">
+                            <div class="form-group">
+                                    <label for="id_Khoa">Khoa
+                                    @if ($errors->has('id_Khoa'))
+                                        <span class="text-danger ml-2">
+                                            *{{ $errors->first('id_Khoa') }}
+                                        </span>
+                                        @endif
+                                    </label>
+                                    <div class="select-wrap">
+                                        <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+                                        <select name="id_Khoa" id="id_Khoa" class="form-control">
+                                            <option value="{{$infoRole -> id_Khoa}}">{{$infoRole -> tenKhoa}}</option>
+                                            @foreach ($faculties as $data)
+                                            <option value="{{$data -> id_Khoa}}">{{$data -> tenKhoa}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            @if($user -> id_VaiTro == 4)
+                            <div class="col-md-4">
+                            <div class="form-group">
+                                    <label for="id_KhoaHoc">Khóa học
+                                        @if ($errors->has('id_KhoaHoc'))
+                                        <span class="text-danger ml-2">
+                                            *{{ $errors->first('id_KhoaHoc') }}
+                                        </span>
+                                        @endif
+                                    </label>
+                                    <div class="select-wrap">
+                                        <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+                                        <select name="id_KhoaHoc" id="id_KhoaHoc" class="form-control">
+                                            <option value="{{$infoRole -> id_KhoaHoc}}">{{$infoRole -> tenKhoaHoc}}</option>
+                                            @foreach ($courses as $data)
+                                            <option value="{{$data -> id_KhoaHoc}}">{{$data -> tenKhoaHoc}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                            <div class="form-group">
+                                    <label for="id_Lop">Lớp học
+                                        @if ($errors->has('id_Lop'))
+                                        <span class="text-danger ml-2">
+                                            *{{ $errors->first('id_Lop') }}
+                                        </span>
+                                        @endif
+                                    </label>
+                                    <div class="select-wrap">
+                                        <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+                                        <select name="id_Lop" id="id_Lop" class="form-control">
+                                            <option value="{{$infoRole -> id_Lop}}">{{$infoRole -> tenLop}}</option>
+                                            @foreach ($classRoom as $data)
+                                            <option value="{{$data -> id_Lop}}">{{$data -> tenLop}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            @endif
+                            @endif
+                            <div class="w-100"></div>
+
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="diaChi">Địa chỉ

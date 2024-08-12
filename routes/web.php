@@ -6,6 +6,7 @@ use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Backend\CourseController;
 use App\Http\Controllers\Backend\FacultyController;
+use App\Http\Controllers\Backend\ClassRoomController;
 
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
@@ -64,7 +65,11 @@ Route::middleware(['checkLogin'])->group(function () {
     Route::post('/sua-khoa', [FacultyController::class, 'editFaculty'])->middleware('role:1')->name('editFaculty');
     Route::delete('/xoa-khoa/{id}', [FacultyController::class, 'deleteFaculty'])->middleware('role:1')->name('deleteFaculty');
 
-    
+    Route::get('/danh-sach-lop', [ClassRoomController::class, 'listClassRoom'])->middleware('role:1')->name('listClassRoom');
+    Route::post('/them-lop', [ClassRoomController::class, 'addClassRoom'])->middleware('role:1')->name('addClassRoom');
+    Route::post('/sua-lop', [ClassRoomController::class, 'editClassRoom'])->middleware('role:1')->name('editClassRoom');
+    Route::delete('/xoa-lop/{id}', [ClassRoomController::class, 'deleteClassRoom'])->middleware('role:1')->name('deleteClassRoom');
+
     Route::get('/chi-tiet-thong-tin', [UserController::class, 'myInfoSessionUser'])->name('thong-tin');
 
     Route::post('/gui-xac-nhan-email', [AuthController::class, 'sendEmailVerify'])->name('confirmEmail');

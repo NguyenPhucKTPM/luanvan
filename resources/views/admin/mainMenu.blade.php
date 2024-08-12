@@ -86,9 +86,14 @@
                     </span>
                 </a>
             </li>
-            <li class=" nav-item"><a class="d-flex align-items-center" href="app-calendar.html"><i
-                        data-feather="calendar"></i><span class="menu-title text-truncate"
-                        data-i18n="Calendar">Calendar</span></a>
+            <li class=" nav-item {{ Route::currentRouteName() == 'listClassRoom' ? 'active' : '' }}">
+                <a class="d-flex align-items-center" href="{{route('listClassRoom')}}">
+                    <i
+                        data-feather="grid"></i>
+                        <span class="menu-title text-truncate"
+                        data-i18n="Calendar">Quản lí lớp học
+                    </span>
+                    </a>
             </li>
             <li class=" nav-item"><a class="d-flex align-items-center" href="app-kanban.html"><i
                         data-feather="grid"></i><span class="menu-title text-truncate"

@@ -27,6 +27,9 @@ class ChangInfoRequest extends FormRequest
             'SDT' => 'required|numeric|digits:10|',
             'gioiTinh' => 'required|in:Nam,Nữ',
             'diaChi' => 'required|string|max:255',
+            // 'id_Khoa' => 'required|integer|not_in:1',
+            // 'id_KhoaHoc' => 'required|integer|not_in:1',
+            // 'id_Lop' => 'required|integer|not_in:1',
         ];
     }
     public function messages(): array
@@ -49,6 +52,18 @@ class ChangInfoRequest extends FormRequest
             'diaChi.required' => 'Địa chỉ là bắt buộc.',
             'diaChi.string' => 'Địa chỉ phải là chuỗi ký tự.',
             'diaChi.max' => 'Địa chỉ không được vượt quá 255 ký tự.',
+
+            'id_Khoa.required' => 'Khoa là bắt buộc.',
+            'id_Khoa.integer' => 'Khoa không hợp lệ.',
+            'id_Khoa.not_in' => 'Chọn khoa không hợp lệ.',
+
+            'id_KhoaHoc.required' => 'Khóa học là bắt buộc.',
+            'id_KhoaHoc.integer' => 'Khóa học không hợp lệ.',
+            'id_KhoaHoc.not_in' => 'Chọn khóa học không hợp lệ.',
+
+            'id_Lop.required' => 'Lớp là bắt buộc.',
+            'id_Lop.integer' => 'Lớp không hợp lệ.',
+            'id_Lop.not_in' => 'Chọn Lớp không hợp lệ.',
 
         ];
     }

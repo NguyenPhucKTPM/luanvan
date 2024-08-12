@@ -28,7 +28,7 @@ class FacultyController extends Controller
         }
         $faculty = Faculty::create([
             'tenKhoa' => $request->tenKhoa,
-            'maKhoa' => 'MK' . rand(1000, 9999) . $request->tenKhoa,
+            'maKhoa' => 'MK' . rand(1000, 9999). $request->tenKhoa,
         ]);
         return redirect()->route('listFaculty')->with('success', 'Thêm khoa thành công.');
     }
