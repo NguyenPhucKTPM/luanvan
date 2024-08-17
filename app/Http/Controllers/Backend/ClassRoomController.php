@@ -21,6 +21,10 @@ class ClassRoomController extends Controller
     }
     public function addClassRoom(Request $request)
     {
+        $checkExist = ClassRoom::where('tenLop',$request -> tenLop)->first();
+        if ($checkExist) {
+            return redirect()->route('listClassRoom')->with('error', 'Tên lớp học đã tồn tại');
+        }
         if ($request->input('tenLop') == "") {
             return redirect()->route('listClassRoom')->with('error', 'Tên lớp học không được rỗng.');
         }
@@ -33,11 +37,15 @@ class ClassRoomController extends Controller
     public function editClassRoom(Request $request)
     {
         $class = ClassRoom::find($request->id_Lop);
+        $checkExist = ClassRoom::where('tenLop',$request -> tenLop1)->first();
         if ($request->input('tenLop1') == "") {
             return redirect()->route('listClassRoom')->with('error', 'Tên lớp học không được rỗng.');
         }
         if ($class->tenLop === $request->tenLop1) {
             return redirect()->route('listClassRoom')->with('error', 'Không có thông tin nào được thay đổi');
+        }
+        if ($checkExist) {
+            return redirect()->route('listClassRoom')->with('error', 'Tên lớp học đã tồn tại');
         }
         $class->tenLop = $request->tenLop1;
         $class->save();

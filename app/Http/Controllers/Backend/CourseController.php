@@ -22,6 +22,10 @@ class CourseController extends Controller
     }
     public function addCourse(Request $request)
     {
+        $checkExist = Course::where('tenKhoaHoc',$request -> tenKhoaHoc)->first();
+        if ($checkExist) {
+            return redirect()->route('listCourse')->with('error', 'Tên khóa học đã tồn tại');
+        }
         if ($request->input('tenKhoaHoc') == "") {
             return redirect()->route('listCourse')->with('error', 'Tên khóa học không được rỗng.');
         }
@@ -34,11 +38,15 @@ class CourseController extends Controller
     public function editCourse(Request $request)
     {
         $course = Course::find($request->id_KhoaHoc);
+        $checkExist = Course::where('tenKhoaHoc',$request -> tenKhoaHoc1)->first();
         if ($request->input('tenKhoaHoc1') == "") {
             return redirect()->route('listCourse')->with('error', 'Tên khóa học không được rỗng.');
         }
         if ($course->tenKhoaHoc === $request->tenKhoaHoc1) {
             return redirect()->route('listCourse')->with('error', 'Không có thông tin nào được thay đổi');
+        }
+        if ($checkExist) {
+            return redirect()->route('listCourse')->with('error', 'Tên khóa học đã tồn tại');
         }
         $course->tenKhoaHoc = $request->tenKhoaHoc1;
         $course->save();

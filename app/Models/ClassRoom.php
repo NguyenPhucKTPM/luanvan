@@ -11,7 +11,7 @@ class ClassRoom extends Model
     use HasFactory;
     protected $table = 'lop';
     protected $primaryKey = 'id_Lop'; 
-    protected $fillable = ['id_Lop', 'maLop', 'tenLop', 'ngayTaoLop', 'ngayTaoLop'];
+    protected $fillable = ['id_Lop', 'maLop', 'tenLop', 'ngayTaoLop', 'ngaySuaLop'];
     public $timestamps = false;
     
     public function getngayTaoLopcAttribute($value)

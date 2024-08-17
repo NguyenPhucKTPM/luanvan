@@ -11,7 +11,7 @@ class Course extends Model
     use HasFactory;
     protected $table = 'khoahoc';
     protected $primaryKey = 'id_KhoaHoc'; 
-    protected $fillable = ['id_KhoaHoc', 'maKhoaHoc', 'tenKhoaHoc', 'ngayTaoKhoaHoc', 'ngayTaoKhoaHoc'];
+    protected $fillable = ['id_KhoaHoc', 'maKhoaHoc', 'tenKhoaHoc', 'ngayTaoKhoaHoc', 'ngaySuaKhoaHoc'];
     public $timestamps = false;
     
     public function getngayTaoKhoaHocAttribute($value)

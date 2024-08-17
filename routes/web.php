@@ -7,7 +7,9 @@ use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Backend\CourseController;
 use App\Http\Controllers\Backend\FacultyController;
 use App\Http\Controllers\Backend\ClassRoomController;
-
+use App\Http\Controllers\Backend\LanguageController;
+use App\Http\Controllers\Backend\PublisherController;
+use App\Http\Controllers\Backend\CategoryController;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
@@ -51,7 +53,7 @@ Route::middleware(['logged'])->group(function () {
 //khi chưa đăng nhập không được phép đến trang này
 Route::middleware(['checkLogin'])->group(function () {
 
-    //admin
+    //admin chuc nang quan li user
     Route::get('/thong-ke', [DashboardController::class, 'index'])->middleware('role:1,2')->name('dashboard');
     Route::get('/danh-sach-nguoi-dung', [UserController::class, 'listUser'])->middleware('role:1')->name('listUser');
         
@@ -71,6 +73,24 @@ Route::middleware(['checkLogin'])->group(function () {
     Route::delete('/xoa-lop/{id}', [ClassRoomController::class, 'deleteClassRoom'])->middleware('role:1')->name('deleteClassRoom');
 
     Route::get('/chi-tiet-thong-tin', [UserController::class, 'myInfoSessionUser'])->name('thong-tin');
+
+
+    //admin chucn nang quan li sach
+    Route::get('/danh-sach-nha-xuat-ban', [PublisherController::class, 'listPublisher'])->middleware('role:1,2')->name('listPublisher');
+    Route::post('/them-nha-xuat-ban', [PublisherController::class, 'addPublisher'])->middleware('role:1,2')->name('addPublisher');
+    Route::post('/sua-nha-xuat-ban', [PublisherController::class, 'editPublisher'])->middleware('role:1,2')->name('editPublisher');
+    Route::delete('/xoa-nha-xuat-ban/{id}', [PublisherController::class, 'deletePublisher'])->middleware('role:1,2')->name('deletePublisher');
+
+    Route::get('/danh-sach-ngon-ngu', [LanguageController::class, 'listLanguage'])->middleware('role:1,2')->name('listLanguage');
+    Route::post('/them-ngon-ngu', [LanguageController::class, 'addLanguage'])->middleware('role:1,2')->name('addLanguage');
+    Route::post('/sua-ngon-ngu', [LanguageController::class, 'editLanguage'])->middleware('role:1,2')->name('editLanguage');
+    Route::delete('/xoa-ngon-ngu/{id}', [LanguageController::class, 'deleteLanguage'])->middleware('role:1,2')->name('deleteLanguage');
+
+    Route::get('/danh-sach-the-loai', [CategoryController::class, 'listCategory'])->middleware('role:1,2')->name('listCategory');
+    Route::post('/them-nha-the-loai', [CategoryController::class, 'addCategory'])->middleware('role:1,2')->name('addCategory');
+    Route::post('/sua-nha-ngon-ngu', [CategoryController::class, 'editCategory'])->middleware('role:1,2')->name('editCategory');
+    Route::delete('/xoa-the-loai/{id}', [CategoryController::class, 'deleteCategory'])->middleware('role:1,2')->name('deleteCategory');
+
 
     Route::post('/gui-xac-nhan-email', [AuthController::class, 'sendEmailVerify'])->name('confirmEmail');
     Route::get('/xac-nhan-email/{token}', [AuthController::class, 'confirmEmail']);

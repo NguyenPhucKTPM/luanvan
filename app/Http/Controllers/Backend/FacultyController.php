@@ -23,6 +23,10 @@ class FacultyController extends Controller
     }
     public function addFaculty(Request $request)
     {
+        $checkExist = Faculty::where('tenKhoa',$request -> tenKhoa)->first();
+        if ($checkExist) {
+            return redirect()->route('listFaculty')->with('error', 'Tên khoa đã tồn tại');
+        }
         if ($request->input('tenKhoa') == "") {
             return redirect()->route('listFaculty')->with('error', 'Tên khoa không được rỗng.');
         }
@@ -35,11 +39,15 @@ class FacultyController extends Controller
     public function editFaculty(Request $request)
     {
         $faculty = Faculty::find($request->id_Khoa);
+        $checkExist = Faculty::where('tenKhoa',$request -> tenKhoa1)->first();
         if ($request->input('tenKhoa1') == "") {
             return redirect()->route('listFaculty')->with('error', 'Tên khoa không được rỗng.');
         }
         if ($faculty->tenKhoa === $request->tenKhoa1) {
             return redirect()->route('listFaculty')->with('error', 'Không có thông tin nào được thay đổi');
+        }
+        if ($checkExist) {
+            return redirect()->route('listFaculty')->with('error', 'Tên khoa đã tồn tại');
         }
         $faculty->tenKhoa = $request->tenKhoa1;
         $faculty->save();

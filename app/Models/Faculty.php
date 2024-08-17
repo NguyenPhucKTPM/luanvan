@@ -11,7 +11,7 @@ class Faculty extends Model
     use HasFactory;
     protected $table = 'khoa';
     protected $primaryKey = 'id_Khoa'; 
-    protected $fillable = ['id_Khoa', 'maKhoa', 'tenKhoa', 'ngayTaoKhoa', 'ngayTaoKhoa'];
+    protected $fillable = ['id_Khoa', 'maKhoa', 'tenKhoa', 'ngayTaoKhoa', 'ngaySuaKhoa'];
     public $timestamps = false;
     
     public function getngayTaoKhoaAttribute($value)

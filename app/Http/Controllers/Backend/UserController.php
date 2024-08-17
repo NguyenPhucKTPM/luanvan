@@ -15,9 +15,7 @@ use App\Http\Requests\ChangInfoRequest;
 
 class UserController extends Controller
 {
-  public function __construct()
-  {
-  }
+  public function __construct() {}
   public function getInformationSessionUser()
   {
     $idUser = Auth::user()->id_NguoiDung;
@@ -71,7 +69,7 @@ class UserController extends Controller
   public function updateInfo(ChangInfoRequest $request)
   {
     $dataUser = $request->only(['tenNguoiDung', 'ngaySinh', 'SDT', 'gioiTinh', 'diaChi']);
-    $dataSudent = $request->only(['id_Khoa','id_KhoaHoc','id_Lop']);
+    $dataSudent = $request->only(['id_Khoa', 'id_KhoaHoc', 'id_Lop']);
     $dataLecturer = $request->only(['id_Khoa']);
     $user = Auth::user();
     $idByRole = $user->getIdByRole();
