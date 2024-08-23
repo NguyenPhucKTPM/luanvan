@@ -11,7 +11,7 @@
                             <div class="head-label">
 
                             </div>
-                            <!-- <div class="dt-action-buttons text-end">
+                            <div class="dt-action-buttons text-end">
                                 <div class="dt-buttons d-inline-flex">
                                     <button
                                         class="dt-button buttons-collection btn btn-outline-secondary dropdown-toggle me-2"
@@ -29,63 +29,38 @@
                                         </span>
                                     </button>
                                 </div>
-                            </div> -->
+                            </div>
                         </div>
                         <table class="datatables-basic table table-hover" id="table">
                             <thead>
                                 <tr>
-                                    <th>Tên Người Dùng</th>
-                                    <th>Ngày Sinh</th>
-                                    <th>Giới Tính</th>
-                                    <th>Số Điện Thoại</th>
-                                    <th>Email</th>
-                                    <th>Vai Trò</th>
-                                    <th>Số Vi Phạm</th>
-                                    <th>Trạng Thái</th>
+                                    <th>ID</th>
+                                    <th>Mã Vị Trí</th>
+                                    <th>Tên Vị Trí</th>
+                                    <th>Tổng Sức Chứa</th>
+                                    <th>Khả Dụng</th>
+                                    <th>Ngăn</th>
+                                    <th>Ngày Tạo</th>
+                                    <th>Ngày Sửa</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($users as $data)
+                                @foreach ($bookLocation as $data)
                                 <tr>
-                                    <td>{{ $data->tenNguoiDung }}</td>
-                                    <td>{{ $data->ngaySinh }}</td>
-                                    <td>{{ $data->gioiTinh }}</td>
-                                    <td>{{ $data->SDT }}</td>
-                                    <td>{{ $data->email }}</td>
+                                    <td>{{ $data->id_ViTri }}</td>
+                                    <td>{{ $data->maViTri }}</td>
+                                    <td>{{ $data->tenViTri }}</td>
+                                    <td>{{ $data->sucChua }}</td>
+                                    <td>{{ $data->viTriDaSuDung }}/{{ $data->sucChua }}</td>
+                                    <td>{{ $data->tenNgan }}</td>
+                                    <td>{{ $data->ngayTaoViTri }}</td>
                                     <td>
-                                        <div class="btn-group">
-                                            <button
-                                                class="btn btn-flat-info btn-sm {{ $data -> id_VaiTro > 1 && $data -> id_VaiTro < 4 ? 'dropdown-toggle' : 'dropdown-toggle-none'}}"
-                                                type="button"
-                                                id="dropdownMenuButton300"
-                                                data-bs-toggle="dropdown"
-                                                aria-expanded="false"
-                                                style="padding-left: 0px;">
-                                                {{$data -> tenVaiTro}}
-                                            </button>
-                                            @if($data -> id_VaiTro > 1 && $data -> id_VaiTro < 4 )
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton300">                                                                                            
-                                                <a
-                                                    class="dropdown-item"
-                                                    href="{{route('changeRole',[$data -> id_NguoiDung,$data -> id_VaiTro == 3 ? 2 : 3])}}">
-                                                    {{$data -> id_VaiTro == 3 ? 'Thủ thư' : 'Giảng viên'}}
-                                                </a>                                            
-                                            </div>
-                                            @endif
-                                        </div>
-                                    </td>
-                                    <td>{{ $data->soViPham }}</td>
-                                    <td>
-                                        @if($data -> id_TrangThai == 1)
-                                        <span class="badge badge-glow bg-secondary"><a href="{{route('updataStatus',[$data -> id_NguoiDung,2])}}">Chưa xác nhận</a></span>
-                                        @else
-                                        <span class="badge badge-glow bg-success"><a href="{{route('updataStatus',[$data -> id_NguoiDung,1])}}">Đã xác nhận</a></span>
-                                        @endif
+                                        {{ $data->ngaySuaViTri == $data -> ngayTaoViTri ? 'Chưa sửa' : $data -> ngaySuaViTri }}
                                     </td>
                                     <td>
                                         <div class="d-inline-flex">
-                                            <a class="pe-1 dropdown-toggle hide-arrow text-primary justify-content-center"
+                                            <a class="pe-1 dropdown-toggle hide-arrow text-primary"
                                                 data-bs-toggle="dropdown">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
                                                     viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -97,7 +72,7 @@
                                                 </svg>
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-end">
-                                                <a href="{{ route('detailUser',[$data -> id_NguoiDung]) }}" class="dropdown-item">
+                                                <a href="#" class="dropdown-item">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
                                                         viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -110,9 +85,9 @@
                                                 </a>
                                             </div>
                                         </div>
-                                        <!-- <a href="javascript:;" class="item-edit" data-bs-toggle="modal"
-                                            data-bs-target="#modals-edit" data-id="{{ $data->id_NguoiDung }}"
-                                            data-ten="{{ $data->tenNguoiDung }}">
+                                        <a href="javascript:;" class="item-edit" data-bs-toggle="modal"
+                                            data-bs-target="#modals-edit" data-id="{{ $data->id_ViTri }}"
+                                            data-ten="{{ $data->tenViTri }}" data-sucChua="{{ $data->sucChua }}" data-id-ngan="{{ $data -> id_Ngan }}" data-ten-ngan="{{ $data->tenNgan }}">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
                                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                                 stroke-linecap="round" stroke-linejoin="round"
@@ -122,7 +97,7 @@
                                                 <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z">
                                                 </path>
                                             </svg>
-                                        </a> -->
+                                        </a>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -132,23 +107,45 @@
                 </div>
             </div>
         </div>
-        Modal to add new record
+        <!-- Modal to add new record -->
         <div class="modal modal-slide-in fade" id="modals-slide-in">
             <div class="modal-dialog sidebar-sm">
-                <form class="add-new-record modal-content pt-0" action="{{ route('addBookCase') }}" method="post">
+                <form class="add-new-record modal-content pt-0" action="{{ route('AddBookLocation') }}" method="post">
                     @csrf
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">×</button>
                     <div class="modal-header mb-1">
-                        <h5 class="modal-title" id="exampleModalLabel">Thêm Ngăn</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Thêm vị trí</h5>
                     </div>
                     <div class="modal-body flex-grow-1">
                         <div class="mb-1">
-                            <label class="form-label" for="tenNgan">Tên Ngăn</label>
-                            <input type="text" class="form-control" id="tenNgan" name="tenNgan"
-                                placeholder="Nhập tên ngăn">
-                            @if($errors->has('tenNgan'))
+                            <label class="form-label" for="tenViTri">Tên vị trí</label>
+                            <input type="text" class="form-control" id="tenViTri" name="tenViTri"
+                                placeholder="Nhập tên vị trí">
+                            @if($errors->has('tenViTri'))
                             <span class="error-message text-danger">*
-                                {{$errors->first('tenNgan')}}</span>
+                                {{$errors->first('tenViTri')}}</span>
+                            @endif
+                        </div>
+                        <div class="mb-1">
+                            <label class="form-label" for="sucChua">Sức chứa</label>
+                            <div class="input-group disabled-touchspin">
+                                <input type="number" class="touchspin" id="sucChua" name="sucChua" value="20" />
+                            </div>
+                            @if($errors->has('sucChua'))
+                            <span class="error-message text-danger">*
+                                {{$errors->first('sucChua')}}</span>
+                            @endif
+                        </div>
+                        <div class="mb-1">
+                            <label class="form-label" for="id_Ngan">Chọn ngăn</label>
+                            <select class="select2 form-select" id="id_Ngan" name="id_Ngan">
+                                @foreach ($bookCase as $data)
+                                <option value="{{$data -> id_Ngan}}">{{$data -> tenNgan}}</option>
+                                @endforeach
+                            </select>
+                            @if($errors->has('id_Ngan'))
+                            <span class="error-message text-danger">*
+                                {{$errors->first('id_Ngan')}}</span>
                             @endif
                         </div>
 
@@ -162,40 +159,89 @@
         <!-- Modal to edit -->
         <div class="modal modal-slide-in fade" id="modals-edit">
             <div class="modal-dialog sidebar-sm">
-                <form class="add-new-record modal-content pt-0" action="{{ route('editBookCase') }}" method="post">
+                <form class="add-new-record modal-content pt-0" action="{{ route('editBookLocation') }}" method="post">
                     @csrf
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">×</button>
                     <div class="modal-header mb-1">
-                        <h5 class="modal-title" id="exampleModalLabel">Sửa Ngăn </h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Sửa Vị Trí </h5>
                     </div>
                     <div class="modal-body flex-grow-1">
-                        <input type="hidden" id="edit-id" name="id_Ngan">
+                        <input type="hidden" id="edit-id" name="id_ViTri">
+                        <input type="hidden" id="edit-id-ngan" name="id_Ngan">
 
                         <div class="mb-1">
-                            <label class="form-label" for="tenNgan1">Tên Ngăn </label>
-                            <input type="text" class="form-control" id="tenNgan1" name="tenNgan1">
+                            <label class="form-label" for="tenViTri1">Tên Vị Trí </label>
+                            <input type="text" class="form-control" id="tenViTri1" name="tenViTri1">
+                            @if($errors->has('tenViTri1'))
+                            <span class="error-message text-danger">*
+                                {{$errors->first('tenViTri1')}}</span>
+                            @endif
                         </div>
+
+                        <div class="mb-1">
+                            <label class="form-label" for="sucChua1">Sức chứa</label>
+                            <div class="input-group disabled-touchspin">
+                                <input type="number" class="touchspin" id="sucChua1" name="sucChua1" />
+                            </div>
+                            @if($errors->has('sucChua1'))
+                            <span class="error-message text-danger">*
+                                {{$errors->first('sucChua1')}}</span>
+                            @endif
+                        </div>
+
+                        <div class="mb-1">
+                            <label class="form-label" for="id_Ngan1">Chọn ngăn</label>
+                            <select class="select2 form-select" id="id_Ngan1" name="id_Ngan1">
+                                <option value="">Chọn ngăn</option>
+                                @foreach ($bookCase as $data)
+                                <option value="{{$data -> id_Ngan}}">{{$data -> tenNgan}}</option>
+                                @endforeach
+                            </select>
+                            @if($errors->has('id_Ngan1'))
+                            <span class="error-message text-danger">*
+                                {{$errors->first('id_Ngan1')}}</span>
+                            @endif
+                        </div>
+
                         <button type="submit" class="btn btn-primary data-submit me-1">Cập nhật</button>
                         <button type="reset" class="btn btn-outline-secondary" data-bs-dismiss="modal">Hủy</button>
                     </div>
+                    <span id="course-name"></span>
                 </form>
             </div>
         </div>
     </section>
-
-
 </div>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         // Xử lý sự kiện click cho các nút edit
         document.querySelectorAll('.item-edit').forEach(function(element) {
             element.addEventListener('click', function() {
-                var id_Ngan = this.getAttribute('data-id');
-                var tenNgan1 = this.getAttribute('data-ten');
-                document.getElementById('edit-id').value = id_Ngan;
-                document.getElementById('tenNgan1').value = tenNgan1;
+                var id_ViTri = this.getAttribute('data-id');
+                var id_Ngan = this.getAttribute('data-id-ngan');
+                var tenViTri1 = this.getAttribute('data-ten');
+                var sucChua1 = this.getAttribute('data-sucChua');
+                var tenNgan1 = this.getAttribute('data-ten-ngan');
+
+                document.getElementById('edit-id').value = id_ViTri;
+                document.getElementById('edit-id-ngan').value = id_Ngan;
+                document.getElementById('tenViTri1').value = tenViTri1;
+                document.getElementById('sucChua1').value = sucChua1;
+
+                var selectElement = document.getElementById('id_Ngan1');
+                var options = selectElement.querySelectorAll('option');
+                console.log('Options:', options);
+                console.log('ID Ngan:', id_Ngan);
+
+                options.forEach(function(option) {
+                    if (option.value == id_Ngan) {
+                        console.log('Setting value:', id_Ngan);
+                        selectElement.value = id_Ngan;
+                    }
+                });
             });
         });
     });
 </script>
+<script src="app-assets/js/scripts/formatInputLocation.js"></script>
 @endsection

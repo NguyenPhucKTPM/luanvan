@@ -10,6 +10,9 @@ use App\Models\User;
 use App\Models\ClassRoom;
 use App\Models\Course;
 use App\Models\Faculty;
+use App\Models\Librarian;
+use App\Models\Student;
+use App\Models\Lecturer;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\ChangInfoRequest;
 
@@ -108,6 +111,53 @@ class UserController extends Controller
   //admin
   public function listUser()
   {
-    return view('admin.layouts.user.listUser', ['title' => 'Danh sách người dùng']);
+    $users = User::getAllUser();
+    return view('admin.layouts.user.listUser', [
+      'users'=> $users,
+      'title' => 'Danh sách người dùng',
+      'tab' => 'Quản lí người dùng',
+    ]);
+  }
+  public function updateStatus($id,$status){
+    $user = User::find($id);
+    $user->id_TrangThai = $status;
+    $user->save();
+    return redirect()->route('listUser')->with('success','Cập nhật trạng thái thành công: ', $user -> email);
+  }
+  public function changeRole($id,$role){
+    $user = User::find($id);
+    if($user -> id_VaiTro == $role){
+      return redirect()->route('listUser')->with('error','Cập nhật vai trò thất bại');
+    }
+    if($role == 1 || $role == 4){
+      return redirect()->route('listUser')->with('error','Cập nhật vai trò thất bại');
+    }
+    $user -> id_VaiTro = $role;
+    $user -> save();    
+    $lecturer = lecturer::where('id_NguoiDung',$user->id_NguoiDung)->first();
+    $checkExist = Librarian::where('id_NguoiDung',$user -> id_NguoiDung)->first();
+    if(!$checkExist){
+      $addLibrarian = Librarian::create([
+        'maThuThu' => 'TT' . rand(1000000, 9999999),
+        'id_Khoa' => $lecturer -> id_Khoa,
+        'id_NguoiDung' => $id,
+      ]);
+    }
+    return redirect()->route('listUser')->with('success','Cập nhật vai trò thành công',) ;
+  }
+  public function detailUser($id){
+    $userDetail = User::find($id); 
+    $librarian = Librarian::getDetailLibrarian($id);
+    $lecturer = lecturer::getDetailLecturer($id);
+    $student = Student::getDetailStudent($id);
+    $userDetail->SDT = preg_replace('/(\d{3})(\d{3})(\d{3})/', '$1 $2 $3', $userDetail->SDT);
+    return view('admin.layouts.user.detailUser',[
+      'tab' => 'Quản lí người dùng',
+      'title' => 'Chi tiết người dùng',
+      'userDetail' => $userDetail,
+      'librarian' => $librarian,
+      'lecturer' => $lecturer,
+      'student' => $student,
+    ]);
   }
 }

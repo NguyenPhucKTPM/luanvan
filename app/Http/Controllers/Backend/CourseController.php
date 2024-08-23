@@ -17,6 +17,7 @@ class CourseController extends Controller
         $courses = Course::all();
         return view('admin.layouts.course.listCourse', [
             'title' => 'Danh sách khóa học',
+            'tab' => 'Quản lí khóa học',
             'courses' => $courses
         ]);
     }

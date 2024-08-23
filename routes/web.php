@@ -10,6 +10,10 @@ use App\Http\Controllers\Backend\ClassRoomController;
 use App\Http\Controllers\Backend\LanguageController;
 use App\Http\Controllers\Backend\PublisherController;
 use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\DisciplineController;
+use App\Http\Controllers\Backend\BookCaseController;
+use App\Http\Controllers\Backend\BookLocationController;
+
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
@@ -56,7 +60,11 @@ Route::middleware(['checkLogin'])->group(function () {
     //admin chuc nang quan li user
     Route::get('/thong-ke', [DashboardController::class, 'index'])->middleware('role:1,2')->name('dashboard');
     Route::get('/danh-sach-nguoi-dung', [UserController::class, 'listUser'])->middleware('role:1')->name('listUser');
-        
+
+    Route::get('/cap-nhat-trang-thai/{id}/{status}', [UserController::class, 'updateStatus'])->middleware('role:1')->name('updataStatus');
+    Route::get('/thay-doi-vai-tro/{id}/{role}', [UserController::class, 'changeRole'])->middleware('role:1')->name('changeRole');
+    Route::get('/chi-tiet-thong-tin-nguoi-dung/{id}', [UserController::class, 'detailUser'])->middleware('role:1')->name('detailUser');
+
     Route::get('/danh-sach-khoa-hoc', [CourseController::class, 'listCourse'])->middleware('role:1')->name('listCourse');
     Route::post('/them-khoa-hoc', [CourseController::class, 'addCourse'])->middleware('role:1')->name('addCourse');
     Route::post('/sua-khoa-hoc', [CourseController::class, 'editCourse'])->middleware('role:1')->name('editCourse');
@@ -75,7 +83,7 @@ Route::middleware(['checkLogin'])->group(function () {
     Route::get('/chi-tiet-thong-tin', [UserController::class, 'myInfoSessionUser'])->name('thong-tin');
 
 
-    //admin chucn nang quan li sach
+    //admin chuc nang quan li sach
     Route::get('/danh-sach-nha-xuat-ban', [PublisherController::class, 'listPublisher'])->middleware('role:1,2')->name('listPublisher');
     Route::post('/them-nha-xuat-ban', [PublisherController::class, 'addPublisher'])->middleware('role:1,2')->name('addPublisher');
     Route::post('/sua-nha-xuat-ban', [PublisherController::class, 'editPublisher'])->middleware('role:1,2')->name('editPublisher');
@@ -87,10 +95,22 @@ Route::middleware(['checkLogin'])->group(function () {
     Route::delete('/xoa-ngon-ngu/{id}', [LanguageController::class, 'deleteLanguage'])->middleware('role:1,2')->name('deleteLanguage');
 
     Route::get('/danh-sach-the-loai', [CategoryController::class, 'listCategory'])->middleware('role:1,2')->name('listCategory');
-    Route::post('/them-nha-the-loai', [CategoryController::class, 'addCategory'])->middleware('role:1,2')->name('addCategory');
-    Route::post('/sua-nha-ngon-ngu', [CategoryController::class, 'editCategory'])->middleware('role:1,2')->name('editCategory');
+    Route::post('/them-the-loai', [CategoryController::class, 'addCategory'])->middleware('role:1,2')->name('addCategory');
+    Route::post('/sua-the-loai', [CategoryController::class, 'editCategory'])->middleware('role:1,2')->name('editCategory');
     Route::delete('/xoa-the-loai/{id}', [CategoryController::class, 'deleteCategory'])->middleware('role:1,2')->name('deleteCategory');
 
+    Route::get('/danh-sach-nganh-hoc', [DisciplineController::class, 'listDiscipline'])->middleware('role:1,2')->name('listDiscipline');
+    Route::post('/them-nganh-hoc', [DisciplineController::class, 'addDiscipline'])->middleware('role:1,2')->name('addDiscipline');
+    Route::post('/sua-nganh-hoc', [DisciplineController::class, 'editDiscipline'])->middleware('role:1,2')->name('editDiscipline');
+    Route::delete('/xoa-nganh-hoc/{id}', [DisciplineController::class, 'deleteDiscipline'])->middleware('role:1,2')->name('deleteDiscipline');
+
+    Route::get('/danh-sach-ngan', [BookCaseController::class, 'listBookCase'])->middleware('role:1,2')->name('listBookCase');
+    Route::post('/them-ngan', [BookCaseController::class, 'addBookCase'])->middleware('role:1,2')->name('addBookCase');
+    Route::post('/sua-ngan', [BookCaseController::class, 'editBookCase'])->middleware('role:1,2')->name('editBookCase');
+
+    Route::get('/danh-sach-vi-tri', [BookLocationController::class, 'listBookLocation'])->middleware('role:1,2')->name('listBookLocation');
+    Route::post('/them-vi-tri', [BookLocationController::class, 'AddBookLocation'])->middleware('role:1,2')->name('AddBookLocation');
+    Route::post('/sua-vi-tri', [BookLocationController::class, 'editBookLocation'])->middleware('role:1,2')->name('editBookLocation');
 
     Route::post('/gui-xac-nhan-email', [AuthController::class, 'sendEmailVerify'])->name('confirmEmail');
     Route::get('/xac-nhan-email/{token}', [AuthController::class, 'confirmEmail']);

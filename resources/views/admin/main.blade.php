@@ -9,16 +9,16 @@
                 <div class="row breadcrumbs-top">
                     <div class="col-12">
                         <h2 class="content-header-title float-start mb-0">{{$title}}</h2>
-                        <!-- <div class="breadcrumb-wrapper">
+                        <div class="breadcrumb-wrapper">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="index.html">Home</a>
+                                <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Trang chủ</a>
                                 </li>
-                                <li class="breadcrumb-item"><a href="#">Datatable</a>
+                                <li class="breadcrumb-item"><a href="#">{{$tab}}</a>
                                 </li>
-                                <li class="breadcrumb-item active">Basic
+                                <li class="breadcrumb-item active">{{$title}}
                                 </li>
                             </ol>
-                        </div> -->
+                        </div>
                     </div>
                 </div>
             </div>
@@ -26,4 +26,4 @@
         @yield('layouts')
     </div>
 </div>
-@endsection
+@endsection 

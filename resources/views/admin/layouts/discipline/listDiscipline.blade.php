@@ -11,7 +11,7 @@
                             <div class="head-label">
 
                             </div>
-                            <!-- <div class="dt-action-buttons text-end">
+                            <div class="dt-action-buttons text-end">
                                 <div class="dt-buttons d-inline-flex">
                                     <button
                                         class="dt-button buttons-collection btn btn-outline-secondary dropdown-toggle me-2"
@@ -29,63 +29,32 @@
                                         </span>
                                     </button>
                                 </div>
-                            </div> -->
+                            </div>
                         </div>
                         <table class="datatables-basic table table-hover" id="table">
                             <thead>
                                 <tr>
-                                    <th>Tên Người Dùng</th>
-                                    <th>Ngày Sinh</th>
-                                    <th>Giới Tính</th>
-                                    <th>Số Điện Thoại</th>
-                                    <th>Email</th>
-                                    <th>Vai Trò</th>
-                                    <th>Số Vi Phạm</th>
-                                    <th>Trạng Thái</th>
+                                    <th>ID</th>
+                                    <th>Mã Ngành Học</th>
+                                    <th>Tên Ngành Học</th>
+                                    <th>Ngày Tạo</th>
+                                    <th>Ngày Sửa</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($users as $data)
+                                @foreach ($discipline as $data)
                                 <tr>
-                                    <td>{{ $data->tenNguoiDung }}</td>
-                                    <td>{{ $data->ngaySinh }}</td>
-                                    <td>{{ $data->gioiTinh }}</td>
-                                    <td>{{ $data->SDT }}</td>
-                                    <td>{{ $data->email }}</td>
+                                    <td>{{ $data->id_NganhHoc }}</td>
+                                    <td>{{ $data->maNganhHoc }}</td>
+                                    <td>{{ $data->tenNganhHoc }}</td>
+                                    <td>{{ $data->ngayTaoNganhHoc }}</td>
                                     <td>
-                                        <div class="btn-group">
-                                            <button
-                                                class="btn btn-flat-info btn-sm {{ $data -> id_VaiTro > 1 && $data -> id_VaiTro < 4 ? 'dropdown-toggle' : 'dropdown-toggle-none'}}"
-                                                type="button"
-                                                id="dropdownMenuButton300"
-                                                data-bs-toggle="dropdown"
-                                                aria-expanded="false"
-                                                style="padding-left: 0px;">
-                                                {{$data -> tenVaiTro}}
-                                            </button>
-                                            @if($data -> id_VaiTro > 1 && $data -> id_VaiTro < 4 )
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton300">                                                                                            
-                                                <a
-                                                    class="dropdown-item"
-                                                    href="{{route('changeRole',[$data -> id_NguoiDung,$data -> id_VaiTro == 3 ? 2 : 3])}}">
-                                                    {{$data -> id_VaiTro == 3 ? 'Thủ thư' : 'Giảng viên'}}
-                                                </a>                                            
-                                            </div>
-                                            @endif
-                                        </div>
-                                    </td>
-                                    <td>{{ $data->soViPham }}</td>
-                                    <td>
-                                        @if($data -> id_TrangThai == 1)
-                                        <span class="badge badge-glow bg-secondary"><a href="{{route('updataStatus',[$data -> id_NguoiDung,2])}}">Chưa xác nhận</a></span>
-                                        @else
-                                        <span class="badge badge-glow bg-success"><a href="{{route('updataStatus',[$data -> id_NguoiDung,1])}}">Đã xác nhận</a></span>
-                                        @endif
+                                        {{ $data->ngaySuaNganhHoc == $data -> ngayTaoNganhHoc ? 'Chưa sửa' : $data -> ngaySuaNganhHoc }}
                                     </td>
                                     <td>
                                         <div class="d-inline-flex">
-                                            <a class="pe-1 dropdown-toggle hide-arrow text-primary justify-content-center"
+                                            <a class="pe-1 dropdown-toggle hide-arrow text-primary"
                                                 data-bs-toggle="dropdown">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
                                                     viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -97,7 +66,7 @@
                                                 </svg>
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-end">
-                                                <a href="{{ route('detailUser',[$data -> id_NguoiDung]) }}" class="dropdown-item">
+                                                <a href="#" class="dropdown-item">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
                                                         viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -107,12 +76,28 @@
                                                         <circle cx="12" cy="12" r="3"></circle>
                                                     </svg>
                                                     Chi tiết
+                                                </a>                                            
+                                                <a href="javascript:;" class="dropdown-item delete-record text-danger"
+                                                    data-bs-toggle="modal" data-bs-target="#modals-delete"
+                                                    data-id="{{ $data->id_NganhHoc }}" data-name="{{ $data->tenNganhHoc }}">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                        class="feather feather-trash-2 me-1">
+                                                        <polyline points="3 6 5 6 21 6"></polyline>
+                                                        <path
+                                                            d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
+                                                        </path>
+                                                        <line x1="10" y1="11" x2="10" y2="17"></line>
+                                                        <line x1="14" y1="11" x2="14" y2="17"></line>
+                                                    </svg>
+                                                    Xóa
                                                 </a>
                                             </div>
                                         </div>
-                                        <!-- <a href="javascript:;" class="item-edit" data-bs-toggle="modal"
-                                            data-bs-target="#modals-edit" data-id="{{ $data->id_NguoiDung }}"
-                                            data-ten="{{ $data->tenNguoiDung }}">
+                                        <a href="javascript:;" class="item-edit" data-bs-toggle="modal"
+                                            data-bs-target="#modals-edit" data-id="{{ $data->id_NganhHoc }}"
+                                            data-ten="{{ $data->tenNganhHoc }}">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
                                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                                 stroke-linecap="round" stroke-linejoin="round"
@@ -122,7 +107,7 @@
                                                 <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z">
                                                 </path>
                                             </svg>
-                                        </a> -->
+                                        </a>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -132,23 +117,23 @@
                 </div>
             </div>
         </div>
-        Modal to add new record
+        <!-- Modal to add new record -->
         <div class="modal modal-slide-in fade" id="modals-slide-in">
             <div class="modal-dialog sidebar-sm">
-                <form class="add-new-record modal-content pt-0" action="{{ route('addBookCase') }}" method="post">
+                <form class="add-new-record modal-content pt-0" action="{{ route('addDiscipline') }}" method="post">
                     @csrf
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">×</button>
                     <div class="modal-header mb-1">
-                        <h5 class="modal-title" id="exampleModalLabel">Thêm Ngăn</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Thêm Ngành Học</h5>
                     </div>
                     <div class="modal-body flex-grow-1">
                         <div class="mb-1">
-                            <label class="form-label" for="tenNgan">Tên Ngăn</label>
-                            <input type="text" class="form-control" id="tenNgan" name="tenNgan"
-                                placeholder="Nhập tên ngăn">
-                            @if($errors->has('tenNgan'))
+                            <label class="form-label" for="tenNganhHoc">Tên Ngành Học</label>
+                            <input type="text" class="form-control" id="tenNganhHoc" name="tenNganhHoc"
+                                placeholder="Nhập tên ngành học">
+                            @if($errors->has('tenNganhHoc'))
                             <span class="error-message text-danger">*
-                                {{$errors->first('tenNgan')}}</span>
+                                {{$errors->first('tenNganhHoc')}}</span>
                             @endif
                         </div>
 
@@ -162,18 +147,18 @@
         <!-- Modal to edit -->
         <div class="modal modal-slide-in fade" id="modals-edit">
             <div class="modal-dialog sidebar-sm">
-                <form class="add-new-record modal-content pt-0" action="{{ route('editBookCase') }}" method="post">
+                <form class="add-new-record modal-content pt-0" action="{{ route('editDiscipline') }}" method="post">
                     @csrf
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">×</button>
                     <div class="modal-header mb-1">
-                        <h5 class="modal-title" id="exampleModalLabel">Sửa Ngăn </h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Sửa Ngành Học </h5>
                     </div>
                     <div class="modal-body flex-grow-1">
-                        <input type="hidden" id="edit-id" name="id_Ngan">
+                        <input type="hidden" id="edit-id" name="id_NganhHoc">
 
                         <div class="mb-1">
-                            <label class="form-label" for="tenNgan1">Tên Ngăn </label>
-                            <input type="text" class="form-control" id="tenNgan1" name="tenNgan1">
+                            <label class="form-label" for="tenNganhHoc1">Tên Ngành Học </label>
+                            <input type="text" class="form-control" id="tenNganhHoc1" name="tenNganhHoc1">
                         </div>
                         <button type="submit" class="btn btn-primary data-submit me-1">Cập nhật</button>
                         <button type="reset" class="btn btn-outline-secondary" data-bs-dismiss="modal">Hủy</button>
@@ -183,19 +168,57 @@
         </div>
     </section>
 
+    <!-- Modal Delete -->
+    <div class="modal fade modal-danger text-start" id="modals-delete" tabindex="-1" aria-labelledby="myModalLabel120"
+        style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="myModalLabel120">Bạn có chắc muốn xóa ?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Bạn có chắc muốn xóa ngôn ngữ: <span id="course-name"></span>
+                </div>
+                <div class="modal-footer">
+                    <form id="delete-form" method="POST" action="#">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger waves-effect waves-float waves-light">Đồng
+                            ý</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/ Basic table -->
+
 
 </div>
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Xử lý sự kiện click cho các nút edit
-        document.querySelectorAll('.item-edit').forEach(function(element) {
-            element.addEventListener('click', function() {
-                var id_Ngan = this.getAttribute('data-id');
-                var tenNgan1 = this.getAttribute('data-ten');
-                document.getElementById('edit-id').value = id_Ngan;
-                document.getElementById('tenNgan1').value = tenNgan1;
-            });
+document.addEventListener('DOMContentLoaded', function() {
+    // Xử lý sự kiện click cho các nút edit
+    document.querySelectorAll('.item-edit').forEach(function(element) {
+        element.addEventListener('click', function() {
+            var id_NganhHoc = this.getAttribute('data-id');
+            var tenNganhHoc1 = this.getAttribute('data-ten');
+            document.getElementById('edit-id').value = id_NganhHoc;
+            document.getElementById('tenNganhHoc1').value = tenNganhHoc1;
         });
     });
+    // Xử lý sự kiện khi modal delete được hiển thị
+    var deleteModal = document.getElementById('modals-delete');
+    var deleteForm = document.getElementById('delete-form');
+    var disciplineName = document.getElementById('course-name');
+    deleteModal.addEventListener('show.bs.modal', function(event) {
+        var button = event.relatedTarget;
+        var id = button.getAttribute('data-id');
+        var name = button.getAttribute('data-name');
+
+        disciplineName.textContent = name;
+
+        deleteForm.action = '{{ route("deleteDiscipline", ":id") }}'.replace(':id', id);
+    });
+});
 </script>
 @endsection

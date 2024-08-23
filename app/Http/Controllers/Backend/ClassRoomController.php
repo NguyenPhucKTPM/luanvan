@@ -16,6 +16,7 @@ class ClassRoomController extends Controller
         $class = ClassRoom::all();
         return view('admin.layouts.classRoom.listClassRoom', [
             'title' => 'Danh sách lớp học',
+            'tab' => 'Quản lí lớp học',
             'class' => $class
         ]);
     }

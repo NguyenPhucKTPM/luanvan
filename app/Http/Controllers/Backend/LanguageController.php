@@ -14,6 +14,7 @@ class LanguageController extends Controller
         $languages = Language::all();
         return view('admin.layouts.language.listLanguages',[
             'title' => 'Danh sách ngôn ngữ',
+            'tab' => 'Quản lí ngôn ngữ',
             'languages'=> $languages,
         ]);
     }

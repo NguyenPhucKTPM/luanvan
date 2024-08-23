@@ -14,6 +14,7 @@ class CategoryController extends Controller
         $categories = Category::all();
         return view('admin.layouts.category.listCategory',[
             'title' => 'Danh sách thể loại',
+            'tab' => 'Quản lí thể loại',
             'categories'=> $categories,
         ]);
     }

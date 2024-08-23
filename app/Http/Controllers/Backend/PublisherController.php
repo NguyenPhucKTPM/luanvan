@@ -16,6 +16,7 @@ class PublisherController extends Controller
         $publishers = Publisher::all();
         return view('admin.layouts.publisher.listPublisher', [
             'title' => 'Danh sách nhà xuất bản',
+            'tab' => 'Quản lí nhà xuất bản',
             'publishers' => $publishers
         ]);
     }

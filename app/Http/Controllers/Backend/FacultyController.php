@@ -18,6 +18,7 @@ class FacultyController extends Controller
         $faculties = Faculty::all();
         return view('admin.layouts.faculty.listFaculty', [
             'title' => 'Danh sách khoa',
+            'tab' => 'Quản lí khoa',
             'faculties' => $faculties
         ]);
     }

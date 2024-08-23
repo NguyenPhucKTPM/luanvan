@@ -16,11 +16,18 @@
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('pages/images/logo.png') }}">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600"
         rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/core/menu/menu-types/vertical-menu.css') }}">
+    <link rel="stylesheet" type="text/css" href="app-assets/vendors/css/forms/spinner/jquery.bootstrap-touchspin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+
 
     <!-- BEGIN: Vendor CSS-->
+
     <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/vendors.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/charts/apexcharts.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/extensions/toastr.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="app-assets/vendors/css/forms/select/select2.min.css">
     <!-- END: Vendor CSS-->
 
     <!-- BEGIN: Theme CSS-->
@@ -32,12 +39,13 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/themes/bordered-layout.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/themes/semi-dark-layout.css') }}">
 
+
     <!-- BEGIN: Page CSS-->
-    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/core/menu/menu-types/vertical-menu.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/pages/dashboard-ecommerce.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/plugins/charts/chart-apex.css') }}">
     <link rel="stylesheet" type="text/css"
         href="{{ asset('app-assets/css/plugins/extensions/ext-component-toastr.css') }}">
+    <link rel="stylesheet" type="text/css" href="app-assets/css/pages/app-user.css">
     <!-- END: Page CSS-->
 
     <!-- BEGIN: Custom CSS-->
@@ -112,6 +120,10 @@
 
     <script src="app-assets/js/scripts/forms/form-tooltip-valid.js"></script>
     <script src="app-assets/js/scripts/pages/page-auth-register.js"></script>
+    <script src="app-assets/js/scripts/forms/form-number-input.js"></script>
+    <script src="app-assets/vendors/js/forms/select/select2.full.min.js"></script>
+    <script src="app-assets/js/scripts/forms/form-select2.js"></script>
+
     <!-- BEGIN: Page JS-->
 
     <!-- <table> -->
@@ -130,30 +142,24 @@
     <script src="{{ asset('app-assets/vendors/js/pickers/flatpickr/flatpickr.min.js') }}"></script>
     <!-- </table> -->
 
-
-
-    <!-- BEGIN: Theme JS-->
-    <script src="app-assets/js/core/app-menu.js"></script>
-    <script src="app-assets/js/core/app.js"></script>
-    <!-- END: Theme JS-->
-    @yield('page-vendor')
-    @yield('page-script')
+    <!-- @yield('page-vendor')
+    @yield('page-script') -->
 
     <script>
-    $(document).ready(function() {
-        $('#table').DataTable();
-    });
+        $(document).ready(function() {
+            $('#table').DataTable();
+        });
     </script>
 
     <script>
-    $(window).on('load', function() {
-        if (feather) {
-            feather.replace({
-                width: 14,
-                height: 14
-            });
-        }
-    });
+        $(window).on('load', function() {
+            if (feather) {
+                feather.replace({
+                    width: 14,
+                    height: 14
+                });
+            }
+        });
     </script>
 </body>
 <!-- END: Body-->

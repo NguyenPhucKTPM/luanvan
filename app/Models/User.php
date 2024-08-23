@@ -146,4 +146,10 @@ class User extends Authenticatable
         }
         return $data ? $idUserByRole : null;
     }
+    public static function getAllUser(){
+        return DB::table('nguoidung')
+        ->join('vaitro','nguoidung.id_VaiTro','=','vaitro.id_VaiTro')
+        ->join('trangthai','nguoidung.id_TrangThai','=','trangthai.id_TrangThai')
+        ->get();
+    }
 }

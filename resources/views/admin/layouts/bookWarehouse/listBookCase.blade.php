@@ -11,7 +11,7 @@
                             <div class="head-label">
 
                             </div>
-                            <!-- <div class="dt-action-buttons text-end">
+                            <div class="dt-action-buttons text-end">
                                 <div class="dt-buttons d-inline-flex">
                                     <button
                                         class="dt-button buttons-collection btn btn-outline-secondary dropdown-toggle me-2"
@@ -29,63 +29,34 @@
                                         </span>
                                     </button>
                                 </div>
-                            </div> -->
+                            </div>
                         </div>
                         <table class="datatables-basic table table-hover" id="table">
                             <thead>
                                 <tr>
-                                    <th>Tên Người Dùng</th>
-                                    <th>Ngày Sinh</th>
-                                    <th>Giới Tính</th>
-                                    <th>Số Điện Thoại</th>
-                                    <th>Email</th>
-                                    <th>Vai Trò</th>
-                                    <th>Số Vi Phạm</th>
-                                    <th>Trạng Thái</th>
+                                    <th>ID</th>
+                                    <th>Mã Ngăn</th>
+                                    <th>Tên Ngăn</th>
+                                    <th>Tổng Vị Trí</th>
+                                    <th>Ngày Tạo</th>
+                                    <th>Ngày Sửa</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($users as $data)
+                                @foreach ($bookCase as $data)
                                 <tr>
-                                    <td>{{ $data->tenNguoiDung }}</td>
-                                    <td>{{ $data->ngaySinh }}</td>
-                                    <td>{{ $data->gioiTinh }}</td>
-                                    <td>{{ $data->SDT }}</td>
-                                    <td>{{ $data->email }}</td>
+                                    <td>{{ $data->id_Ngan }}</td>
+                                    <td>{{ $data->maNgan }}</td>
+                                    <td>{{ $data->tenNgan }}</td>
+                                    <td>{{ $data->soViTri }}</td>
+                                    <td>{{ $data->ngayTaoNgan }}</td>
                                     <td>
-                                        <div class="btn-group">
-                                            <button
-                                                class="btn btn-flat-info btn-sm {{ $data -> id_VaiTro > 1 && $data -> id_VaiTro < 4 ? 'dropdown-toggle' : 'dropdown-toggle-none'}}"
-                                                type="button"
-                                                id="dropdownMenuButton300"
-                                                data-bs-toggle="dropdown"
-                                                aria-expanded="false"
-                                                style="padding-left: 0px;">
-                                                {{$data -> tenVaiTro}}
-                                            </button>
-                                            @if($data -> id_VaiTro > 1 && $data -> id_VaiTro < 4 )
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton300">                                                                                            
-                                                <a
-                                                    class="dropdown-item"
-                                                    href="{{route('changeRole',[$data -> id_NguoiDung,$data -> id_VaiTro == 3 ? 2 : 3])}}">
-                                                    {{$data -> id_VaiTro == 3 ? 'Thủ thư' : 'Giảng viên'}}
-                                                </a>                                            
-                                            </div>
-                                            @endif
-                                        </div>
-                                    </td>
-                                    <td>{{ $data->soViPham }}</td>
-                                    <td>
-                                        @if($data -> id_TrangThai == 1)
-                                        <span class="badge badge-glow bg-secondary"><a href="{{route('updataStatus',[$data -> id_NguoiDung,2])}}">Chưa xác nhận</a></span>
-                                        @else
-                                        <span class="badge badge-glow bg-success"><a href="{{route('updataStatus',[$data -> id_NguoiDung,1])}}">Đã xác nhận</a></span>
-                                        @endif
+                                        {{ $data->ngaySuaNgan == $data -> ngayTaoNgan ? 'Chưa sửa' : $data -> ngaySuaNgan }}
                                     </td>
                                     <td>
                                         <div class="d-inline-flex">
-                                            <a class="pe-1 dropdown-toggle hide-arrow text-primary justify-content-center"
+                                            <a class="pe-1 dropdown-toggle hide-arrow text-primary"
                                                 data-bs-toggle="dropdown">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
                                                     viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -97,7 +68,7 @@
                                                 </svg>
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-end">
-                                                <a href="{{ route('detailUser',[$data -> id_NguoiDung]) }}" class="dropdown-item">
+                                                <a href="#" class="dropdown-item">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
                                                         viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -107,12 +78,12 @@
                                                         <circle cx="12" cy="12" r="3"></circle>
                                                     </svg>
                                                     Chi tiết
-                                                </a>
+                                                </a>                                            
                                             </div>
                                         </div>
-                                        <!-- <a href="javascript:;" class="item-edit" data-bs-toggle="modal"
-                                            data-bs-target="#modals-edit" data-id="{{ $data->id_NguoiDung }}"
-                                            data-ten="{{ $data->tenNguoiDung }}">
+                                        <a href="javascript:;" class="item-edit" data-bs-toggle="modal"
+                                            data-bs-target="#modals-edit" data-id="{{ $data->id_Ngan }}"
+                                            data-ten="{{ $data->tenNgan }}">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
                                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                                 stroke-linecap="round" stroke-linejoin="round"
@@ -122,7 +93,7 @@
                                                 <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z">
                                                 </path>
                                             </svg>
-                                        </a> -->
+                                        </a>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -132,7 +103,7 @@
                 </div>
             </div>
         </div>
-        Modal to add new record
+        <!-- Modal to add new record -->
         <div class="modal modal-slide-in fade" id="modals-slide-in">
             <div class="modal-dialog sidebar-sm">
                 <form class="add-new-record modal-content pt-0" action="{{ route('addBookCase') }}" method="post">
@@ -186,16 +157,16 @@
 
 </div>
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Xử lý sự kiện click cho các nút edit
-        document.querySelectorAll('.item-edit').forEach(function(element) {
-            element.addEventListener('click', function() {
-                var id_Ngan = this.getAttribute('data-id');
-                var tenNgan1 = this.getAttribute('data-ten');
-                document.getElementById('edit-id').value = id_Ngan;
-                document.getElementById('tenNgan1').value = tenNgan1;
-            });
+document.addEventListener('DOMContentLoaded', function() {
+    // Xử lý sự kiện click cho các nút edit
+    document.querySelectorAll('.item-edit').forEach(function(element) {
+        element.addEventListener('click', function() {
+            var id_Ngan = this.getAttribute('data-id');
+            var tenNgan1 = this.getAttribute('data-ten');
+            document.getElementById('edit-id').value = id_Ngan;
+            document.getElementById('tenNgan1').value = tenNgan1;
         });
     });
+});
 </script>
 @endsection

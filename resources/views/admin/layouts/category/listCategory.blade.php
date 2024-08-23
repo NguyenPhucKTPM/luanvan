@@ -130,7 +130,7 @@
                         <div class="mb-1">
                             <label class="form-label" for="tenTheLoai">Tên Thể Loại</label>
                             <input type="text" class="form-control" id="tenTheLoai" name="tenTheLoai"
-                                placeholder="Nhập tên ngôn ngữ">
+                                placeholder="Nhập tên thể loại">
                             @if($errors->has('tenTheLoai'))
                             <span class="error-message text-danger">*
                                 {{$errors->first('tenTheLoai')}}</span>
