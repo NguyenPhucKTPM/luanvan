@@ -19,15 +19,25 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/core/menu/menu-types/vertical-menu.css') }}">
     <link rel="stylesheet" type="text/css" href="app-assets/vendors/css/forms/spinner/jquery.bootstrap-touchspin.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
 
 
-
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Inconsolata&amp;family=Roboto+Slab&amp;family=Slabo+27px&amp;family=Sofia&amp;family=Ubuntu+Mono&amp;display=swap">
     <!-- BEGIN: Vendor CSS-->
+
+    <script src="https://cdn.ckeditor.com/4.25.0-lts/standard/ckeditor.js"></script>
+
 
     <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/vendors.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/charts/apexcharts.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/extensions/toastr.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="app-assets/vendors/css/forms/select/select2.min.css">
+    <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/css/forms/select/select2.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('app-assets/css/pages/app-ecommerce-details.min.css')}}">
+
+    <!-- <link rel="stylesheet" type="text/css" href="app-assets/vendors/css/file-uploaders/dropzone.min.css"> -->
+    <!-- <link rel="stylesheet" type="text/css" href="app-assets/css/plugins/forms/form-file-uploader.min.css"> -->
+
     <!-- END: Vendor CSS-->
 
     <!-- BEGIN: Theme CSS-->
@@ -38,32 +48,34 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/themes/dark-layout.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/themes/bordered-layout.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/themes/semi-dark-layout.css') }}">
-
+    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/custom.css') }}">
 
     <!-- BEGIN: Page CSS-->
     <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/pages/dashboard-ecommerce.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/plugins/charts/chart-apex.css') }}">
     <link rel="stylesheet" type="text/css"
         href="{{ asset('app-assets/css/plugins/extensions/ext-component-toastr.css') }}">
-    <link rel="stylesheet" type="text/css" href="app-assets/css/pages/app-user.css">
+    <link rel="stylesheet" type="text/css" href=" {{asset('app-assets/css/pages/app-user.css')}}">
+
     <!-- END: Page CSS-->
 
     <!-- BEGIN: Custom CSS-->
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
+    <!-- <link rel="stylesheet" type="text/css" href="{{asset('assets/css/style.css')}}"> -->
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
-    <link rel="stylesheet" type="text/css" href="app-assets/css/core/menu/menu-types/vertical-menu.css">
-    <link rel="stylesheet" type="text/css" href="app-assets/css/plugins/forms/pickers/form-flat-pickr.css">
-    <link rel="stylesheet" type="text/css" href="app-assets/css/plugins/forms/pickers/form-pickadate.css">
-    <link rel="stylesheet" type="text/css" href="app-assets/vendors/css/pickers/pickadate/pickadate.css">
-    <link rel="stylesheet" type="text/css" href="app-assets/vendors/css/pickers/flatpickr/flatpickr.min.css">
-    <link rel="stylesheet" type="text/css" href="app-assets/css/plugins/forms/form-validation.css">
+
+    <link rel="stylesheet" type="text/css" href="{{asset('app-assets/css/core/menu/menu-types/vertical-menu.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('app-assets/css/plugins/forms/pickers/form-flat-pickr.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('app-assets/css/plugins/forms/pickers/form-pickadate.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/css/pickers/pickadate/pickadate.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/css/pickers/flatpickr/flatpickr.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('app-assets/css/plugins/forms/form-validation.css')}}" >
     <!-- END: Custom CSS-->
 
     <!-- table -->
-    <link rel="stylesheet" type="text/css" href="app-assets/vendors/css/tables/datatable/dataTables.bootstrap5.min.css">
-    <link rel="stylesheet" type="text/css" href="app-assets/vendors/css/tables/datatable/buttons.bootstrap5.min.css">
-    <link rel="stylesheet" type="text/css" href="vendors/css/pickers/flatpickr/flatpickr.min.css">
-    <link rel="stylesheet" href="{{ asset('app-assets/vendors/css/tables/datatable/rowGroup.bootstrap4.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/css/tables/datatable/dataTables.bootstrap5.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/css/tables/datatable/buttons.bootstrap5.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('vendors/css/pickers/flatpickr/flatpickr.min.css')}}">
+    <link rel="stylesheet" href="{{asset('app-assets/vendors/css/tables/datatable/rowGroup.bootstrap4.min.css') }}">
     <!-- table -->
 
 </head>
@@ -92,37 +104,39 @@
 
     <!-- BEGIN: Vendor JS-->
     <script src="{{ asset('app-assets/vendors/js/vendors.min.js') }}"></script>
-    <!-- END: Vendor JS-->
 
+    <!-- END: Vendor JS-->
     <!-- BEGIN: Page Vendor JS-->
+    <script src="{{ asset('app-assets/vendors/js/forms/repeater/jquery.repeater.min.js') }}"></script>
     <script src="{{ asset('app-assets/vendors/js/charts/apexcharts.min.js') }}"></script>
-    <!-- <script src="{{ asset('app-assets/vendors/js/extensions/toastr.min.js') }}"></script> -->
-    <script src="app-assets/vendors/js/forms/wizard/bs-stepper.min.js"></script>
-    <script src="app-assets/vendors/js/forms/spinner/jquery.bootstrap-touchspin.js"></script>
-    <!-- END: Page Vendor JS-->
+    <script src="{{ asset('app-assets/vendors/js/forms/wizard/bs-stepper.min.js')}}"></script>
+    <script src="{{ asset('app-assets/vendors/js/forms/spinner/jquery.bootstrap-touchspin.js')}}"></script>
+    <script src="{{ asset('app-assets/vendors/js/forms/select/select2.full.min.js')}}"></script>
+    <!-- <script src="app-assets/vendors/js/file-uploaders/dropzone.min.js"></script> -->
+
 
     <!-- BEGIN: Theme JS-->
-    <script src="{{ asset('app-assets/js/core/app-menu.js') }}"></script>
+    <script src="{{ asset('app-assets/js/core/app-menu.js')}}"></script>
     <script src="{{ asset('app-assets/js/core/app.js') }}"></script>
+    <script src="{{ asset('app-assets/js/scripts/customizer.min.js')}}"></script>
     <!-- END: Theme JS-->
+    <script src="{{ asset('app-assets/js/scripts/forms/form-select2.js')}}"></script>
+    <script src="{{ asset('app-assets/js/scripts/forms/form-repeater.min.js')}}"></script>
 
-    <!-- BEGIN: Page JS-->
-    <script src="{{ asset('app-assets/js/scripts/pages/dashboard-ecommerce.js') }}"></script>
-    <!-- END: Page JS-->
-    <script src="app-assets/vendors/js/pickers/flatpickr/flatpickr.min.js"></script>
-    <script src="app-assets/vendors/js/forms/validation/jquery.validate.min.js"></script>
-    <script src="app-assets/vendors/js/pickers/pickadate/picker.js"></script>
-    <script src="app-assets/vendors/js/pickers/pickadate/picker.date.js"></script>
-    <script src="app-assets/vendors/js/pickers/pickadate/picker.time.js"></script>
-    <script src="app-assets/vendors/js/pickers/pickadate/legacy.js"></script>
-    <script src="app-assets/vendors/js/pickers/flatpickr/flatpickr.min.js"></script>
-    <script src="app-assets/js/scripts/forms/pickers/form-pickers.js"></script>
 
-    <script src="app-assets/js/scripts/forms/form-tooltip-valid.js"></script>
-    <script src="app-assets/js/scripts/pages/page-auth-register.js"></script>
-    <script src="app-assets/js/scripts/forms/form-number-input.js"></script>
-    <script src="app-assets/vendors/js/forms/select/select2.full.min.js"></script>
-    <script src="app-assets/js/scripts/forms/form-select2.js"></script>
+    <script src=" {{ asset('app-assets/vendors/js/pickers/flatpickr/flatpickr.min.js')}}"></script>
+    <script src=" {{ asset('app-assets/vendors/js/forms/validation/jquery.validate.min.js')}}"></script>
+    <script src=" {{ asset('app-assets/vendors/js/pickers/pickadate/picker.js')}}"></script>
+    <script src=" {{ asset('app-assets/vendors/js/pickers/pickadate/picker.date.js')}}"></script>
+    <script src=" {{ asset('app-assets/vendors/js/pickers/pickadate/picker.time.js')}}"></script>
+    <script src=" {{ asset('app-assets/vendors/js/pickers/pickadate/legacy.js')}}"></script>
+    <script src=" {{ asset('app-assets/vendors/js/pickers/flatpickr/flatpickr.min.js')}}"></script>
+    <script src=" {{ asset('app-assets/js/scripts/forms/pickers/form-pickers.js')}}"></script>
+    <!-- <script src=" {{ asset('app-assets/js/scripts/pages/app-ecommerce-details.min.js')}}"></script> -->
+    <!-- <script src="app-assets/js/scripts/forms/form-tooltip-valid.js"></script> -->
+    <script src=" {{ asset('app-assets/js/scripts/pages/page-auth-register.js')}}"></script>
+    <script src=" {{ asset('app-assets/js/scripts/forms/form-number-input.js')}}"></script>
+    <!-- <script src="app-assets/js/scripts/forms/form-file-uploader.min.js"></script> -->
 
     <!-- BEGIN: Page JS-->
 

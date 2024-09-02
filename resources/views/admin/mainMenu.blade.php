@@ -57,13 +57,34 @@
             <li class=" navigation-header"><span data-i18n="User Interface">Thư viện</span><i
                     data-feather="more-horizontal"></i>
             </li>
-            <li class=" nav-item">
-                <a class="d-flex align-items-center" href="ui-typography.html">
+            <!-- <li class=" nav-item {{ Route::currentRouteName() == 'listBook' ? 'active' : '' }}">
+                <a class="d-flex align-items-center" href="{{route('listBook')}}">
                     <i data-feather='book-open'></i>
                     <span class="menu-title text-truncate"
                         data-i18n="Typography">Quản lí sách
                     </span>
                 </a>
+            </li> -->
+            <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i data-feather="book-open"></i><span
+                        class="menu-title text-truncate" data-i18n="Form Elements">Quản lí sách</span></a>
+                <ul class="menu-content">
+                    <li class="{{ Route::currentRouteName() == 'listBook' ? 'active' : '' }}">
+                        <a class="d-flex align-items-center" href="{{ route('listBook') }}">
+                            <i data-feather="circle"></i>
+                            <span
+                                class="menu-item text-truncate" data-i18n="Input">Tất cả sách
+                            </span>
+                        </a>
+                    </li>
+                    <li  class="{{ Route::currentRouteName() == 'formAddBook' ? 'active' : '' }}">
+                        <a class="d-flex align-items-center" href="{{ route('formAddBook') }}">
+                            <i data-feather="circle"></i>
+                            <span class="menu-item text-truncate"
+                                data-i18n="Input Groups">Thêm sách
+                            </span>
+                        </a>
+                    </li>
+                </ul>
             </li>
             <li class=" nav-item  {{ Route::currentRouteName() == 'listPublisher' ? 'active' : '' }}">
                 <a class="d-flex align-items-center" href="{{route('listPublisher')}}">

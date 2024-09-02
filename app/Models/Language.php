@@ -20,4 +20,14 @@ class Language extends Model
     {
         return Carbon::parse($value)->format('d-m-Y H:i:s');
     }
+    public static function addLanguage($data)
+    {
+        // Tạo một bản ghi mới trong bảng ngonngu
+        $language = self::create([
+            'maNgonNgu' => 'MNN' . rand(10000000, 99999999),
+            'tenNgonNgu' => $data['tenNgonNgu'],
+        ]);
+
+        return $language->id_NgonNgu;
+    }
 }

@@ -72,4 +72,5 @@ class PublisherController extends Controller
             return redirect()->route('listPublisher')->with('error', 'Lỗi khi xóa nhà xuất bản');
         }
     }
+    
 }

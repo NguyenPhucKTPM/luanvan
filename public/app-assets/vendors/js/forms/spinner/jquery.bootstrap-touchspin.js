@@ -21,7 +21,7 @@
   D.fn.TouchSpin = function (k) {
     var C = {
         min: 0,
-        max: 100,
+        max: 1000,
         initval: '',
         replacementval: '',
         firstclickvalueifempty: null,

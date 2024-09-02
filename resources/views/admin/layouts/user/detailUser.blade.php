@@ -188,10 +188,6 @@
                     </div>
                 </div>
                 <!-- Account Tab ends -->
-
-                <!-- Information Tab starts -->
-                
-                <!-- Information Tab ends -->
             </div>
         </div>
     </div>

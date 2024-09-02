@@ -13,7 +13,7 @@ use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\DisciplineController;
 use App\Http\Controllers\Backend\BookCaseController;
 use App\Http\Controllers\Backend\BookLocationController;
-
+use App\Http\Controllers\Backend\BookController;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
@@ -111,6 +111,13 @@ Route::middleware(['checkLogin'])->group(function () {
     Route::get('/danh-sach-vi-tri', [BookLocationController::class, 'listBookLocation'])->middleware('role:1,2')->name('listBookLocation');
     Route::post('/them-vi-tri', [BookLocationController::class, 'AddBookLocation'])->middleware('role:1,2')->name('AddBookLocation');
     Route::post('/sua-vi-tri', [BookLocationController::class, 'editBookLocation'])->middleware('role:1,2')->name('editBookLocation');
+
+    Route::get('/danh-sach-sach', [BookController::class, 'listBook'])->middleware('role:1,2')->name('listBook');
+    Route::get('/form-them-sach-moi', [BookController::class, 'formAddBook'])->middleware('role:1,2')->name('formAddBook');
+    Route::post('/them-sach-moi', [BookController::class, 'addBook'])->middleware('role:1,2')->name('addBook');
+    Route::get('/admin-chi-tiet-sach/{id}', [BookController::class, 'detailBook'])->middleware('role:1,2')->name('detailBook');
+    Route::get('/form-chinh-sua-sach/{id}', [BookController::class, 'formEditBook'])->middleware('role:1,2')->name('formEditBook');
+    Route::post('/cap-nhat-sach', [BookController::class, 'editBook'])->middleware('role:1,2')->name('editBook');
 
     Route::post('/gui-xac-nhan-email', [AuthController::class, 'sendEmailVerify'])->name('confirmEmail');
     Route::get('/xac-nhan-email/{token}', [AuthController::class, 'confirmEmail']);

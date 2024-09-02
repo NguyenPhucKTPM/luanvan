@@ -104,9 +104,9 @@
   margin-bottom: 1.25rem !important; }
 
 .vertical-layout.vertical-menu-modern.menu-collapsed .main-menu:not(.expanded) .navigation li.active a {
-  background: whitesmoke;
+  background: #0e4582;
   box-shadow: none;
-  color: #565656; }
+  color: #fff; }
 
 .vertical-layout.vertical-menu-modern.menu-collapsed .main-menu.expanded {
   width: 260px; }
