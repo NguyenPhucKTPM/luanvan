@@ -14,6 +14,7 @@ use App\Http\Controllers\Backend\DisciplineController;
 use App\Http\Controllers\Backend\BookCaseController;
 use App\Http\Controllers\Backend\BookLocationController;
 use App\Http\Controllers\Backend\BookController;
+use App\Http\Controllers\Backend\CartController;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
@@ -127,10 +128,17 @@ Route::middleware(['checkLogin'])->group(function () {
 
     Route::get('/cap-nhat-thong-tin', [UserController::class, 'formUpdateInfo'])->name('thay-doi');
     Route::post('/cap-nhat-thong-tin-post', [UserController::class, 'updateInfo'])->name('updateInfo');
-    
+
+    // cart
+    Route::get('/gio-hang', [CartController::class, 'showCart'])->name('showCart');
+    Route::post('/them-gio-hang', [CartController::class, 'addCart'])->name('addCart');
+    Route::post('/cap-nhat-gio-sach', [CartController::class, 'editCart'])->name('editCart');
+    Route::post('/xoa-gio-sach', [CartController::class, 'deleteCart'])->name('deleteCart');
+
 });
 
-
+Route::get('/sach-theo-the-loai', [BookController::class, 'listBooksByCategory'])->name('listBookByCategory');
+Route::get('/chi-tiet-sach/{id}', [BookController::class, 'pageDetailBook'])->name('pageDetailBook');
 
 Route::get('/aa', [DashboardController::class, 'a']);
 // Route::get('/aa', [UserController::class, 'test']);

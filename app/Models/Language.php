@@ -22,7 +22,6 @@ class Language extends Model
     }
     public static function addLanguage($data)
     {
-        // Tạo một bản ghi mới trong bảng ngonngu
         $language = self::create([
             'maNgonNgu' => 'MNN' . rand(10000000, 99999999),
             'tenNgonNgu' => $data['tenNgonNgu'],

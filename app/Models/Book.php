@@ -90,5 +90,70 @@ class Book extends Model
         )
         ->first();
     }
+    public static function getBookByCategory($id){
+        return DB::table('sach')
+        ->join('chitiettheloai','chitiettheloai.id_Sach','=','sach.id_Sach')
+        ->join('theloai','theloai.id_TheLoai','=','chitiettheloai.id_TheLoai')
+        ->join('hinhanh','hinhanh.id_Sach','=','sach.id_Sach')
+        // ->join('ngonngu','ngonngu.id_NgonNgu','=','sach.id_NgonNgu')
+        ->where('theloai.id_TheLoai', $id)
+        ->orderBy('sach.id_Sach','desc')
+        ->select(
+            'sach.*',
+            'theloai.tenTheLoai',
+            'hinhanh.duongDan',
+            // 'ngonngu.TenNgonNgu'
+        )
+        ->paginate(12);
+    }
+    public static function getBookByLanguage($id,$id_NgonNgu){
+        return DB::table('sach')
+        ->join('chitiettheloai','chitiettheloai.id_Sach','=','sach.id_Sach')
+        ->join('theloai','theloai.id_TheLoai','=','chitiettheloai.id_TheLoai')
+        ->join('hinhanh','hinhanh.id_Sach','=','sach.id_Sach')
+        ->join('ngonngu','ngonngu.id_NgonNgu','=','sach.id_NgonNgu')
+        ->where('theloai.id_TheLoai', $id)
+        ->where('sach.id_NgonNgu', $id_NgonNgu)
+        ->orderBy('sach.id_Sach','desc')
+        ->select(
+            'sach.*',
+            'theloai.tenTheLoai',
+            'hinhanh.duongDan',
+        )
+        ->paginate(12);
+    }
+    public static function getBookByPublisher($id,$id_NhaXuatBan){
+        return DB::table('sach')
+        ->join('chitiettheloai','chitiettheloai.id_Sach','=','sach.id_Sach')
+        ->join('theloai','theloai.id_TheLoai','=','chitiettheloai.id_TheLoai')
+        ->join('hinhanh','hinhanh.id_Sach','=','sach.id_Sach')
+        ->join('nhaxuatban','nhaxuatban.id_NhaXuatBan','=','sach.id_NhaXuatBan')
+        ->where('theloai.id_TheLoai', $id)
+        ->where('sach.id_NhaXuatBan', $id_NhaXuatBan)
+        ->orderBy('sach.id_Sach','desc')
+        ->select(
+            'sach.*',
+            'theloai.tenTheLoai',
+            'hinhanh.duongDan',
+        )
+        ->paginate(12);
+    }
+    public static function getBookByDiscipline($id,$id_NganhHoc){
+        return DB::table('sach')
+        ->join('chitiettheloai','chitiettheloai.id_Sach','=','sach.id_Sach')
+        ->join('theloai','theloai.id_TheLoai','=','chitiettheloai.id_TheLoai')
+        ->join('hinhanh','hinhanh.id_Sach','=','sach.id_Sach')
+        ->join('chitietnganhhoc','sach.id_Sach','=','chitietnganhhoc.id_Sach')
+        ->join('nganhhoc','nganhhoc.id_NganhHoc','=','chitietnganhhoc.id_NganhHoc')
+        ->where('theloai.id_TheLoai', $id)
+        ->where('nganhhoc.id_NganhHoc', $id_NganhHoc)
+        ->orderBy('sach.id_Sach','desc')
+        ->select(
+            'sach.*',
+            'theloai.tenTheLoai',
+            'hinhanh.duongDan',
+        )
+        ->paginate(12);
+    }
     
 }

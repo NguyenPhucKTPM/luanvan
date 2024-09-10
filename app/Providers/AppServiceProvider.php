@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Backend\UserController;
+use App\Models\Category;
 use App\Observers\BookObserver;
 use App\Models\Book;
 
@@ -34,6 +35,8 @@ class AppServiceProvider extends ServiceProvider
                 $view->with('user', $userInfo);
                 // dd($userInfo);
             }
+            $categories = Category::orderBy('tenTheLoai', 'asc')->get();
+            $view->with('menuCategories', $categories);
         });
     }
 }

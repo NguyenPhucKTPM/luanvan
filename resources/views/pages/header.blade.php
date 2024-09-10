@@ -38,12 +38,11 @@
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">Catalog</a>
+                        aria-haspopup="true" aria-expanded="false">Thể loại</a>
                     <div class="dropdown-menu" aria-labelledby="dropdown04">
-                        <a class="dropdown-item" href="shop.html">Shop</a>
-                        <a class="dropdown-item" href="product-single.html">Single Product</a>
-                        <a class="dropdown-item" href="cart.html">Cart</a>
-                        <a class="dropdown-item" href="checkout.html">Checkout</a>
+                        @foreach ($menuCategories as $data)
+                        <a class="dropdown-item" href="{{ route('listBookByCategory', ['category' => $data->id_TheLoai]) }}">{{$data->tenTheLoai}}</a>
+                        @endforeach  
                     </div>
                 </li>
                 <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
@@ -59,6 +58,8 @@
                         <a class="dropdown-item" href="{{route('dang-xuat')}}">Đăng xuất</a>
                     </div>
                 </li>
+                <li class="nav-item cta cta-colored"><a href="{{route('showCart')}}" class="nav-link"><span
+                class="icon-shopping_cart" style="color: #0e4582;"></span>[0]</a></li>
                 @else
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="taikhoan" data-toggle="dropdown"
@@ -70,8 +71,7 @@
                     </div>
                 </li>
                 @endif
-                <li class="nav-item cta cta-colored"><a href="cart.html" class="nav-link"><span
-                            class="icon-shopping_cart" style="color: #0e4582;"></span>[0]</a></li>
+               
 
             </ul>
         </div>

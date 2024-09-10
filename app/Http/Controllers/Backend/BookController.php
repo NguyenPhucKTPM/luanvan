@@ -100,6 +100,11 @@ class BookController extends Controller
                 ]);
                 $disciplineArray[] = $newDiscipline;
             }
+            $getBookLocation = BookLocation::find($request->id_ViTri);
+            $totalSlot = $getBookLocation->sucChua - $getBookLocation->viTriDaSuDung;
+            if ($request->soLuongHienCo > $totalSlot) {
+                dd('da du');
+            }
             $newBook = Book::addBook([
                 'tenSach' => $request->tenSach,
                 'tenTacGia' =>  $request->tenTacGia,
@@ -307,7 +312,7 @@ class BookController extends Controller
                     case 'id_ViTri':
                         $activityLogs[] = 'Cập nhật vị trí sách';
                         break;
-                    case 'ghiChu':  
+                    case 'ghiChu':
                         $activityLogs[] = 'Có thay đổi ghi chú';
                         break;
                 }
@@ -384,7 +389,7 @@ class BookController extends Controller
                 }
                 if (!empty($changedData)) {
                     foreach ($changedData as $key => $value) {
-                        if ($key !== 'ghiChu') {  
+                        if ($key !== 'ghiChu') {
                             $oldValue = $oldBook[$key] ?? 'n/a';
                             $activityLogs[] = "Thay đổi {$key} từ '{$oldValue}' sang '{$value}'";
                         }
@@ -402,5 +407,52 @@ class BookController extends Controller
             return redirect()->back()->with('error', 'Lỗi khi cập nhật sách');
             // echo $e->getMessage();
         }
+    }
+    public function listBooksByCategory(Request $request)
+    {
+        $id_TheLoai = $request->category;
+        $id_NgonNgu = $request->ngonngu;
+        $id_NhaXuatBan = $request->nxb;
+        $id_NganhHoc = $request->nganhhoc;
+        $getBook = Book::getBookByCategory($id_TheLoai);
+        $idNgonNguArray = $getBook->pluck('id_NgonNgu')->unique()->toArray();
+        $getAllLanguage = Language::whereIn('id_NgonNgu', $idNgonNguArray)->orderBy('tenNgonNgu', 'asc') ->get();
+
+        $idNhaXuatBanArray = $getBook->pluck('id_NhaXuatBan')->unique()->toArray(); 
+        $getAllPublishers = Publisher::whereIn('id_NhaXuatBan',$idNhaXuatBanArray)->orderBy('tenNhaXuatBan', 'asc')->get();
+
+        $bookIds = $getBook->pluck('id_Sach')->toArray();
+        $getAllDiscipline = Discipline::getListDisciplineByBook($bookIds);
+        // dd($getAllDiscipline);
+        if (isset($id_NgonNgu)) {
+            $getBook = Book::getBookByLanguage($id_TheLoai, $id_NgonNgu);
+        }
+        if (isset($id_NhaXuatBan)) {
+            $getBook = Book::getBookByPublisher($id_TheLoai, $id_NhaXuatBan);
+        }
+        if (isset($id_NganhHoc)) {
+            $getBook = Book::getBookByDiscipline($id_TheLoai, $id_NganhHoc);
+        }
+        return view('pages.layouts.book.bookBycategory', [
+            'tab' => 'Sách',
+            'title' => 'Sách theo thể loại',
+            'getAllLanguage' => $getAllLanguage,
+            'getAllPublishers' => $getAllPublishers,
+            'getAllDiscipline' => $getAllDiscipline,
+            'getBook' => $getBook,
+        ]);
+    }
+    public function pageDetailBook($id){
+        $detailBook = Book::detailBook($id);
+        $categories = Category::getCategoryByBook($id);
+        $disciplines = Discipline::getDisciplineByBook($id);
+        // dd($detailBook);
+        return view('pages.layouts.book.detailBook', [
+            'tab' => 'Sách',
+            'title' => 'Chi tiết sách',
+            'detailBook' => $detailBook,
+            'categories' => $categories,
+            'disciplines' => $disciplines
+        ]);
     }
 }

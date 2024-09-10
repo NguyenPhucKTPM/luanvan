@@ -11,10 +11,10 @@ class Discipline extends Model
 {
     use HasFactory;
     protected $table = 'nganhhoc';
-    protected $primaryKey = 'id_NganhHoc'; 
+    protected $primaryKey = 'id_NganhHoc';
     protected $fillable = ['id_NganhHoc', 'maNganhHoc', 'tenNganhHoc', 'ngayTaoNganhHoc', 'ngaySuaNganhHoc'];
     public $timestamps = false;
-    
+
     public function getngayTaoNganhHocAttribute($value)
     {
         return Carbon::parse($value)->format('d-m-Y H:i:s');
@@ -41,6 +41,16 @@ class Discipline extends Model
         return DB::table('nganhhoc')
             ->join('chitietnganhhoc', 'chitietnganhhoc.id_NganhHoc', '=', 'nganhhoc.id_NganhHoc')
             ->where('chitietnganhhoc.id_Sach', $id)
+            ->get();
+    }
+    public static function getListDisciplineByBook($bookIds)
+    {
+        return DB::table('nganhhoc')
+            ->join('chitietnganhhoc', 'chitietnganhhoc.id_NganhHoc', '=', 'nganhhoc.id_NganhHoc')
+            ->whereIn('chitietnganhhoc.id_Sach', $bookIds)
+            ->select('nganhhoc.id_NganhHoc', 'nganhhoc.tenNganhHoc')
+            ->distinct() 
+            ->orderBy('nganhhoc.tenNganhHoc', 'asc')  
             ->get();
     }
 }

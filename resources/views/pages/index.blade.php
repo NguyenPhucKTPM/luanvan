@@ -2,10 +2,12 @@
 <html lang="en">
 
 <head>
-    <title>@yield('title', 'Trang chủ')</title>
+    <title>{{isset($title) ? $title : 'Trang chủ'}}</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="shortcut icon" type="image/x-icon" href="pages/images/logo.png">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <link rel="shortcut icon" type="image/x-icon" href="{{asset('pages/images/logo.png')}}">
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css">
@@ -44,6 +46,7 @@
     <link rel="stylesheet" type="text/css" href="app-assets/vendors/css/pickers/flatpickr/flatpickr.min.css">
     <link rel="stylesheet" type="text/css" href="app-assets/css/plugins/forms/form-validation.css">
     <link rel="stylesheet" type="text/css" href="app-assets/vendors/css/forms/select/select2.min.css">
+
 </head>
 
 <body class="goto-here">
@@ -51,7 +54,7 @@
 
     @include('pages.header')
 
-    @yield('content', View::make('pages.main'))
+    @yield('content', View::make('pages.home'))
 
     @include('pages.footer')
 
@@ -80,6 +83,7 @@
     </script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+
 
     <script src="{{asset('pages/js/google-map.js')}}"></script>
     <script src="{{asset('pages/js/main.js')}}"></script>
