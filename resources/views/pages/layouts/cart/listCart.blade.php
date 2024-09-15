@@ -68,7 +68,7 @@
                     </p>
                 </form>
                 <p class="text-center">
-                    <a href="checkout.html" class="btn btn-black py-3 px-4">Mượn sách</a>
+                    <a href="{{route('formCheckout')}}" class="btn btn-black py-3 px-4">Mượn sách</a>
                 </p>
             </div>
         </div>

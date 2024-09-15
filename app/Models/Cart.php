@@ -35,16 +35,22 @@ class Cart extends Model
         )     
         ->get();
     }
-    public static function chooseDetailCart($id_NguoiDung){
-        return DB::table('chitietgiosach')
-        ->join('giosach','chitietgiosach.id_GioSach','=','giosach.id_GioSach')
+    // public static function chooseDetailCart($id_NguoiDung){
+    //     return DB::table('chitietgiosach')
+    //     ->join('giosach','chitietgiosach.id_GioSach','=','giosach.id_GioSach')
+    //     ->where('giosach.id_NguoiDung', $id_NguoiDung)
+    //     ->select(
+    //         'gioSach.*',
+    //         'sach.tenSach','sach.giaTien',
+    //         'chitietgiosach.*',
+    //         'hinhAnh.duongDan',
+    //     )     
+    //     ->get();
+    // }
+    public static function countBookInCartByUser($id_NguoiDung){
+        return DB::table('giosach')
+        ->join('chitietgiosach','chitietgiosach.id_GioSach','=','giosach.id_GioSach')
         ->where('giosach.id_NguoiDung', $id_NguoiDung)
-        ->select(
-            'gioSach.*',
-            'sach.tenSach','sach.giaTien',
-            'chitietgiosach.*',
-            'hinhAnh.duongDan',
-        )     
-        ->get();
+        ->sum('chitietgiosach.soLuong');
     }
 }

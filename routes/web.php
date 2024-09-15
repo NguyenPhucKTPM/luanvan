@@ -15,6 +15,8 @@ use App\Http\Controllers\Backend\BookCaseController;
 use App\Http\Controllers\Backend\BookLocationController;
 use App\Http\Controllers\Backend\BookController;
 use App\Http\Controllers\Backend\CartController;
+use App\Http\Controllers\Backend\BorrowBookController;
+
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
@@ -135,6 +137,10 @@ Route::middleware(['checkLogin'])->group(function () {
     Route::post('/cap-nhat-gio-sach', [CartController::class, 'editCart'])->name('editCart');
     Route::post('/xoa-gio-sach', [CartController::class, 'deleteCart'])->name('deleteCart');
 
+    //checkout
+    Route::get('/chi-tiet-muon-sach', [BorrowBookController::class, 'formCheckout'])->name('formCheckout');
+    Route::post('/muon-sach', [BorrowBookController::class, 'borrowBook'])->name('borrowBook');
+    Route::get('/thong-tin-muon-sach', [BorrowBookController::class, 'infoBorrow'])->name('infoBorrow');
 });
 
 Route::get('/sach-theo-the-loai', [BookController::class, 'listBooksByCategory'])->name('listBookByCategory');

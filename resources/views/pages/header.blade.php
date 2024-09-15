@@ -59,7 +59,7 @@
                     </div>
                 </li>
                 <li class="nav-item cta cta-colored"><a href="{{route('showCart')}}" class="nav-link"><span
-                class="icon-shopping_cart" style="color: #0e4582;"></span>[0]</a></li>
+                class="icon-shopping_cart" style="color: #0e4582;"></span>[{{$sumCart}}]</a></li>
                 @else
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="taikhoan" data-toggle="dropdown"

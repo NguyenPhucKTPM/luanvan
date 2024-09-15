@@ -5,22 +5,22 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Category;
+
 class CategoryController extends Controller
 {
-    public function __construct()
+    public function __construct() {}
+    public function listCategory()
     {
-    }
-    public function listCategory(){
         $categories = Category::all();
-        return view('admin.layouts.category.listCategory',[
+        return view('admin.layouts.category.listCategory', [
             'title' => 'Danh sách thể loại',
             'tab' => 'Quản lí thể loại',
-            'categories'=> $categories,
+            'categories' => $categories,
         ]);
     }
     public function addCategory(Request $request)
     {
-        $checkExist = Category::where('tenTheLoai',$request -> tenTheLoai)->first();
+        $checkExist = Category::where('tenTheLoai', $request->tenTheLoai)->first();
         if ($checkExist) {
             return redirect()->route('listCategory')->with('error', 'Tên thể loại đã tồn tại');
         }
@@ -36,7 +36,7 @@ class CategoryController extends Controller
     public function editCategory(Request $request)
     {
         $category = Category::find($request->id_TheLoai);
-        $checkExist = Category::where('tenTheLoai',$request -> tenTheLoai1)->first();
+        $checkExist = Category::where('tenTheLoai', $request->tenTheLoai1)->first();
         if ($checkExist) {
             return redirect()->route('listCategory')->with('error', 'Tên thể loại đã tồn tại');
         }
@@ -52,7 +52,7 @@ class CategoryController extends Controller
     }
     public function deleteCategory($id)
     {
-        try {         
+        try {
             $category = Category::find($id);
             if ($category) {
                 $category->delete();

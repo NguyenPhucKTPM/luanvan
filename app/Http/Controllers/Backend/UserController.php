@@ -39,6 +39,7 @@ class UserController extends Controller
       $infoRole = User::getInformationSessionLecturers($idUser);
     }
     return view('pages.layouts.auth.infoUser', [
+      'tab'=> 'Người dùng',
       'title' => 'Chi tiết thông tin',
       'userInfo' => $userInfo,
       'infoRole' => $infoRole,
@@ -61,6 +62,7 @@ class UserController extends Controller
       $infoRole = User::getInformationSessionStudent($idUser);
     }
     return view('pages.layouts.auth.changeInfo', [
+      'tab'=> 'Người dùng',
       'title' => 'Cập nhật thông tin',
       'user' => $userInfo,
       'infoRole' => $infoRole,

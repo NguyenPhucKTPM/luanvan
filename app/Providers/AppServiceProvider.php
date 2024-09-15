@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Backend\UserController;
 use App\Models\Category;
+use App\Models\Cart;
 use App\Observers\BookObserver;
 use App\Models\Book;
 
@@ -34,6 +35,8 @@ class AppServiceProvider extends ServiceProvider
                 $userInfo = $userController->getInformationSessionUser();
                 $view->with('user', $userInfo);
                 // dd($userInfo);
+                $sumCart = Cart::countBookInCartByUser($userInfo -> id_NguoiDung);
+                $view->with('sumCart', $sumCart);
             }
             $categories = Category::orderBy('tenTheLoai', 'asc')->get();
             $view->with('menuCategories', $categories);
