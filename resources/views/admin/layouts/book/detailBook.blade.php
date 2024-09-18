@@ -18,14 +18,18 @@
           <div class="ecommerce-details-price d-flex flex-wrap mt-1">
             <h4 class="item-price me-1">{{number_format($detailBook->giaTien, 0, ',', '.')}}₫</h4>
             <ul class="unstyled-list list-inline ps-1 border-start">
-              <li class="ratings-list-item"><i data-feather="star" class="filled-star"></i></li>
-              <li class="ratings-list-item"><i data-feather="star" class="filled-star"></i></li>
-              <li class="ratings-list-item"><i data-feather="star" class="filled-star"></i></li>
-              <li class="ratings-list-item"><i data-feather="star" class="filled-star"></i></li>
-              <li class="ratings-list-item"><i data-feather="star" class="unfilled-star"></i></li>
+              @php
+              $averageRating = min($detailBook->danhGiaTrungBinh, 5);
+              @endphp
+              @for ($i = 1; $i <= 5; $i++)
+                @if ($i <=$averageRating)
+                <li class="ratings-list-item"><i data-feather="star" class="filled-star"></i></li>
+                @else
+                <li class="ratings-list-item"><i data-feather="star" class="unfilled-star"></i></li>
+                @endif
+                @endfor
             </ul>
           </div>
-
           <p class="card-text"></p>
           <div class="col-xl-12 col-lg-12 mt-2 mt-xl-0">
             <div class="d-flex flex-wrap">

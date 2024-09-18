@@ -19,6 +19,7 @@ use App\Models\BookLocation;
 use App\Models\Librarian;
 use App\Models\detailCategory;
 use App\Models\detailDiscipline;
+use App\Models\Comment;
 
 class BookController extends Controller
 {
@@ -446,13 +447,27 @@ class BookController extends Controller
         $detailBook = Book::detailBook($id);
         $categories = Category::getCategoryByBook($id);
         $disciplines = Discipline::getDisciplineByBook($id);
-        // dd($detailBook);
+        $getComment = Comment::getComment($id);
+        if($detailBook){
+            $editView = Book::find($id);
+            $editView -> luotXem += 1;
+            $editView->save();
+        }
         return view('pages.layouts.book.detailBook', [
             'tab' => 'Sách',
             'title' => 'Chi tiết sách',
             'detailBook' => $detailBook,
             'categories' => $categories,
-            'disciplines' => $disciplines
+            'disciplines' => $disciplines,
+            'getComment' => $getComment,
         ]);
+    }
+    public function readBook($id){
+        $book = Book::find($id);
+        if ($book) {
+            $book->luotDoc += 1;
+            $book->save();
+        }
+        return response()->json(['success' => true]);
     }
 }

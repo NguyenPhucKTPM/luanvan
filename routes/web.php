@@ -16,6 +16,8 @@ use App\Http\Controllers\Backend\BookLocationController;
 use App\Http\Controllers\Backend\BookController;
 use App\Http\Controllers\Backend\CartController;
 use App\Http\Controllers\Backend\BorrowBookController;
+use App\Http\Controllers\Backend\RatingController;
+use App\Http\Controllers\Backend\CommentController;
 
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
@@ -122,6 +124,15 @@ Route::middleware(['checkLogin'])->group(function () {
     Route::get('/form-chinh-sua-sach/{id}', [BookController::class, 'formEditBook'])->middleware('role:1,2')->name('formEditBook');
     Route::post('/cap-nhat-sach', [BookController::class, 'editBook'])->middleware('role:1,2')->name('editBook');
 
+    //duyet phieu muon
+    Route::get('/danh-sach-phieu-muon-cho-duyet', [BorrowBookController::class, 'listBorrowPending'])->middleware('role:1,2')->name('listBorrowPending');
+    Route::get('/danh-sach-phieu-muon-da-duyet', [BorrowBookController::class, 'listBorrowApproved'])->middleware('role:1,2')->name('listBorrowApproved');
+    Route::get('/danh-sach-phieu-muon-da-huy', [BorrowBookController::class, 'listBorrowCancel'])->middleware('role:1,2')->name('listBorrowCancel');
+    Route::get('/chi-tiet-phieu-muon/{id}', [BorrowBookController::class, 'detailBorrow'])->middleware('role:1,2')->name('detailBorrow');
+    Route::get('/duyet-phieu-muon', [BorrowBookController::class, 'approveBorrow'])->middleware('role:1,2')->name('approveBorrow');
+
+
+
     Route::post('/gui-xac-nhan-email', [AuthController::class, 'sendEmailVerify'])->name('confirmEmail');
     Route::get('/xac-nhan-email/{token}', [AuthController::class, 'confirmEmail']);
 
@@ -141,10 +152,17 @@ Route::middleware(['checkLogin'])->group(function () {
     Route::get('/chi-tiet-muon-sach', [BorrowBookController::class, 'formCheckout'])->name('formCheckout');
     Route::post('/muon-sach', [BorrowBookController::class, 'borrowBook'])->name('borrowBook');
     Route::get('/thong-tin-muon-sach', [BorrowBookController::class, 'infoBorrow'])->name('infoBorrow');
+
+    //danh gia so sao
+    Route::get('/danh-gia-sach', [RatingController::class, 'rateBook'])->name('rateBook');
+    //binh luan
+    Route::post('/binh-luan-sach', [CommentController::class, 'writeComment'])->name('writeComment');
+
 });
 
 Route::get('/sach-theo-the-loai', [BookController::class, 'listBooksByCategory'])->name('listBookByCategory');
 Route::get('/chi-tiet-sach/{id}', [BookController::class, 'pageDetailBook'])->name('pageDetailBook');
+Route::post('/luot-doc-sach/{id}', [BookController::class, 'readBook'])->name('readBook');
 
 Route::get('/aa', [DashboardController::class, 'a']);
 // Route::get('/aa', [UserController::class, 'test']);

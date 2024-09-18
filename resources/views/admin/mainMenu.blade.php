@@ -76,7 +76,7 @@
                             </span>
                         </a>
                     </li>
-                    <li  class="{{ Route::currentRouteName() == 'formAddBook' ? 'active' : '' }}">
+                    <li class="{{ Route::currentRouteName() == 'formAddBook' ? 'active' : '' }}">
                         <a class="d-flex align-items-center" href="{{ route('formAddBook') }}">
                             <i data-feather="circle"></i>
                             <span class="menu-item text-truncate"
@@ -129,7 +129,7 @@
                             </span>
                         </a>
                     </li>
-                    <li  class="{{ Route::currentRouteName() == 'listBookLocation' ? 'active' : '' }}">
+                    <li class="{{ Route::currentRouteName() == 'listBookLocation' ? 'active' : '' }}">
                         <a class="d-flex align-items-center" href="{{ route('listBookLocation') }}">
                             <i data-feather="circle"></i>
                             <span class="menu-item text-truncate"
@@ -139,24 +139,28 @@
                     </li>
                 </ul>
             </li>
-            <li class=" navigation-header"><span data-i18n="Misc">Misc</span><i data-feather="more-horizontal"></i>
+            <li class=" navigation-header"><span data-i18n="QLMT">Mượn trả sách</span><i data-feather="more-horizontal"></i>
             </li>
-            <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i data-feather="menu"></i><span
-                        class="menu-title text-truncate" data-i18n="Menu Levels">Menu Levels</span></a>
+            <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i data-feather="file-text"></i><span
+                        class="menu-title text-truncate" data-i18n="Menu Levels">Phiếu mượn sách</span></a>
                 <ul class="menu-content">
-                    <li><a class="d-flex align-items-center" href="#"><i data-feather="circle"></i><span
-                                class="menu-item text-truncate" data-i18n="Second Level">Second Level 2.1</span></a>
+                    <li class="{{ Route::currentRouteName() == 'listBorrowPending' ? 'active' : '' }}">
+                        <a class="d-flex align-items-center" href="{{route('listBorrowPending')}}">
+                            <i data-feather="circle"></i>
+                            <span class="menu-item text-truncate" data-i18n="Second Level">Đang chờ duyệt</span>
+                        </a>
                     </li>
-                    <li><a class="d-flex align-items-center" href="#"><i data-feather="circle"></i><span
-                                class="menu-item text-truncate" data-i18n="Second Level">Second Level 2.2</span></a>
-                        <ul class="menu-content">
-                            <li><a class="d-flex align-items-center" href="#"><span class="menu-item text-truncate"
-                                        data-i18n="Third Level">Third Level 3.1</span></a>
-                            </li>
-                            <li><a class="d-flex align-items-center" href="#"><span class="menu-item text-truncate"
-                                        data-i18n="Third Level">Third Level 3.2</span></a>
-                            </li>
-                        </ul>
+                    <li class="{{ Route::currentRouteName() == 'listBorrowApproved' ? 'active' : '' }}">
+                        <a class="d-flex align-items-center" href="{{route('listBorrowApproved')}}">
+                            <i data-feather="circle"></i>
+                            <span class="menu-item text-truncate" data-i18n="Second Level">Đang đã duyệt</span>
+                        </a>
+                    </li>
+                    <li class="{{ Route::currentRouteName() == 'listBorrowCancel' ? 'active' : '' }}">
+                        <a class="d-flex align-items-center" href="{{route('listBorrowCancel')}}">
+                            <i data-feather="circle"></i>
+                            <span class="menu-item text-truncate" data-i18n="Second Level">Đang đã hủy</span>
+                        </a>
                     </li>
                 </ul>
             </li>

@@ -13141,7 +13141,7 @@ h5,
   display: inline-block;
   border: 1px solid transparent;
   background: rgba(0, 0, 0, 0.05);
-  width: 33%;
+  width: 50%;
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
   -ms-border-radius: 0;
@@ -14954,7 +14954,7 @@ textarea.form-control {
 
 .search-form .form-group input:focus,
 .search-form .form-group input:active {
-  border-color: #dbcc8f !important;
+  border-color: #1b80ef !important;
 }
 
 .search-form .icon {

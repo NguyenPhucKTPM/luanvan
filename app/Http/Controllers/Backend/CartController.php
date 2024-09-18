@@ -98,10 +98,13 @@ class CartController extends Controller
                     'message' => 'Dữ liệu không hợp lệ.',
                 ]);
             }
+
             $totals = [];
             $totalQuantity = 0;
             $id_VaiTro = Auth::user()->id_VaiTro;
             $maxQuantity = $id_VaiTro < 4 ? 5 : 3;
+
+            // Đầu tiên tính tổng số lượng
             foreach ($cartItems as $item) {
                 if (!isset($item['id_ChiTietGioSach']) || !isset($item['soLuong'])) {
                     return response()->json([
@@ -110,16 +113,22 @@ class CartController extends Controller
                     ]);
                 }
 
-                $id_ChiTietGioSach = $item['id_ChiTietGioSach'];
                 $soLuong = (int) $item['soLuong'];
                 $totalQuantity += $soLuong;
+            }
 
-                if ($totalQuantity > $maxQuantity) {
-                    return response()->json([
-                        'success' => false,
-                        'message' => 'Tổng số lượng sách vượt quá giới hạn cho phép.',
-                    ]);
-                }
+            // Kiểm tra tổng số lượng sau khi đã cộng dồn tất cả
+            if ($totalQuantity > $maxQuantity) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Tổng số lượng sách vượt quá giới hạn cho phép.',
+                ]);
+            }
+
+            // Cập nhật giỏ hàng
+            foreach ($cartItems as $item) {
+                $id_ChiTietGioSach = $item['id_ChiTietGioSach'];
+                $soLuong = (int) $item['soLuong'];
 
                 $detail = DB::table('chitietgiosach')
                     ->where('id_ChiTietGioSach', $id_ChiTietGioSach)
@@ -131,27 +140,30 @@ class CartController extends Controller
                     if ($book) {
                         $giaTien = $book->giaTien;
                         $total = $giaTien * $soLuong;
-                        DB::table('chitietgiosach')->updateOrInsert(
-                            ['id_ChiTietGioSach' => $id_ChiTietGioSach],
-                            ['soLuong' => $soLuong]
-                        );
                         $totals[$id_ChiTietGioSach] = number_format($total, 0, ',', '.') . '₫';
+
+                        if ($soLuong <= 0) {
+                            DB::table('chitietgiosach')->where('id_ChiTietGioSach', $id_ChiTietGioSach)->delete();
+                        } else {
+                            DB::table('chitietgiosach')->updateOrInsert(
+                                ['id_ChiTietGioSach' => $id_ChiTietGioSach],
+                                ['soLuong' => $soLuong]
+                            );
+                        }
                     } else {
                         return response()->json([
                             'success' => false,
                             'message' => 'Không tìm thấy sách với ID ' . $id_Sach,
                         ]);
                     }
-                    if ($soLuong <= 0) {
-                        DB::table('chitietgiosach')->where('id_ChiTietGioSach', $id_ChiTietGioSach)->delete();
-                    } else {
-                        DB::table('chitietgiosach')->updateOrInsert(
-                            ['id_ChiTietGioSach' => $id_ChiTietGioSach],
-                            ['soLuong' => $soLuong]
-                        );
-                    }
+                } else {
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'Không tìm thấy chi tiết giỏ sách với ID ' . $id_ChiTietGioSach,
+                    ]);
                 }
             }
+
             return response()->json([
                 'success' => true,
                 'message' => 'Cập nhật giỏ hàng thành công',
@@ -164,6 +176,7 @@ class CartController extends Controller
             ]);
         }
     }
+
     public function deleteCart(Request $request)
     {
         try {

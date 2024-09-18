@@ -75,131 +75,172 @@
     </div>
 </section>
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
+   document.addEventListener('DOMContentLoaded', function() {
+    var updateCartBtn = document.getElementById('update-cart-btn');
+    var quantityInputs = document.querySelectorAll('.quantity');
 
-        var updateCartBtn = document.getElementById('update-cart-btn');
-        var quantityInputs = document.querySelectorAll('.quantity');
+    // Thiết lập giá trị soLuong trước đó khi trang được tải
+    quantityInputs.forEach(function(input) {
+        input.setAttribute('data-prev-value', input.value);
+    });
 
+    // Hàm tính tổng số lượng sách trong giỏ hàng
+    function calculateTotalQuantity() {
+        return Array.from(quantityInputs).reduce(function(total, input) {
+            return total + parseInt(input.value, 10);
+        }, 0);
+    }
 
-        // Cập nhật tổng tiền khi số lượng thay đổi
-        quantityInputs.forEach(function(input) {
-            input.addEventListener('input', function() {
-                var cartId = input.getAttribute('data-id');
-                var soLuong = parseInt(input.value, 10);
-                var giaTien = parseFloat(input.getAttribute('data-price'));
-                var maxQuantity = parseInt(input.getAttribute('max'), 10);
-                var totalElement = document.getElementById(`total-${cartId}`);
+    // Cập nhật tổng tiền khi số lượng thay đổi
+    quantityInputs.forEach(function(input) {
+        input.addEventListener('input', function() {
+            var cartId = input.getAttribute('data-id');
+            var soLuong = parseInt(input.value, 10);
+            var giaTien = parseFloat(input.getAttribute('data-price'));
+            var maxQuantity = parseInt(input.getAttribute('max'), 10);
+            var totalElement = document.getElementById(`total-${cartId}`);
 
-                if (!isNaN(soLuong) && giaTien) {
-                    if (soLuong > maxQuantity) {
-                        alert('Số lượng không được vượt quá số lượng tối đa!');
-                        input.value = maxQuantity;
-                        soLuong = maxQuantity;
-                    }
+            // Tính tổng số lượng sau khi thay đổi
+            var totalQuantity = calculateTotalQuantity();
+            var maxTotalQuantity = Array.from(quantityInputs).reduce(function(total, input) {
+                return total + parseInt(input.getAttribute('max'), 10);
+            }, 0);
+
+            if (!isNaN(soLuong) && giaTien) {
+                if (soLuong > maxQuantity) {
+                    alert('Số lượng cho từng sách không được vượt quá số lượng tối đa!');
+
+                    // Trả lại giá trị soLuong trước đó
+                    input.value = input.getAttribute('data-prev-value');
+                } else if (totalQuantity > maxTotalQuantity) {
+                    alert('Tổng số lượng sách trong giỏ hàng không được vượt quá số lượng tối đa cho phép!');
+
+                    // Trả lại giá trị soLuong trước đó
+                    input.value = input.getAttribute('data-prev-value');
+                } else {
+                    // Lưu giá trị soLuong mới vào thuộc tính data-prev-value
+                    input.setAttribute('data-prev-value', soLuong);
+
                     // Cập nhật tổng tiền khi số lượng thay đổi
                     var total = soLuong * giaTien;
                     totalElement.innerText = `${total.toLocaleString()}₫`;
                 }
-            });
-        });
-
-        // Xử lý sự kiện khi nhấn nút cập nhật giỏ hàng
-        updateCartBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-
-            var formData = new FormData();
-            formData.append('_token', '{{ csrf_token() }}');
-            formData.append('update_cart', '1');
-
-            var cartItems = Array.from(quantityInputs).map(input => {
-                var cartId = input.getAttribute('data-id');
-                var soLuong = parseInt(input.value, 10);
-
-                if (soLuong <= 0) {
-                    var row = document.querySelector(`tr[data-id="${cartId}"]`);
-                    if (row) {
-                        row.remove();
-                    }
-                    return {
-                        id_ChiTietGioSach: cartId,
-                        soLuong: soLuong
-                    };
-                }
-                return !isNaN(soLuong) ? {
-                    id_ChiTietGioSach: cartId,
-                    soLuong: soLuong
-                } : null;
-            }).filter(item => item !== null);
-
-            if (cartItems.length > 0) {
-                formData.append('cart_items', JSON.stringify(cartItems));
-
-                fetch('{{ route("editCart") }}', {
-                        method: 'POST',
-                        body: formData
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        console.log('Update Response Data:', data);
-
-                        if (data.success) {
-                            quantityInputs.forEach(input => {
-                                var cartId = input.getAttribute('data-id');
-                                var totalElement = document.getElementById(`total-${cartId}`);
-                                if (data.totals && data.totals[cartId]) {
-                                    totalElement.innerText = data.totals[cartId];
-                                }
-                            });
-
-                            // Xóa các dòng bị loại bỏ từ giỏ hàng
-                            if (Array.isArray(data.removedItems)) {
-                                data.removedItems.forEach(itemId => {
-                                    var row = document.querySelector(`tr[data-id="${itemId}"]`);
-                                    if (row) {
-                                        row.remove();
-                                    }
-                                });
-                            }
-                        } else {
-                            alert(data.message || 'Có lỗi xảy ra!');
-                        }
-                    })
-                    .catch(error => console.error('Error:', error));
-            } else {
-                console.log('Không có sản phẩm nào để cập nhật!');
-            }
-        });
-
-        // Xử lý sự kiện khi nhấn nút xóa sản phẩm
-        document.addEventListener('click', function(e) {
-            if (e.target && e.target.matches('.product-remove a')) {
-                e.preventDefault();
-                var row = e.target.closest('tr');
-                var cartId = e.target.getAttribute('data-id');
-
-                var formData = new FormData();
-                formData.append('_token', '{{ csrf_token() }}');
-                formData.append('remove_item', '1');
-                formData.append('id_ChiTietGioSach', cartId);
-
-                fetch('{{ route("deleteCart") }}', {
-                        method: 'POST',
-                        body: formData
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        console.log('Delete Response Data:', data);
-
-                        if (data.success) {
-                            row.remove();
-                        } else {
-                            alert(data.message || 'Có lỗi xảy ra!');
-                        }
-                    })
-                    .catch(error => console.error('Error:', error));
             }
         });
     });
+
+    // Xử lý sự kiện khi nhấn nút cập nhật giỏ hàng
+    updateCartBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+
+        // Tính tổng số lượng sách trong giỏ hàng
+        var totalQuantity = calculateTotalQuantity();
+        var maxTotalQuantity = Array.from(quantityInputs).reduce(function(total, input) {
+            return total + parseInt(input.getAttribute('max'), 10);
+        }, 0);
+
+        if (totalQuantity > maxTotalQuantity) {
+            alert('Tổng số lượng sách trong giỏ hàng không được vượt quá số lượng tối đa cho phép!');
+            return; // Ngăn chặn việc gửi yêu cầu cập nhật
+        }
+
+        var formData = new FormData();
+        formData.append('_token', '{{ csrf_token() }}');
+        formData.append('update_cart', '1');
+
+        var cartItems = Array.from(quantityInputs).map(input => {
+            var cartId = input.getAttribute('data-id');
+            var soLuong = parseInt(input.value, 10);
+            var maxQuantity = parseInt(input.getAttribute('max'), 10);
+
+            if (soLuong <= 0) {
+                var row = document.querySelector(`tr[data-id="${cartId}"]`);
+                if (row) {
+                    row.remove();
+                }
+                return {
+                    id_ChiTietGioSach: cartId,
+                    soLuong: soLuong
+                };
+            }
+            if (soLuong > maxQuantity) {
+                soLuong = maxQuantity;
+            }
+            return !isNaN(soLuong) ? {
+                id_ChiTietGioSach: cartId,
+                soLuong: soLuong
+            } : null;
+        }).filter(item => item !== null);
+
+        if (cartItems.length > 0) {
+            formData.append('cart_items', JSON.stringify(cartItems));
+
+            fetch('{{ route("editCart") }}', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Update Response Data:', data);
+
+                    if (data.success) {
+                        quantityInputs.forEach(input => {
+                            var cartId = input.getAttribute('data-id');
+                            var totalElement = document.getElementById(`total-${cartId}`);
+                            if (data.totals && data.totals[cartId]) {
+                                totalElement.innerText = data.totals[cartId];
+                            }
+                        });
+
+                        // Xóa các dòng bị loại bỏ từ giỏ hàng
+                        if (Array.isArray(data.removedItems)) {
+                            data.removedItems.forEach(itemId => {
+                                var row = document.querySelector(`tr[data-id="${itemId}"]`);
+                                if (row) {
+                                    row.remove();
+                                }
+                            });
+                        }
+                    } else {
+                        alert(data.message || 'Có lỗi xảy ra!');
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        } else {
+            console.log('Không có sản phẩm nào để cập nhật!');
+        }
+    });
+
+    // Xử lý sự kiện khi nhấn nút xóa sản phẩm
+    document.addEventListener('click', function(e) {
+        if (e.target && e.target.matches('.product-remove a')) {
+            e.preventDefault();
+            var row = e.target.closest('tr');
+            var cartId = e.target.getAttribute('data-id');
+
+            var formData = new FormData();
+            formData.append('_token', '{{ csrf_token() }}');
+            formData.append('remove_item', '1');
+            formData.append('id_ChiTietGioSach', cartId);
+
+            fetch('{{ route("deleteCart") }}', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Delete Response Data:', data);
+
+                    if (data.success) {
+                        row.remove();
+                    } else {
+                        alert(data.message || 'Có lỗi xảy ra!');
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        }
+    });
+});
 </script>
 <script src="{{asset('pages/js/numberCart.js')}}"></script>
 @endsection

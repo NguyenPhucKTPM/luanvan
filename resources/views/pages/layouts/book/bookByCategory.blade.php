@@ -1,58 +1,71 @@
 @extends('pages.main')
 @section('layouts')
+
+</style>
 <section class="ftco-section bg-light">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-8 col-lg-10 order-md-last">
-				<div class="row">
-					@foreach ( $getBook as $data )
-					<div class="col-sm-12 col-md-12 col-lg-4 ftco-animate d-flex">
+				<div id="book-list" class="row">
+					@foreach ($getBook as $data)
+					<div class="col-sm-12 col-md-12 col-lg-4 ftco-animate  book-item" data-title="{{ $data->tenSach }}">
 						<div class="product d-flex flex-column">
-							<a href="{{route('pageDetailBook',$data->id_Sach)}}" class="img-prod"><img class="img-fluid" src="{{$data->duongDan}}" alt="Colorlib Template">
+							<a href="{{ route('pageDetailBook', $data->id_Sach) }}" class="img-prod">
+								<img class="img-fluid" src="{{ $data->duongDan }}" alt="Sách">
 								<div class="overlay"></div>
 							</a>
 							<div class="text py-3 pb-4 px-3">
 								<div class="d-flex">
 									<div class="cat">
-										<span>{{$data -> tenTheLoai}}</span>
+										<span>{{ $data->tenTheLoai }}</span>
 									</div>
 									<div class="rating">
 										<p class="text-right mb-0">
-											<a href="#" style="color:#f1b609"><span class="ion-ios-star-outline"></span></a>
-											<a href="#" style="color:#f1b609"><span class="ion-ios-star-outline"></span></a>
-											<a href="#" style="color:#f1b609"><span class="ion-ios-star-outline"></span></a>
-											<a href="#" style="color:#f1b609"><span class="ion-ios-star-outline"></span></a>
-											<a href="#" style="color:#f1b609"><span class="ion-ios-star-outline"></span></a>
+											@php
+											$averageRating = min($data->danhGiaTrungBinh, 5); 
+											@endphp
+
+											@for ($i = 1; $i <= 5; $i++)
+												@if ($i <=$averageRating)
+												<a href="#" style="color:#f1b609">
+												<span class="ion-ios-star"></span>
+												</a>
+												@else
+												<a href="#" style="color:#f1b609">
+													<span class="ion-ios-star-outline"></span>
+												</a>
+												@endif
+												@endfor									
 										</p>
 									</div>
 								</div>
-								<h3><a href="{{route('pageDetailBook',$data->id_Sach)}}">{{$data -> tenSach}} ({{$data->tenTacGia}})</a></h3>
+								<h3><a href="{{ route('pageDetailBook', $data->id_Sach) }}">{{ $data->tenSach }} ({{ $data->tenTacGia }})</a></h3>
 								<div class="d-flex">
 									<div class="pricing" style="width:50%">
-										<p class="price text-success"><span>Số lượng: {{$data -> soLuongCoSan}}</span></p>
+										<p class="price text-success"><span>Số lượng: {{ $data->soLuongCoSan }}</span></p>
 									</div>
 									<div class="pricing" style="width:50%; text-align:right">
-										<p class="price text-info"><span>Lượt mượn: {{$data -> luotMuon}}</span></p>
+										<p class="price text-info"><span>Lượt mượn: {{ $data->luotMuon }}</span></p>
 									</div>
 								</div>
-								<form id="cart-form-{{$data->id_Sach}}" action="{{route('addCart')}}" method="post">
-								@csrf
-								<input type="hidden" name="soLuong" value="1">
-								<input type="hidden" name="id_Sach" value="{{ \Illuminate\Support\Facades\Crypt::encryptString($data->id_Sach) }}">
-								<p class="bottom-area d-flex px-3">
-									@if(isset($user))
-									<a href="javascript:void(0)" class="add-to-cart text-center py-2 mr-1" onclick="document.getElementById('cart-form-{{$data->id_Sach}}').submit();">
-										<span>Thêm vào giỏ
-											<i class="ion-ios-add ml-1"></i>
-										</span>
-									</a>
-									@endif
-									<a href="{{route('pageDetailBook',$data->id_Sach)}}" class="buy-now text-center py-2">Chi tiết
-										<span>
-											<i class="far fa-eye ml-1"></i>
-										</span>
-									</a>
-								</p>
+								<form id="cart-form-{{ $data->id_Sach }}" action="{{ route('addCart') }}" method="post">
+									@csrf
+									<input type="hidden" name="soLuong" value="1">
+									<input type="hidden" name="id_Sach" value="{{ \Illuminate\Support\Facades\Crypt::encryptString($data->id_Sach) }}">
+									<p class="bottom-area d-flex px-3">
+										@if(isset($user))
+										<a href="javascript:void(0)" class="add-to-cart text-center py-2 mr-1" onclick="document.getElementById('cart-form-{{ $data->id_Sach }}').submit();">
+											<span>Thêm vào giỏ
+												<i class="ion-ios-add ml-1"></i>
+											</span>
+										</a>
+										@endif
+										<a href="{{ route('pageDetailBook', $data->id_Sach) }}" class="buy-now text-center py-2">Chi tiết
+											<span>
+												<i class="far fa-eye ml-1"></i>
+											</span>
+										</a>
+									</p>
 								</form>
 							</div>
 						</div>
@@ -107,7 +120,7 @@
 										<div class="panel-body">
 											<ul>
 												@foreach ($getAllLanguage as $data)
-												<li><a href="?category={{ request('category') }}&ngonngu={{ $data->id_NgonNgu }}">{{$data -> tenNgonNgu}}</a></li>
+												<li><a href="?category={{ request('category') }}&ngonngu={{ $data->id_NgonNgu }}">{{ $data->tenNgonNgu }}</a></li>
 												@endforeach
 											</ul>
 										</div>
@@ -124,7 +137,7 @@
 										<div class="panel-body">
 											<ul>
 												@foreach ($getAllPublishers as $data)
-												<li><a href="?category={{ request('category') }}&nxb={{ $data->id_NhaXuatBan }}">{{$data -> tenNhaXuatBan}}</a></li>
+												<li><a href="?category={{ request('category') }}&nxb={{ $data->id_NhaXuatBan }}">{{ $data->tenNhaXuatBan }}</a></li>
 												@endforeach
 											</ul>
 										</div>
@@ -141,26 +154,28 @@
 										<div class="panel-body">
 											<ul>
 												@foreach ($getAllDiscipline as $data)
-												<li><a href="?category={{ request('category') }}&nganhhoc={{ $data->id_NganhHoc }}">{{$data -> tenNganhHoc}}</a></li>
+												<li><a href="?category={{ request('category') }}&nganhhoc={{ $data->id_NganhHoc }}">{{ $data->tenNganhHoc }}</a></li>
 												@endforeach
 											</ul>
 										</div>
 									</div>
 								</div>
-
+							</div>
+						</div>
+					</div>
+					<div class="sidebar-box-2">
+						<h2 class="heading">Tìm kiếm</h2>
+						<div id="search-form" class="search-form">
+							<div class="form-group">
+								<input type="text" id="search-input" class="form-control" placeholder="Tìm kiếm...">
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-</section>
 
-<!-- <script>
-    function submitForm(id_Sach) {
-        // Cập nhật giá trị của input id_Sach trước khi submit form
-        document.getElementById('hidden-id-Sach').value = id_Sach;
-        document.getElementById('cart-form').submit();
-    }
-</script> -->
+		</div>
+	</div>
+</section>
+<script src="{{asset('pages/js/searchBook.js')}}"></script>
 @endsection

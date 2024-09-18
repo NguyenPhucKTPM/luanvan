@@ -266,7 +266,7 @@
   position: relative; }
 
 .ecommerce-application .list-view .ecommerce-card .item-options .item-wrapper .item-cost .item-price {
-  color: #7367f0;
+  color: #0e4582;
   margin-bottom: 0; }
 
 .ecommerce-application .list-view .ecommerce-card .item-options .shipping {
@@ -282,7 +282,7 @@
   margin: 0; }
 
 .ecommerce-application .checkout-items .ecommerce-card .item-img img {
-  width: 200px; }
+  width: 150px; }
 
 .ecommerce-application .checkout-items .ecommerce-card .item-name {
   order: 0 !important; }
@@ -346,7 +346,7 @@
   border: none; }
 
 @media (min-width: 992px) {
-  .ecommerce-application .ecommerce-header-items .shop-sidebar-toggler {
+   .ecommerce-header-items .shop-sidebar-toggler {
     display: none; }
   .ecommerce-application .product-checkout.list-view {
     grid-template-columns: 2fr 1fr;

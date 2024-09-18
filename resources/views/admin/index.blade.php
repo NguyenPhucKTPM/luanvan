@@ -52,6 +52,8 @@
 
     <!-- BEGIN: Page CSS-->
     <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/pages/dashboard-ecommerce.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{asset('app-assets/css/pages/app-ecommerce.css')}}">
+
     <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/plugins/charts/chart-apex.css') }}">
     <link rel="stylesheet" type="text/css"
         href="{{ asset('app-assets/css/plugins/extensions/ext-component-toastr.css') }}">
@@ -68,7 +70,7 @@
     <link rel="stylesheet" type="text/css" href="{{asset('app-assets/css/plugins/forms/pickers/form-pickadate.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/css/pickers/pickadate/pickadate.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/css/pickers/flatpickr/flatpickr.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('app-assets/css/plugins/forms/form-validation.css')}}" >
+    <link rel="stylesheet" type="text/css" href="{{asset('app-assets/css/plugins/forms/form-validation.css')}}">
     <!-- END: Custom CSS-->
 
     <!-- table -->
@@ -136,6 +138,7 @@
     <!-- <script src="app-assets/js/scripts/forms/form-tooltip-valid.js"></script> -->
     <script src=" {{ asset('app-assets/js/scripts/pages/page-auth-register.js')}}"></script>
     <script src=" {{ asset('app-assets/js/scripts/forms/form-number-input.js')}}"></script>
+    <script src=" {{ asset('app-assets/js/scripts/pages/app-ecommerce-checkout.js')}}"></script>
     <!-- <script src="app-assets/js/scripts/forms/form-file-uploader.min.js"></script> -->
 
     <!-- BEGIN: Page JS-->

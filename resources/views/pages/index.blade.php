@@ -37,7 +37,6 @@
     <link rel="stylesheet" href="{{asset('pages/css/swiper.css')}}">
     <link rel="stylesheet" href="{{asset('pages/css/search.css')}}">
     <link rel="stylesheet" href="{{asset('pages/css/infoUser.css')}}">
-
     <!-- picker -->
     <link rel="stylesheet" type="text/css" href="app-assets/css/core/menu/menu-types/vertical-menu.css">
     <link rel="stylesheet" type="text/css" href="app-assets/css/plugins/forms/pickers/form-flat-pickr.css">
@@ -46,6 +45,7 @@
     <link rel="stylesheet" type="text/css" href="app-assets/vendors/css/pickers/flatpickr/flatpickr.min.css">
     <link rel="stylesheet" type="text/css" href="app-assets/css/plugins/forms/form-validation.css">
     <link rel="stylesheet" type="text/css" href="app-assets/vendors/css/forms/select/select2.min.css">
+    <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
 
 </head>
 
