@@ -21,38 +21,39 @@
                                             <i data-feather='upload' class="me-1"></i>Export
                                         </span>
                                     </button>
-                                    <button class="dt-button create-new btn btn-primary" tabindex="0"
-                                        aria-controls="DataTables_Table_0" type="button">
+                                    <!-- <button class="dt-button create-new btn btn-primary" tabindex="0"
+                                        aria-controls="DataTables_Table_0" type="button" data-bs-toggle="modal"
+                                        data-bs-target="#modals-slide-in">
                                         <span>
-                                            <i data-feather='plus' class="me-1"></i><a class="text-light" href="{{route('formAddBook')}}">Thêm</a>
+                                            <i data-feather='plus' class="me-1"></i>Thêm
                                         </span>
-                                    </button>
+                                    </button> -->
                                 </div>
                             </div>
                         </div>
-                        <table class="datatables-basic table table-hover" id="table">
+                        <table class="datatables-basic table-striped table table-hover" id="table">
                             <thead>
                                 <tr>
-                                    <th>Mã Sách</th>
-                                    <th>Tên Sách</th>
-                                    <th>Hình ảnh</th>
-                                    <th>Tên tác giả</th>
-                                    <th>Số lượng</th>
-                                    <th>Giá nhập</th>
-                                    <th>Vị trí</th>
+                                    <th>ID</th>
+                                    <th>Mã Phiếu Mượn</th>
+                                    <th>Hình Thức Mượn</th>                              
+                                    <th>Trạng thái</th>
+                                    <th>Tiền cọc</th>
+                                    <th>Ngày Mượn</th>
+                                    <th>Ngày Trả</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($books as $data)
+                                @foreach ($borrowReturn as $data)
                                 <tr>
-                                    <td>{{ $data->maSach}}</td>
-                                    <td><a href="{{route('detailBook',[$data -> id_Sach])}}">{{ $data->tenSach }}</a></td>
-                                    <td><img src="{{ $data->duongDan}}" width="60"></td>
-                                    <td>{{ $data->tenTacGia }}</td>
-                                    <td>{{ $data->soLuongHienCo }}/{{ $data->soLuongCoSan }}</td>
-                                    <td>{{ $data->formattedGiaTien  }}₫</td>
-                                    <td>{{ $data->tenViTri }}</td>
+                                    <td>{{ $data->id_PhieuMuon }}</td>
+                                    <td><a href="{{route('detailBorrow',$data -> id_PhieuMuon)}}">{{ $data->maPhieuMuon }}</a></td>
+                                    <td>{{ $data->hinhThucMuon }}</td>
+                                    <td><span class="badge rounded-pill badge-glow bg-primary me-1">Đã trả sách</span></td>
+                                    <td><strong style="color: #0e4582;">{{ number_format($data->tienCoc, 0, ',', '.') }}₫</strong></td>                                   
+                                    <td>{{ $data->ngayMuon }}</td>
+                                    <td>{{ $data->ngayTraThucTe }}</td>                                 
                                     <td>
                                         <div class="d-inline-flex">
                                             <a class="pe-1 dropdown-toggle hide-arrow text-primary"
@@ -67,7 +68,7 @@
                                                 </svg>
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-end">
-                                                <a href="{{route('detailBook',[$data -> id_Sach])}}" class="dropdown-item">
+                                                <a href="{{route('detailBorrow',$data -> id_PhieuMuon)}}" class="dropdown-item">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
                                                         viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -80,17 +81,6 @@
                                                 </a>
                                             </div>
                                         </div>
-                                        <a href="{{route('formEditBook',[$data -> id_Sach])}}" class="item-edit">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
-                                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                                stroke-linecap="round" stroke-linejoin="round"
-                                                class="feather feather-edit">
-                                                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7">
-                                                </path>
-                                                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z">
-                                                </path>
-                                            </svg>
-                                        </a>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -102,5 +92,4 @@
         </div>
     </section>
 </div>
-
 @endsection

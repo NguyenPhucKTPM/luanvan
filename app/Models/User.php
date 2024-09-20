@@ -28,6 +28,7 @@ class User extends Authenticatable
         'email',
         'password',
         'soViPham',
+        'soLanMuonSach',
         'trangThaiMuonSach',
         'id_TrangThai',
         'id_VaiTro',

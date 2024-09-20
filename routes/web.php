@@ -128,8 +128,12 @@ Route::middleware(['checkLogin'])->group(function () {
     Route::get('/danh-sach-phieu-muon-cho-duyet', [BorrowBookController::class, 'listBorrowPending'])->middleware('role:1,2')->name('listBorrowPending');
     Route::get('/danh-sach-phieu-muon-da-duyet', [BorrowBookController::class, 'listBorrowApproved'])->middleware('role:1,2')->name('listBorrowApproved');
     Route::get('/danh-sach-phieu-muon-da-huy', [BorrowBookController::class, 'listBorrowCancel'])->middleware('role:1,2')->name('listBorrowCancel');
+    Route::get('/danh-sach-phieu-muon-da-muon', [BorrowBookController::class, 'listBorrowing'])->middleware('role:1,2')->name('listBorrowing');
+    Route::get('/danh-sach-phieu-muon-da-tra', [BorrowBookController::class, 'listBorrowReturn'])->middleware('role:1,2')->name('listBorrowReturn');
+
     Route::get('/chi-tiet-phieu-muon/{id}', [BorrowBookController::class, 'detailBorrow'])->middleware('role:1,2')->name('detailBorrow');
     Route::get('/duyet-phieu-muon', [BorrowBookController::class, 'approveBorrow'])->middleware('role:1,2')->name('approveBorrow');
+    Route::post('/tra-phieu-muon', [BorrowBookController::class, 'returnBorrow'])->middleware('role:1,2')->name('returnBorrow');
 
 
 

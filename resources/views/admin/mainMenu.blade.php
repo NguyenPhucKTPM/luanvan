@@ -156,27 +156,27 @@
                             <span class="menu-item text-truncate" data-i18n="Second Level">Đang đã duyệt</span>
                         </a>
                     </li>
+                    <li class="{{ Route::currentRouteName() == 'listBorrowing' ? 'active' : '' }}">
+                        <a class="d-flex align-items-center" href="{{route('listBorrowing')}}">
+                            <i data-feather="circle"></i>
+                            <span class="menu-item text-truncate" data-i18n="Second Level">Đang mượn</span>
+                        </a>
+                    </li>
                     <li class="{{ Route::currentRouteName() == 'listBorrowCancel' ? 'active' : '' }}">
                         <a class="d-flex align-items-center" href="{{route('listBorrowCancel')}}">
                             <i data-feather="circle"></i>
                             <span class="menu-item text-truncate" data-i18n="Second Level">Đang đã hủy</span>
                         </a>
                     </li>
+                    <li class="{{ Route::currentRouteName() == 'listBorrowReturn' ? 'active' : '' }}">
+                        <a class="d-flex align-items-center" href="{{route('listBorrowReturn')}}">
+                            <i data-feather="circle"></i>
+                            <span class="menu-item text-truncate" data-i18n="Second Level">Đã trả sách</span>
+                        </a>
+                    </li>
                 </ul>
             </li>
-            <li class="disabled nav-item"><a class="d-flex align-items-center" href="#"><i
-                        data-feather="eye-off"></i><span class="menu-title text-truncate"
-                        data-i18n="Disabled Menu">Disabled Menu</span></a>
-            </li>
-            <li class=" nav-item"><a class="d-flex align-items-center"
-                    href="https://pixinvent.com/demo/vuexy-html-bootstrap-admin-template/documentation"
-                    target="_blank"><i data-feather="folder"></i><span class="menu-title text-truncate"
-                        data-i18n="Documentation">Documentation</span></a>
-            </li>
-            <li class=" nav-item"><a class="d-flex align-items-center" href="https://pixinvent.ticksy.com/"
-                    target="_blank"><i data-feather="life-buoy"></i><span class="menu-title text-truncate"
-                        data-i18n="Raise Support">Raise Support</span></a>
-            </li>
+          
         </ul>
     </div>
 </div>

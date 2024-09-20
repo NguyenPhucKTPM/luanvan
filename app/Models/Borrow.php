@@ -53,6 +53,14 @@ class Borrow extends Model
             ->select('chitietphieumuon.*','sach.tenSach','sach.giaTien','sach.soLuongCoSan','hinhAnh.duongDan','sach.danhGiaTrungBinh')
             ->get();
     }
+    public static function getBorrowReturn()
+    {
+        return DB::table('phieumuon')
+            ->join('phieutra', 'phieutra.id_PhieuMuon', '=', 'phieumuon.id_PhieuMuon')
+            ->where('phieumuon.trangThaiPhieuMuon',4)
+            ->select('phieutra.*','phieumuon.*')
+            ->get();
+    }
     
    
 }

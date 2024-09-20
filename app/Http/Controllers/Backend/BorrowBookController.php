@@ -16,6 +16,8 @@ use App\Models\Borrow;
 use App\Models\Cart;
 use App\Models\Book;
 use App\Models\User;
+use App\Models\Mistake;
+use App\Models\ReturnBorrow;
 
 class BorrowBookController extends Controller
 {
@@ -163,6 +165,10 @@ class BorrowBookController extends Controller
             $statusBorrow = 'Đã duyệt';
         } elseif ($getBorrowAdded->trangThaiPhieuMuon == 2) {
             $statusBorrow = 'Đã hủy';
+        } elseif ($getBorrowAdded->trangThaiPhieuMuon == 3) {
+            $statusBorrow = 'Đã mượn sách';
+        } elseif ($getBorrowAdded->trangThaiPhieuMuon == 4) {
+            $statusBorrow = 'Đã trả sách';
         }
 
         // Tạo mã QR cho URL
@@ -212,10 +218,34 @@ class BorrowBookController extends Controller
             'getAll' => $getAll
         ]);
     }
+    public function listBorrowing()
+    {
+        $getAll = Borrow::where('trangThaiPhieuMuon', 3)->get();
+        // dd($getAll);
+        return view('admin.layouts.borrow.listBorrowing', [
+            'tab' => 'Phiếu mượn',
+            'title' => 'Phiếu mượn đã mượn',
+            'getAll' => $getAll
+        ]);
+    }
+    public function listBorrowReturn()
+    {
+        $borrowReturn = Borrow::getBorrowReturn();
+        return view('admin.layouts.borrow.listBorrowReturn', [
+            'tab' => 'Phiếu mượn',
+            'title' => 'Phiếu mượn đã trả',
+            'borrowReturn' => $borrowReturn
+        ]);
+    }
     public function detailBorrow($id)
     {
         $getBorrow = Borrow::getInfoUserBorrow($id);
         $getDetailBorrow = Borrow::getDetailBorrow($id);
+        $getReturnBorrow = ReturnBorrow::where('id_PhieuMuon',$id)->first();
+        $detailMistake = null;
+        if($getBorrow -> trangThaiPhieuMuon == 4){
+            $detailMistake = Mistake::getMistake($getReturnBorrow -> id_PhieuTra);
+        }
         $tong = 0;
         foreach ($getDetailBorrow as $data) {
             $tong += $data->giaTien * $data->soLuongSachMuon;
@@ -227,7 +257,12 @@ class BorrowBookController extends Controller
             $statusBorrow = 'Đã duyệt';
         } elseif ($getBorrow->trangThaiPhieuMuon == 2) {
             $statusBorrow = 'Đã hủy';
+        } elseif ($getBorrow->trangThaiPhieuMuon == 3) {
+            $statusBorrow = 'Đã mượn sách';
+        } elseif ($getBorrow->trangThaiPhieuMuon == 4) {
+            $statusBorrow = 'Đã trả sách';
         }
+
         return view('admin.layouts.borrow.detailBorrow', [
             'tab' => 'Phiếu mượn',
             'title' => 'Chi tiết phiếu mượn',
@@ -235,6 +270,8 @@ class BorrowBookController extends Controller
             'getDetailBorrow' => $getDetailBorrow,
             'tong' => $tong,
             'statusBorrow' => $statusBorrow,
+            'getReturnBorrow' => $getReturnBorrow,
+            'detailMistake' => $detailMistake,
         ]);
     }
     public function approveBorrow(Request $request)
@@ -250,10 +287,6 @@ class BorrowBookController extends Controller
                 $getBorrow->trangThaiPhieuMuon = $status;
                 $getBorrow->nguoiDuyet = $nguoiDuyet;
                 $getBorrow->save();
-                if ($getUser && $status == 2) {
-                    $getUser->trangThaiMuonSach = 0;
-                    $getUser->save();
-                }
                 if ($status == 1) {
                     foreach ($getDetailBorrow as $data) {
                         $getBook = Book::where('id_Sach', $data->id_Sach)->first();
@@ -271,10 +304,86 @@ class BorrowBookController extends Controller
                         $message->to($email)->subject('Phiếu Mượn Đã Được Duyệt!');
                     });
                 }
+                if ($getUser && $status == 2) {
+                    $getUser->trangThaiMuonSach = 0;
+                    $getUser->save();
+                }
+                if ($status == 3) {
+                    $getUser -> soLanMuonSach += 1;
+                    $getUser->save();
+                    $getRoleUser = DB::table('nguoiDung')->where('id_NguoiDung', $getBorrow->id_NguoiDung)->first();
+                    $bookReturnDate = $getRoleUser->id_VaiTro < 4 ? 15 : 10;
+                  
+                    $getBorrow->ngayMuon = Carbon::now()->format('Y-m-d H:i:s');
+                    if ($getBorrow->hinhThucMuon == 'Mượn từ xa') {
+                        $getBorrow->ngayTraDuKien = Carbon::now()->addDays($bookReturnDate + 5)->format('Y-m-d H:i:s');
+                    }else{
+                        $getBorrow->ngayTraDuKien = Carbon::now()->addDays($bookReturnDate)->format('Y-m-d H:i:s');
+                    }
+                    $getBorrow->save();
+                }
+                // if($status == 4){}
             }
             return redirect()->back()->with('success', 'Duyệt phiếu mượn thành công.');
         } catch (\Exception) {
             return redirect()->back()->with('error', 'Duyệt không hợp lệ');
+        }
+    }
+    public function returnBorrow(Request $request)
+    {
+        try {
+            $validatedData = $request->validate([
+                'koViPham' => 'nullable|in:1',
+                'viPham' => 'nullable|array',
+                'viPham.*' => 'in:2,3,4',
+            ]);
+            $id_PhieuMuon = Crypt::decrypt($request->id_PhieuMuon);
+            $id_NguoiDung = Crypt::decrypt($request->id_NguoiDung);
+            $koViPham = $request->input('koViPham');
+            $viPhamArray = $request->input('viPham');
+            if (!$koViPham && (!$viPhamArray || count($viPhamArray) == 0)) {
+                return redirect()->back()->with('error', 'Bạn phải chọn ít nhất một trường!');
+            }
+            if ($viPhamArray && $koViPham) {
+                return redirect()->back()->with('error', 'Nếu đã chọn không vi phạm thì những trường khác không khả dụng');
+            }
+            $getBorrow = Borrow::where('id_PhieuMuon', $id_PhieuMuon)->first();
+            if ($getBorrow) {
+                $getBorrow->trangThaiPhieuMuon = 4;
+                $getBorrow->save();
+            }
+            $returnBorrowAdded = ReturnBorrow::addReturnBorrow([
+                'nguoiNhan' => Auth::user()->tenNguoiDung,
+                'id_PhieuMuon' => $id_PhieuMuon,
+            ]);
+            $countMistake = 0;
+            if ($viPhamArray) {
+                foreach ($viPhamArray as $viPham) {
+                    DB::table('chitietvipham')->insert([
+                        'id_ViPham' => $viPham,
+                        'id_NguoiDung' => $id_NguoiDung,
+                        'id_PhieuTra' => $returnBorrowAdded
+                    ]);
+                    $countMistake++;
+                }
+            }
+            $getDetailBorrow = Borrow::getDetailBorrow($id_PhieuMuon);
+            foreach ($getDetailBorrow as $data) {
+                $getBook = Book::where('id_Sach', $data->id_Sach)->first();
+                if ($getBook) {
+                    $getBook->soLuongCoSan += $data->soLuongSachMuon;
+                    $getBook->save();
+                }
+            }
+            $getUser = User::where('id_NguoiDung', $id_NguoiDung)->first();
+            if ($getUser) {
+                $getUser->trangThaiMuonSach = 0;
+                $getUser->soViPham += $countMistake;
+                $getUser->save();
+            }
+            return redirect()->back()->with('success', 'Trả sách thành công!');
+        } catch (\Exception) {
+            return redirect()->back()->with('error', 'Thao tác không hợp lệ hãy thao tác lại');
         }
     }
 }

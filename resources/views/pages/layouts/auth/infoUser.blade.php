@@ -39,7 +39,7 @@
                                 <i class="fas fa-book" style="width: 15px; height:15px;"></i>
                             </div>
                             <div class="ml-3">
-                                <h5 class="mb-0" style="line-height: 0.5;color: #0e4582;">1</h5>
+                                <h5 class="mb-0" style="line-height: 0.5;color: #0e4582;">{{$userInfo -> soLanMuonSach}}</h5>
                                 <small>Số lần mượn </small>
                             </div>
                         </div>
