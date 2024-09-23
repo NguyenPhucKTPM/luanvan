@@ -54,6 +54,7 @@ class Kernel extends HttpKernel
      */
     protected $middlewareAliases = [
         'logged' => \App\Http\Middleware\CheckLogged::class,
+        'track.book.view' => \App\Http\Middleware\TrackBookView::class,
         'checkLogin' => \App\Http\Middleware\CheckAuthenticated::class,
         'role' => \App\Http\Middleware\CheckRoles::class,
         'codeVerify' => \App\Http\Middleware\VerifyCode::class,

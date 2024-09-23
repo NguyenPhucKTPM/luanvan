@@ -90,6 +90,7 @@ class AuthController extends Controller
          Auth::logout();
          $request->session()->invalidate();
          $request->session()->regenerateToken();
+         $request->session()->forget('book_views');
          return redirect()->route('home');
      }
 

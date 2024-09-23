@@ -33,7 +33,7 @@
 
         <div class="collapse navbar-collapse" id="ftco-nav">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item active"><a href="index.html" class="nav-link" style="color: #0e4582;">Trang
+                <li class="nav-item active"><a href="{{route('home')}}" class="nav-link" style="color: #0e4582;">Trang
                         chủ</a>
                 </li>
                 <li class="nav-item dropdown">
@@ -58,6 +58,14 @@
                         <a class="dropdown-item" href="{{route('dang-xuat')}}">Đăng xuất</a>
                     </div>
                 </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="muonsach" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">Mượn trả sách</a>
+                    <div class="dropdown-menu" aria-labelledby="muonsach">
+                        <a class="dropdown-item" href="{{route('borrowByUser')}}">Phiếu mượn</a>  
+                        <a class="dropdown-item" href="{{route('borrowReturnByUser')}}">Phiếu trả</a>        
+                    </div>
+                </li>
                 <li class="nav-item cta cta-colored"><a href="{{route('showCart')}}" class="nav-link"><span
                 class="icon-shopping_cart" style="color: #0e4582;"></span>[{{$sumCart}}]</a></li>
                 @else
@@ -70,6 +78,7 @@
 
                     </div>
                 </li>
+                
                 @endif
                
 

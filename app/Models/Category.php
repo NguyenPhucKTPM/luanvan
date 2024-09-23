@@ -27,6 +27,10 @@ class Category extends Model
     {
         return $this->belongsToMany(Book::class, 'chitiettheloai', 'id_TheLoai', 'id_Sach');
     }
+    public function chiTietTheLoais()
+    {
+        return $this->hasMany(detailCategory::class, 'id_TheLoai');
+    }
     public static function addCategory($data)
     {
         $category = self::create([

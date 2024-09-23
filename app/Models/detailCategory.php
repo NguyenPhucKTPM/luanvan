@@ -13,4 +13,13 @@ class detailCategory extends Model
     public $incrementing = false; // Đặt thành false vì không tự tăng
 
     public $timestamps = false;
+    public function sach()
+    {
+        return $this->belongsTo(Book::class, 'id_Sach');
+    }
+
+    public function theLoai()
+    {
+        return $this->belongsTo(Category::class, 'id_TheLoai');
+    }
 }

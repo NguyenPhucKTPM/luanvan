@@ -39,11 +39,22 @@ class Book extends Model
     {
         return $this->belongsToMany(Discipline::class, 'chitietnganhhoc', 'id_Sach', 'id_NganhHoc');
     }
+    public function chiTietPhieuMuons()
+    {
+        return $this->hasMany(detailBorrow::class, 'id_Sach');
+    }
+    public function hinhAnh() {
+        return $this->hasOne(Image::class, 'id_Sach', 'id_Sach');
+    }
+    
     public static function getAllBook(){
         return DB::table('sach')
         ->join('hinhAnh','sach.id_Sach','=','hinhAnh.id_Sach')
         ->join('vitri','sach.id_ViTri','=','vitri.id_ViTri')
         ->get();
+    }
+    public static function getBookRecommendation() {
+        return Book::with(['hinhAnh'])->get();
     }
     public static function detailBook($id){
         return DB::table('sach')
@@ -154,6 +165,15 @@ class Book extends Model
             'hinhanh.duongDan',
         )
         ->paginate(12);
+    }
+    public static function getBookViewed($id_Sach){
+        return DB::table('sach')
+        ->join('hinhanh','sach.id_Sach','=','hinhanh.id_Sach')
+        ->where('sach.id_Sach', $id_Sach)
+        ->select(
+            'hinhanh.duongDan','sach.*'         
+        )
+        ->first();
     }
     
 }

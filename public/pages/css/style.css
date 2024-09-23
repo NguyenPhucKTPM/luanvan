@@ -12883,7 +12883,6 @@ h5,
   font-size: 14px;
   margin-bottom: 5px;
   font-weight: 700;
-  text-transform: uppercase;
 }
 
 .product .text h3 a {
@@ -12909,7 +12908,59 @@ h5,
 .product .text .rating {
   width: 50%;
 }
+.book-container.d-flex.overflow-auto {
+  display: flex;
+  overflow-x: auto;
+  padding: 20px 0;
+  -webkit-overflow-scrolling: touch;
+  justify-content: flex-start; /* Thêm dòng này */
+}
 
+.book-container.d-flex.overflow-auto .col-sm-6.col-md-6.col-lg-4.ftco-animate.book-item.book-recom {
+  flex: 0 0 auto;
+  width: 278px;
+  white-space: normal;
+  min-width: 200px; /* Đảm bảo chiều rộng tối thiểu */
+  max-width: 100%; /* Đảm bảo không vượt quá chiều rộng container trên màn hình nhỏ */
+}
+
+.book-container.d-flex.overflow-auto .product.d-flex.flex-column {
+  border: 1px solid #e6e6e6;
+  height: 100%;
+}
+
+.book-container.d-flex.overflow-auto .img-prod img {
+  width: 100%;
+  height: auto;
+}
+
+.book-container.d-flex.overflow-auto .text.py-3.pb-4.px-3 {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.book-container.d-flex.overflow-auto h3 {
+  height: 66px;
+  overflow: hidden;
+}
+
+.book-container.d-flex.overflow-auto .d-flex {
+  display: flex;
+  justify-content: space-between;
+}
+
+.book-container.d-flex.overflow-auto .bottom-area.d-flex.px-3 {
+  margin-top: auto;
+}
+
+/* Thêm media query cho màn hình nhỏ */
+@media (max-width: 768px) {
+  .book-container.d-flex.overflow-auto .col-sm-6.col-md-6.col-lg-4.ftco-animate.book-item.book-recom {
+    width: 100%;
+    margin-right: 0;
+  }
+}
 .product .text .cat span {
   font-size: 11px;
   /* text-transform: uppercase; */
@@ -15342,3 +15393,56 @@ textarea.form-control {
     stroke-dashoffset: -136px;
   }
 }
+
+.custom-card {
+  border: 1px solid #eaeaea;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  background-color: #fff;
+  margin-bottom: 20px; /* Tạo khoảng cách giữa các thẻ card */
+}
+
+.custom-card-body {
+  margin-bottom: 20px;
+}
+
+/* Hình ảnh sản phẩm */
+.custom-product-image {
+  width: 100%;
+  max-width: 140px;
+  height: auto;
+  border-radius: 4px;
+}
+
+/* Tên sản phẩm */
+.custom-product-name {
+  font-size: 18px;
+  font-weight: 600;
+  margin-top: 0; /* Loại bỏ khoảng trống phía trên */
+}
+
+/* Mô tả sản phẩm */
+.custom-product-description {
+  font-size: 14px;
+  color: #777;
+}
+
+/* Danh mục sản phẩm */
+.custom-product-category {
+  display: inline-block;
+  background-color: #28a745;
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  margin-top: 8px;
+}
+
+/* Số lượng sản phẩm */
+.custom-product-quantity {
+  font-size: 16px;
+  margin-top: 8px;
+}
+
+

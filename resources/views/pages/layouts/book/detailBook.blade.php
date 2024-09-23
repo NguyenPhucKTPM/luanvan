@@ -107,9 +107,6 @@
             <div class="col-md-12 nav-link-wrap">
                 <div class="nav nav-pills d-flex text-center" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                     <a class="nav-link ftco-animate active " id="v-pills-1-tab" data-toggle="pill" href="#v-pills-1" role="tab" aria-controls="v-pills-1" aria-selected="true">Mô tả</a>
-
-                    <!-- <a class="nav-link ftco-animate mr-lg-1" id="v-pills-2-tab" data-toggle="pill" href="#v-pills-2" role="tab" aria-controls="v-pills-2" aria-selected="false">Manufacturer</a> -->
-
                     <a class="nav-link ftco-animate" id="v-pills-3-tab" data-toggle="pill" href="#v-pills-3" role="tab" aria-controls="v-pills-3" aria-selected="false">Bình luận</a>
 
                 </div>
@@ -133,7 +130,6 @@
                     <div class="tab-pane fade" id="v-pills-3" role="tabpanel" aria-labelledby="v-pills-day-3-tab">
                         <div class="row p-4">
                             <div class="col-md-12">
-                                <!-- <h3 class="mb-4">23 Reviews</h3> -->
                                 @foreach ( $getComment as $data )
                                 <div class="review">
                                     <div class="user-img" style="background-image:  url({{ asset('pages/images//person_1.jpg') }});"></div>
@@ -145,7 +141,7 @@
                                         <p class="star">
                                             <span>
                                                 @php
-                                                $star = min($data->soSao, 5); // Đảm bảo điểm không vượt quá 5
+                                                $star = min($data->soSao, 5); 
                                                 @endphp
                                                 @for ($i = 1; $i <= 5; $i++)
                                                     @if ($i <=$star)
@@ -153,19 +149,19 @@
                                                     @else
                                                     <i class="ion-ios-star-outline"></i>
                                                     @endif
-                                                @endfor
+                                                    @endfor
                                             </span>
-                                            <!-- <span class="text-right"><a href="#" class="reply"><i class="icon-reply"></i></a></span> -->
                                         </p>
                                         {!!$data -> noiDung!!}
                                     </div>
                                 </div>
                                 @endforeach
+                                @if(isset($user))
                                 <div class="review">
                                     <div class="user-img" style="background-image:  url({{ asset('pages/images//person_1.jpg') }});"></div>
                                     <div class="desc">
                                         <h4>
-                                            <span class="text-left">{{$user->tenNguoiDung}}</span>
+                                            <span class="text-left">{{$user->tenNguoiDung }}</span>
                                             <span class="text-right"></span>
                                         </h4>
                                         <p id="toggleText" style="color:#368ded;">Click vào để viết bình luận bình luận ở đây!</p>
@@ -181,68 +177,26 @@
                                         </form>
                                     </div>
                                 </div>
+                                @else
+                                <div class="review">
+                                    <div class="user-img" style="background-image:  url({{ asset('pages/images//person_1.jpg') }});"></div>
+                                    <div class="desc">
+                                        <h4>
+                                            <span class="text-left">Cần đăng nhập</span>
+                                            <span class="text-right"></span>
+                                        </h4>
+                                        <p style="color:#368ded;"><a href="{{route('dang-nhap')}}">Đăng nhập để bình luận</a></p>
+                                        <form method="post" action="{{route('writeComment')}}">
+                                            @csrf
+                                            <textarea id="ghiChu" name="noiDung">Đăng nhập để được bình luận</textarea>
+                                        </form>
+                                    </div>
+                                </div>
+
+                                @endif
+
 
                             </div>
-                            <!-- <div class="col-md-4">
-                                <div class="rating-wrap">
-                                    <h3 class="mb-4">Give a Review</h3>
-                                    <p class="star">
-                                        <span>
-                                            <i class="ion-ios-star-outline"></i>
-                                            <i class="ion-ios-star-outline"></i>
-                                            <i class="ion-ios-star-outline"></i>
-                                            <i class="ion-ios-star-outline"></i>
-                                            <i class="ion-ios-star-outline"></i>
-                                            (98%)
-                                        </span>
-                                        <span>20 Reviews</span>
-                                    </p>
-                                    <p class="star">
-                                        <span>
-                                            <i class="ion-ios-star-outline"></i>
-                                            <i class="ion-ios-star-outline"></i>
-                                            <i class="ion-ios-star-outline"></i>
-                                            <i class="ion-ios-star-outline"></i>
-                                            <i class="ion-ios-star-outline"></i>
-                                            (85%)
-                                        </span>
-                                        <span>10 Reviews</span>
-                                    </p>
-                                    <p class="star">
-                                        <span>
-                                            <i class="ion-ios-star-outline"></i>
-                                            <i class="ion-ios-star-outline"></i>
-                                            <i class="ion-ios-star-outline"></i>
-                                            <i class="ion-ios-star-outline"></i>
-                                            <i class="ion-ios-star-outline"></i>
-                                            (98%)
-                                        </span>
-                                        <span>5 Reviews</span>
-                                    </p>
-                                    <p class="star">
-                                        <span>
-                                            <i class="ion-ios-star-outline"></i>
-                                            <i class="ion-ios-star-outline"></i>
-                                            <i class="ion-ios-star-outline"></i>
-                                            <i class="ion-ios-star-outline"></i>
-                                            <i class="ion-ios-star-outline"></i>
-                                            (98%)
-                                        </span>
-                                        <span>0 Reviews</span>
-                                    </p>
-                                    <p class="star">
-                                        <span>
-                                            <i class="ion-ios-star-outline"></i>
-                                            <i class="ion-ios-star-outline"></i>
-                                            <i class="ion-ios-star-outline"></i>
-                                            <i class="ion-ios-star-outline"></i>
-                                            <i class="ion-ios-star-outline"></i>
-                                            (98%)
-                                        </span>
-                                        <span>0 Reviews</span>
-                                    </p>
-                                </div>
-                            </div> -->
                         </div>
                     </div>
                 </div>

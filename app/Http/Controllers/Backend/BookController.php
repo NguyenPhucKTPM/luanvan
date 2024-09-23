@@ -20,14 +20,29 @@ use App\Models\Librarian;
 use App\Models\detailCategory;
 use App\Models\detailDiscipline;
 use App\Models\Comment;
+use App\Models\User;
+use App\Models\Borrow;
+use App\Services\BookRecommendationService;
 
 class BookController extends Controller
 {
     protected $cloudinaryService;
-    public function __construct(CloudinaryService $cloudinaryService)
+    protected $recommendationService;
+    public function __construct(CloudinaryService $cloudinaryService,BookRecommendationService $recommendationService)
     {
         $this->cloudinaryService = $cloudinaryService;
+        $this->recommendationService = $recommendationService;
     }
+    // public function index(Request $request)
+    // {
+    //     $user = $request->user();
+
+    //     $limit = $request->input('limit', 10); // Số lượng sách muốn gợi ý, mặc định là 10
+
+    //     $recommendedBooks = $this->recommendationService->getComprehensiveRecommendations($user, $limit);
+
+    //     dd($recommendedBooks);
+    // }
     public function listBook()
     {
         $books = Book::getAllBook();
@@ -104,7 +119,7 @@ class BookController extends Controller
             $getBookLocation = BookLocation::find($request->id_ViTri);
             $totalSlot = $getBookLocation->sucChua - $getBookLocation->viTriDaSuDung;
             if ($request->soLuongHienCo > $totalSlot) {
-                dd('da du');
+                return redirect()->route('formAddBook')->with('error', 'Số lượng còn lại ở ví trí không đủ chứa sách');
             }
             $newBook = Book::addBook([
                 'tenSach' => $request->tenSach,
@@ -410,11 +425,13 @@ class BookController extends Controller
         }
     }
     public function listBooksByCategory(Request $request)
-    {
+    {   
         $id_TheLoai = $request->category;
         $id_NgonNgu = $request->ngonngu;
         $id_NhaXuatBan = $request->nxb;
         $id_NganhHoc = $request->nganhhoc;
+        $user = $request->user();
+        $limit = $request->input('limit', 10); 
         $getBook = Book::getBookByCategory($id_TheLoai);
         $idNgonNguArray = $getBook->pluck('id_NgonNgu')->unique()->toArray();
         $getAllLanguage = Language::whereIn('id_NgonNgu', $idNgonNguArray)->orderBy('tenNgonNgu', 'asc') ->get();
@@ -422,9 +439,11 @@ class BookController extends Controller
         $idNhaXuatBanArray = $getBook->pluck('id_NhaXuatBan')->unique()->toArray(); 
         $getAllPublishers = Publisher::whereIn('id_NhaXuatBan',$idNhaXuatBanArray)->orderBy('tenNhaXuatBan', 'asc')->get();
 
+        
         $bookIds = $getBook->pluck('id_Sach')->toArray();
         $getAllDiscipline = Discipline::getListDisciplineByBook($bookIds);
-        // dd($getAllDiscipline);
+        $getNameCategori = Category::where('id_TheLoai',$id_TheLoai)->first();
+
         if (isset($id_NgonNgu)) {
             $getBook = Book::getBookByLanguage($id_TheLoai, $id_NgonNgu);
         }
@@ -434,6 +453,32 @@ class BookController extends Controller
         if (isset($id_NganhHoc)) {
             $getBook = Book::getBookByDiscipline($id_TheLoai, $id_NganhHoc);
         }
+        //sach da xem
+         // cache()->forget("user_{$user->id_NguoiDung}_book_views");
+        $bookviewed = [];
+        $getBooksViewed = [];
+        if ($request->user()) {
+            $bookviewed = cache()->get("user_{$request->user()->id_NguoiDung}_book_views", []);
+        }
+        
+        $validBookIds = [];
+        foreach ($bookviewed as $id_Sach) {
+            $book = Book::getBookViewed($id_Sach);
+            if ($book) {
+                $getBooksViewed[] = $book;
+                $validBookIds[] = $id_Sach;
+            }
+        }   
+        if ($request->user() && count($validBookIds) !== count($bookviewed)) {
+            cache()->put("user_{$request->user()->id_NguoiDung}_book_views", $validBookIds, 60 * 60 * 10); // 10 tiếng
+        }
+        //goi y sach
+        $getBorrow = Borrow::getBorrowByUser($user->id_NguoiDung);
+        $countBorrow = $getBorrow -> count();
+        $recommendedBooks = [];
+        if($countBorrow >= 1){
+            $recommendedBooks = $this->recommendationService->getComprehensiveRecommendations($user, $limit);
+        }
         return view('pages.layouts.book.bookBycategory', [
             'tab' => 'Sách',
             'title' => 'Sách theo thể loại',
@@ -441,6 +486,9 @@ class BookController extends Controller
             'getAllPublishers' => $getAllPublishers,
             'getAllDiscipline' => $getAllDiscipline,
             'getBook' => $getBook,
+            'getNameCategori' => $getNameCategori,
+            'getBooksViewed' => $getBooksViewed,
+            'recommendedBooks' => $recommendedBooks,
         ]);
     }
     public function pageDetailBook($id){

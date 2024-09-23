@@ -16,8 +16,10 @@ use App\Models\Borrow;
 use App\Models\Cart;
 use App\Models\Book;
 use App\Models\User;
+use App\Models\Category;
 use App\Models\Mistake;
 use App\Models\ReturnBorrow;
+use Illuminate\Support\Facades\Cache;
 
 class BorrowBookController extends Controller
 {
@@ -145,6 +147,8 @@ class BorrowBookController extends Controller
                 return redirect($jsonResult['payUrl']);
             }
         }
+        Cache::forget("user_{$request->user()->id_NguoiDung}_favorite_categories");
+        Cache::forget("user_{$request->user()->id_NguoiDung}_favorite_disciplines");
         return redirect()->route('infoBorrow', ['token' => $token])->with('success', 'Đăng kí mượn sách thành công đơn mượn của bạn đang đợi duyệt');
     }
     public function infoBorrow(Request $request)
@@ -241,10 +245,10 @@ class BorrowBookController extends Controller
     {
         $getBorrow = Borrow::getInfoUserBorrow($id);
         $getDetailBorrow = Borrow::getDetailBorrow($id);
-        $getReturnBorrow = ReturnBorrow::where('id_PhieuMuon',$id)->first();
+        $getReturnBorrow = ReturnBorrow::where('id_PhieuMuon', $id)->first();
         $detailMistake = null;
-        if($getBorrow -> trangThaiPhieuMuon == 4){
-            $detailMistake = Mistake::getMistake($getReturnBorrow -> id_PhieuTra);
+        if ($getBorrow->trangThaiPhieuMuon == 4) {
+            $detailMistake = Mistake::getMistake($getReturnBorrow->id_PhieuTra);
         }
         $tong = 0;
         foreach ($getDetailBorrow as $data) {
@@ -309,15 +313,15 @@ class BorrowBookController extends Controller
                     $getUser->save();
                 }
                 if ($status == 3) {
-                    $getUser -> soLanMuonSach += 1;
+                    $getUser->soLanMuonSach += 1;
                     $getUser->save();
                     $getRoleUser = DB::table('nguoiDung')->where('id_NguoiDung', $getBorrow->id_NguoiDung)->first();
                     $bookReturnDate = $getRoleUser->id_VaiTro < 4 ? 15 : 10;
-                  
+
                     $getBorrow->ngayMuon = Carbon::now()->format('Y-m-d H:i:s');
                     if ($getBorrow->hinhThucMuon == 'Mượn từ xa') {
                         $getBorrow->ngayTraDuKien = Carbon::now()->addDays($bookReturnDate + 5)->format('Y-m-d H:i:s');
-                    }else{
+                    } else {
                         $getBorrow->ngayTraDuKien = Carbon::now()->addDays($bookReturnDate)->format('Y-m-d H:i:s');
                     }
                     $getBorrow->save();
@@ -385,5 +389,65 @@ class BorrowBookController extends Controller
         } catch (\Exception) {
             return redirect()->back()->with('error', 'Thao tác không hợp lệ hãy thao tác lại');
         }
+    }
+
+    public function borrowByUser()
+    {
+        $id_NguoiDung = Auth::user()->id_NguoiDung;
+        $getBorrow = Borrow::getBorrowByUser($id_NguoiDung);
+        if(!$getBorrow){ return redirect()->back()->with('error', 'Chưa có phiếu mượn nào');}
+        foreach ($getBorrow as $data) {
+
+            $statuses = [
+                0 => 'Chờ duyệt',
+                1 => 'Đã duyệt',
+                2 => 'Đã hủy',
+                3 => 'Đã mượn sách',
+                4 => 'Đã trả sách'
+            ];
+
+            $statusBorrow = isset($statuses[$data->trangThaiPhieuMuon]) ? $statuses[$data->trangThaiPhieuMuon] : 'Không xác định';
+            $data->statusBorrow = $statusBorrow;
+
+            $data->details = Borrow::getDetailBorrow($data->id_PhieuMuon);
+            foreach ($data->details as $categories) {
+                $categories->category = Category::getCategoryByBook($categories->id_Sach);
+            }
+        }
+        return view('pages.layouts.borrow.listBorrowByUser', [
+            'tab' => 'Phiếu mượn',
+            'title' => 'Danh sách phiếu mượn',
+            'getBorrow' => $getBorrow,
+        ]);
+    }
+    public function borrowReturnByUser(){
+        $id_NguoiDung = Auth::user()->id_NguoiDung;
+        $getBorrow = Borrow::getReturnBorrowByUser($id_NguoiDung);
+        // dd($getBorrow);
+        if(!$getBorrow){ return redirect()->back()->with('error', 'Chưa có phiếu mượn nào');}
+        foreach ($getBorrow as $data) {
+
+            $statuses = [
+                0 => 'Chờ duyệt',
+                1 => 'Đã duyệt',
+                2 => 'Đã hủy',
+                3 => 'Đã mượn sách',
+                4 => 'Đã trả sách'
+            ];
+
+            $statusBorrow = isset($statuses[$data->trangThaiPhieuMuon]) ? $statuses[$data->trangThaiPhieuMuon] : 'Không xác định';
+            $data->statusBorrow = $statusBorrow;
+
+            $data->details = Borrow::getDetailBorrow($data->id_PhieuMuon);
+            foreach ($data->details as $categories) {
+                $categories->category = Category::getCategoryByBook($categories->id_Sach);
+            }
+            $data->mistakes = Mistake::getMistake($data -> id_PhieuTra);
+        }
+        return view('pages.layouts.borrow.listReturnBorrowByUser', [
+            'tab' => 'Phiếu trả',
+            'title' => 'Danh sách phiếu trả',
+            'getBorrow' => $getBorrow,
+        ]);
     }
 }

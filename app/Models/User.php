@@ -80,7 +80,10 @@ class User extends Authenticatable
     protected $table = 'nguoiDung';
     protected $primaryKey = 'id_NguoiDung';
 
-
+    public function phieuMuons()
+    {
+        return $this->hasMany(Borrow::class, 'id_NguoiDung');
+    }
     public static function getInformationSessionUser($id)
     {
         return DB::table('nguoiDung')

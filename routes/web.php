@@ -135,6 +135,8 @@ Route::middleware(['checkLogin'])->group(function () {
     Route::get('/duyet-phieu-muon', [BorrowBookController::class, 'approveBorrow'])->middleware('role:1,2')->name('approveBorrow');
     Route::post('/tra-phieu-muon', [BorrowBookController::class, 'returnBorrow'])->middleware('role:1,2')->name('returnBorrow');
 
+    Route::get('/phieu-muon', [BorrowBookController::class, 'borrowByUser'])->name('borrowByUser');
+    Route::get('/phieu-tra', [BorrowBookController::class, 'borrowReturnByUser'])->name('borrowReturnByUser');
 
 
     Route::post('/gui-xac-nhan-email', [AuthController::class, 'sendEmailVerify'])->name('confirmEmail');
@@ -162,13 +164,16 @@ Route::middleware(['checkLogin'])->group(function () {
     //binh luan
     Route::post('/binh-luan-sach', [CommentController::class, 'writeComment'])->name('writeComment');
 
+    Route::get('/goi-y', [BookController::class, 'index'])->name('goiy');
+
 });
 
 Route::get('/sach-theo-the-loai', [BookController::class, 'listBooksByCategory'])->name('listBookByCategory');
-Route::get('/chi-tiet-sach/{id}', [BookController::class, 'pageDetailBook'])->name('pageDetailBook');
+Route::get('/chi-tiet-sach/{id}', [BookController::class, 'pageDetailBook'])->name('pageDetailBook')->middleware('track.book.view');
 Route::post('/luot-doc-sach/{id}', [BookController::class, 'readBook'])->name('readBook');
 
 Route::get('/aa', [DashboardController::class, 'a']);
 // Route::get('/aa', [UserController::class, 'test']);
 
 Route::get('/dang-xuat', [AuthController::class, 'logout'])->name('dang-xuat');
+

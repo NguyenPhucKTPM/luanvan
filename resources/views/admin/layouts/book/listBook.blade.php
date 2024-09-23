@@ -30,8 +30,8 @@
                                 </div>
                             </div>
                         </div>
-                        <table class="datatables-basic table table-hover" id="table">
-                            <thead>
+                        <table class="datatables-basic table-striped table table-hover" id="table">
+                            <thead >
                                 <tr>
                                     <th>Mã Sách</th>
                                     <th>Tên Sách</th>
@@ -50,7 +50,7 @@
                                     <td><a href="{{route('detailBook',[$data -> id_Sach])}}">{{ $data->tenSach }}</a></td>
                                     <td><img src="{{ $data->duongDan}}" width="60"></td>
                                     <td>{{ $data->tenTacGia }}</td>
-                                    <td>{{ $data->soLuongHienCo }}/{{ $data->soLuongCoSan }}</td>
+                                    <td>{{ $data->soLuongCoSan }}/{{ $data->soLuongHienCo }}</td>
                                     <td>{{ $data->formattedGiaTien  }}₫</td>
                                     <td>{{ $data->tenViTri }}</td>
                                     <td>
