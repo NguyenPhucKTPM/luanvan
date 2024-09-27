@@ -18,6 +18,7 @@ use App\Http\Controllers\Backend\CartController;
 use App\Http\Controllers\Backend\BorrowBookController;
 use App\Http\Controllers\Backend\RatingController;
 use App\Http\Controllers\Backend\CommentController;
+use App\Http\Controllers\Backend\DiaryController;
 
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
@@ -64,6 +65,8 @@ Route::middleware(['checkLogin'])->group(function () {
 
     //admin chuc nang quan li user
     Route::get('/thong-ke', [DashboardController::class, 'index'])->middleware('role:1,2')->name('dashboard');
+    Route::post('/thong-ke1', [DashboardController::class, 'test'])->middleware('role:1,2')->name('test');
+    Route::get('/aa', [DashboardController::class, 'a'])->middleware('role:1,2')->name('dashboar1d');
     Route::get('/danh-sach-nguoi-dung', [UserController::class, 'listUser'])->middleware('role:1')->name('listUser');
 
     Route::get('/cap-nhat-trang-thai/{id}/{status}', [UserController::class, 'updateStatus'])->middleware('role:1')->name('updataStatus');
@@ -124,6 +127,9 @@ Route::middleware(['checkLogin'])->group(function () {
     Route::get('/form-chinh-sua-sach/{id}', [BookController::class, 'formEditBook'])->middleware('role:1,2')->name('formEditBook');
     Route::post('/cap-nhat-sach', [BookController::class, 'editBook'])->middleware('role:1,2')->name('editBook');
 
+    //nhat ki muon cua thu thu
+    Route::get('/danh-sach-hoat-dong', [DiaryController::class, 'listDiary'])->middleware('role:1')->name('listDiary');
+
     //duyet phieu muon
     Route::get('/danh-sach-phieu-muon-cho-duyet', [BorrowBookController::class, 'listBorrowPending'])->middleware('role:1,2')->name('listBorrowPending');
     Route::get('/danh-sach-phieu-muon-da-duyet', [BorrowBookController::class, 'listBorrowApproved'])->middleware('role:1,2')->name('listBorrowApproved');
@@ -169,11 +175,8 @@ Route::middleware(['checkLogin'])->group(function () {
 });
 
 Route::get('/sach-theo-the-loai', [BookController::class, 'listBooksByCategory'])->name('listBookByCategory');
-Route::get('/chi-tiet-sach/{id}', [BookController::class, 'pageDetailBook'])->name('pageDetailBook')->middleware('track.book.view');
+Route::get('/chi-tiet-sach/{id}', [BookController::class, 'pageDetailBook'])->name('pageDetailBook')->middleware(['track.book.view', 'viewBook']);
 Route::post('/luot-doc-sach/{id}', [BookController::class, 'readBook'])->name('readBook');
-
-Route::get('/aa', [DashboardController::class, 'a']);
-// Route::get('/aa', [UserController::class, 'test']);
 
 Route::get('/dang-xuat', [AuthController::class, 'logout'])->name('dang-xuat');
 

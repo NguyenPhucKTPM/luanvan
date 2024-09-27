@@ -318,7 +318,7 @@ class BorrowBookController extends Controller
                     $getRoleUser = DB::table('nguoiDung')->where('id_NguoiDung', $getBorrow->id_NguoiDung)->first();
                     $bookReturnDate = $getRoleUser->id_VaiTro < 4 ? 15 : 10;
 
-                    $getBorrow->ngayMuon = Carbon::now()->format('Y-m-d H:i:s');
+                    // $getBorrow->ngayMuon = Carbon::now()->format('Y-m-d H:i:s');
                     if ($getBorrow->hinhThucMuon == 'Mượn từ xa') {
                         $getBorrow->ngayTraDuKien = Carbon::now()->addDays($bookReturnDate + 5)->format('Y-m-d H:i:s');
                     } else {

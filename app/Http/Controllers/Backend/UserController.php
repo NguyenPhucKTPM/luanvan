@@ -55,7 +55,7 @@ class UserController extends Controller
     $courses = Course::all();
     $faculties = Faculty::all();
     $classRoom = ClassRoom::all();
-    if ($role == 3) {
+    if ($role == 3 || $role == 2) {
       $infoRole = User::getInformationSessionLecturers($idUser);
     }
     if ($role == 4) {
@@ -79,15 +79,15 @@ class UserController extends Controller
     $user = Auth::user();
     $idByRole = $user->getIdByRole();
     $isChanged = false;
-    foreach ($dataUser as $key => $value) {
-      if ($user->$key != $value) {
-        $isChanged = true;
-        break;
-      }
-    }
-    if ($isChanged == false) {
-      return redirect()->route('thay-doi')->with('error', 'Không có thông tin nào được thay đổi');
-    }
+    // foreach ($dataUser as $key => $value) {
+    //   if ($user->$key != $value) {
+    //     $isChanged = true;
+    //     break;
+    //   }
+    // }
+    // if ($isChanged == false) {
+    //   return redirect()->route('thay-doi')->with('error', 'Không có thông tin nào được thay đổi');
+    // }
     try {
       $user->update($dataUser);
       if ($user->id_VaiTro == 3) {

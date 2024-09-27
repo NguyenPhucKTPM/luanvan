@@ -337,7 +337,6 @@
 		</div>
 		@endif
 	</div>
-
 	</div>
 </section>
 <script src="{{asset('pages/js/searchBook.js')}}"></script>

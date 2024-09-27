@@ -62,7 +62,7 @@ $(window).on('load', function () {
   var $productOrderChart = document.querySelector('#product-order-chart');
   var $earningsChart = document.querySelector('#earnings-donut-chart');
 
-  // Support Tracker Chart
+  // Tổng sách trong kho
   // -----------------------------
   supportChartOptions = {
     chart: {
@@ -103,7 +103,7 @@ $(window).on('load', function () {
         shade: 'dark',
         type: 'horizontal',
         shadeIntensity: 0.5,
-        gradientToColors: [window.colors.solid.primary],
+        gradientToColors: ['#0e4582'],
         inverseColors: true,
         opacityFrom: 1,
         opacityTo: 1,
@@ -113,11 +113,12 @@ $(window).on('load', function () {
     stroke: {
       dashArray: 8
     },
-    series: [83],
-    labels: ['Completed Tickets']
+    series: [percentBookLocation],
+    labels: ['Số lượng sách chiếm']
   };
   supportChart = new ApexCharts($supportTrackerChart, supportChartOptions);
   supportChart.render();
+  
 
   // Average Session Chart
   // ----------------------------------
@@ -687,7 +688,7 @@ $(window).on('load', function () {
 
             formatter: function (w) {
               // By default this function returns the average of all series. The below is just an example to show the use of custom formatter function
-              return 42459;
+              return 424259;
             }
           }
         }

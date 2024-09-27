@@ -110,7 +110,6 @@
     <!-- END: Vendor JS-->
     <!-- BEGIN: Page Vendor JS-->
     <script src="{{ asset('app-assets/vendors/js/forms/repeater/jquery.repeater.min.js') }}"></script>
-    <script src="{{ asset('app-assets/vendors/js/charts/apexcharts.min.js') }}"></script>
     <script src="{{ asset('app-assets/vendors/js/forms/wizard/bs-stepper.min.js')}}"></script>
     <script src="{{ asset('app-assets/vendors/js/forms/spinner/jquery.bootstrap-touchspin.js')}}"></script>
     <script src="{{ asset('app-assets/vendors/js/forms/select/select2.full.min.js')}}"></script>
@@ -139,10 +138,9 @@
     <script src=" {{ asset('app-assets/js/scripts/pages/page-auth-register.js')}}"></script>
     <script src=" {{ asset('app-assets/js/scripts/forms/form-number-input.js')}}"></script>
     <script src=" {{ asset('app-assets/js/scripts/pages/app-ecommerce-checkout.js')}}"></script>
-    <!-- <script src="app-assets/js/scripts/forms/form-file-uploader.min.js"></script> -->
-
+    <script src="{{ asset('app-assets/js/scripts/components/components-popovers.js')}}"></script>
+    @yield('scripts')
     <!-- BEGIN: Page JS-->
-
     <!-- <table> -->
     <script src="{{ asset('app-assets/vendors/js/tables/datatable/customText.js') }}"></script>
     <script src="{{ asset('app-assets/vendors/js/tables/datatable/jquery.dataTables.min.js') }}"></script>

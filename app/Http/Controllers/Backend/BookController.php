@@ -28,7 +28,7 @@ class BookController extends Controller
 {
     protected $cloudinaryService;
     protected $recommendationService;
-    public function __construct(CloudinaryService $cloudinaryService,BookRecommendationService $recommendationService)
+    public function __construct(CloudinaryService $cloudinaryService, BookRecommendationService $recommendationService)
     {
         $this->cloudinaryService = $cloudinaryService;
         $this->recommendationService = $recommendationService;
@@ -425,24 +425,24 @@ class BookController extends Controller
         }
     }
     public function listBooksByCategory(Request $request)
-    {   
+    {
         $id_TheLoai = $request->category;
         $id_NgonNgu = $request->ngonngu;
         $id_NhaXuatBan = $request->nxb;
         $id_NganhHoc = $request->nganhhoc;
         $user = $request->user();
-        $limit = $request->input('limit', 10); 
+        $limit = $request->input('limit', 10);
         $getBook = Book::getBookByCategory($id_TheLoai);
         $idNgonNguArray = $getBook->pluck('id_NgonNgu')->unique()->toArray();
-        $getAllLanguage = Language::whereIn('id_NgonNgu', $idNgonNguArray)->orderBy('tenNgonNgu', 'asc') ->get();
+        $getAllLanguage = Language::whereIn('id_NgonNgu', $idNgonNguArray)->orderBy('tenNgonNgu', 'asc')->get();
 
-        $idNhaXuatBanArray = $getBook->pluck('id_NhaXuatBan')->unique()->toArray(); 
-        $getAllPublishers = Publisher::whereIn('id_NhaXuatBan',$idNhaXuatBanArray)->orderBy('tenNhaXuatBan', 'asc')->get();
+        $idNhaXuatBanArray = $getBook->pluck('id_NhaXuatBan')->unique()->toArray();
+        $getAllPublishers = Publisher::whereIn('id_NhaXuatBan', $idNhaXuatBanArray)->orderBy('tenNhaXuatBan', 'asc')->get();
 
-        
+
         $bookIds = $getBook->pluck('id_Sach')->toArray();
         $getAllDiscipline = Discipline::getListDisciplineByBook($bookIds);
-        $getNameCategori = Category::where('id_TheLoai',$id_TheLoai)->first();
+        $getNameCategori = Category::where('id_TheLoai', $id_TheLoai)->first();
 
         if (isset($id_NgonNgu)) {
             $getBook = Book::getBookByLanguage($id_TheLoai, $id_NgonNgu);
@@ -454,13 +454,10 @@ class BookController extends Controller
             $getBook = Book::getBookByDiscipline($id_TheLoai, $id_NganhHoc);
         }
         //sach da xem
-         // cache()->forget("user_{$user->id_NguoiDung}_book_views");
+        // cache()->forget("book_views");
         $bookviewed = [];
         $getBooksViewed = [];
-        if ($request->user()) {
-            $bookviewed = cache()->get("user_{$request->user()->id_NguoiDung}_book_views", []);
-        }
-        
+        $bookviewed = cache()->get("book_views", []);
         $validBookIds = [];
         foreach ($bookviewed as $id_Sach) {
             $book = Book::getBookViewed($id_Sach);
@@ -468,17 +465,21 @@ class BookController extends Controller
                 $getBooksViewed[] = $book;
                 $validBookIds[] = $id_Sach;
             }
-        }   
-        if ($request->user() && count($validBookIds) !== count($bookviewed)) {
-            cache()->put("user_{$request->user()->id_NguoiDung}_book_views", $validBookIds, 60 * 60 * 10); // 10 tiếng
+        }
+        if (count($validBookIds) !== count($bookviewed)) {
+            cache()->put("book_views", $validBookIds, 60 * 60 * 5); 
         }
         //goi y sach
-        $getBorrow = Borrow::getBorrowByUser($user->id_NguoiDung);
-        $countBorrow = $getBorrow -> count();
         $recommendedBooks = [];
-        if($countBorrow >= 1){
-            $recommendedBooks = $this->recommendationService->getComprehensiveRecommendations($user, $limit);
+        if (Auth::user()) {
+            $getBorrow = Borrow::getBorrowByUser($user->id_NguoiDung);
+            $countBorrow = $getBorrow->count();
+            $recommendedBooks = [];
+            if ($countBorrow >= 1) {
+                $recommendedBooks = $this->recommendationService->getComprehensiveRecommendations($user, $limit);
+            }
         }
+
         return view('pages.layouts.book.bookBycategory', [
             'tab' => 'Sách',
             'title' => 'Sách theo thể loại',
@@ -491,14 +492,15 @@ class BookController extends Controller
             'recommendedBooks' => $recommendedBooks,
         ]);
     }
-    public function pageDetailBook($id){
+    public function pageDetailBook($id)
+    {
         $detailBook = Book::detailBook($id);
         $categories = Category::getCategoryByBook($id);
         $disciplines = Discipline::getDisciplineByBook($id);
         $getComment = Comment::getComment($id);
-        if($detailBook){
+        if ($detailBook) {
             $editView = Book::find($id);
-            $editView -> luotXem += 1;
+            $editView->luotXem += 1;
             $editView->save();
         }
         return view('pages.layouts.book.detailBook', [
@@ -510,7 +512,8 @@ class BookController extends Controller
             'getComment' => $getComment,
         ]);
     }
-    public function readBook($id){
+    public function readBook($id)
+    {
         $book = Book::find($id);
         if ($book) {
             $book->luotDoc += 1;

@@ -208,6 +208,7 @@ $(window).on('load', function () {
 
   // Subscribed Gained Chart
   // ----------------------------------
+  //Số lượng người dùng trong hệ thống
 
   gainedChartOptions = {
     chart: {
@@ -227,7 +228,7 @@ $(window).on('load', function () {
         }
       }
     },
-    colors: [window.colors.solid.primary],
+    colors: ['#0e4582'],
     dataLabels: {
       enabled: false
     },
@@ -295,7 +296,7 @@ $(window).on('load', function () {
         }
       }
     },
-    colors: [window.colors.solid.success],
+    colors: ['window.colors.solid.success'],
     dataLabels: {
       enabled: false
     },
@@ -363,7 +364,7 @@ $(window).on('load', function () {
         }
       }
     },
-    colors: [window.colors.solid.danger],
+    colors: ['#FFFF66'],
     dataLabels: {
       enabled: false
     },
@@ -431,7 +432,7 @@ $(window).on('load', function () {
         }
       }
     },
-    colors: [window.colors.solid.warning],
+    colors: [window.colors.solid.success],
     dataLabels: {
       enabled: false
     },

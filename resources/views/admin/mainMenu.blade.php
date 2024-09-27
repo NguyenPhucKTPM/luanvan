@@ -53,18 +53,26 @@
                     </span>
                 </a>
             </li>
+            <li class=" nav-item  {{ Route::currentRouteName() == 'listDiary' ? 'active' : '' }}">
+                <a class="d-flex align-items-center" href="{{route('listDiary')}}">
+                    <i data-feather="database"></i>
+                    <span class="menu-title text-truncate" data-i18n="Chat">Quản
+                        lí hoạt động
+                    </span>
+                </a>
+            </li>
 
             <li class=" navigation-header"><span data-i18n="User Interface">Thư viện</span><i
                     data-feather="more-horizontal"></i>
             </li>
-            <!-- <li class=" nav-item {{ Route::currentRouteName() == 'listBook' ? 'active' : '' }}">
-                <a class="d-flex align-items-center" href="{{route('listBook')}}">
-                    <i data-feather='book-open'></i>
+            <li class=" nav-item  {{ Route::currentRouteName() == 'dashboard' ? 'active' : '' }}">
+                <a class="d-flex align-items-center" href="{{route('dashboard')}}">
+                    <i data-feather='trending-up'></i>
                     <span class="menu-title text-truncate"
-                        data-i18n="Typography">Quản lí sách
+                        data-i18n="Feather">Thống kê
                     </span>
                 </a>
-            </li> -->
+            </li>
             <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i data-feather="book-open"></i><span
                         class="menu-title text-truncate" data-i18n="Form Elements">Quản lí sách</span></a>
                 <ul class="menu-content">

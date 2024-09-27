@@ -14,14 +14,14 @@
   border-color:#0e4582 ; }
 
 .flatpickr-calendar .flatpickr-day.inRange, .flatpickr-calendar .flatpickr-day.inRange:hover {
-  background: #f3f2fe;
-  border-color: #f3f2fe;
-  box-shadow: -5px 0 0 #f3f2fe, 5px 0 0 #f3f2fe; }
+  background: rgb(6 126 255 / 12%);
+  border-color: rgb(6 126 255 / 12%);
+  box-shadow: -5px 0 0 rgb(6 126 255 / 12%), 5px 0 0 rgb(6 126 255 / 12%); }
 
 .flatpickr-calendar .flatpickr-day.startRange, .flatpickr-calendar .flatpickr-day.endRange, .flatpickr-calendar .flatpickr-day.startRange:hover, .flatpickr-calendar .flatpickr-day.endRange:hover {
-  background: #7367f0;
+  background: #0e4582;
   color: #fff;
-  border-color: #7367f0; }
+  border-color: #0e4582; }
 
 .flatpickr-calendar .flatpickr-day.selected.startRange + .endRange:not(:nth-child(7n + 1)),
 .flatpickr-calendar .flatpickr-day.startRange.startRange + .endRange:not(:nth-child(7n + 1)),

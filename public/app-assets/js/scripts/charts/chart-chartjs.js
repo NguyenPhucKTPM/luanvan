@@ -636,23 +636,21 @@ $(window).on('load', function () {
           }
         },
         animation: {
-          animateRotate: false
+          animateRotate: true
         }
       },
       data: {
-        labels: ['Africa', 'Asia', 'Europe', 'America', 'Antarctica', 'Australia'],
+        labels: ['Admin', 'Thủ Thư', 'Giảng Viên', 'Sinh Viên',],
         datasets: [
           {
             label: 'Population (millions)',
             backgroundColor: [
-              primaryColorShade,
-              warningColorShade,
-              window.colors.solid.primary,
-              infoColorShade,
-              greyColor,
+              '#0e4582',
+              '#28c76f ',
+              '#ff9f43',
               successColorShade
             ],
-            data: [19, 17.5, 15, 13.5, 11, 9],
+            data: [countAdmin, countLibrarian, countLecturer, countStudent,],
             borderWidth: 0
           }
         ]

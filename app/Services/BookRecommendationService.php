@@ -93,14 +93,13 @@ class BookRecommendationService
             ->where('chitietphieumuon.id_Sach', $book->id_Sach)
             ->exists();
 
-        // Lấy thông tin truy cập sách từ cache
         $views = cache()->get("user_{$user->id_NguoiDung}_book_views", []);
         // cache()->forget("user_{$user->id_NguoiDung}_book_views");
         // dd($views);
 
         if (!in_array($book->id_Sach, $views)) {
             $views[] = $book->id_Sach;
-            cache()->put("user_{$user->id_NguoiDung}_book_views", $views, 3600);
+            cache()->put("user_{$user->id_NguoiDung}_book_views", $views, 60 * 60 * 10);
             return 1;
         }
 

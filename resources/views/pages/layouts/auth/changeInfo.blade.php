@@ -161,7 +161,7 @@
                         </div>
                         <div class="row mt-5 pt-3 d-flex justify-content-center">
                             <div class="col-md-6">
-                                <div class="cart-detail bg-light p-3 p-md-4">
+                                <div class="cart-detail p-3 p-md-4">
                                     <p><button class="btn btn-primary py-3 px-4">Lưu thay đổi</button></p>
                                 </div>
                             </div>

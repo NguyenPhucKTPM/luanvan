@@ -89,7 +89,7 @@
                                     <span class="card-text user-info-title fw-bold mb-0" style="margin-left: 1rem;">Ngày
                                         sinh</span>
                                 </div>
-                                <p class="card-text mb-0">{{$userInfo -> ngaySinh}}</p>
+                                <p class="card-text mb-0">{{ \Carbon\Carbon::parse($userInfo->ngaySinh)->format('d/m/Y') }}</p>
                             </div>
 
                             <div class="d-flex  flex-wrap ">

@@ -305,8 +305,8 @@ input:focus ~ .bg-light {
   color: #7367f0 !important; }
 
 .bg-light-primary {
-  background: rgba(115, 103, 240, 0.12) !important;
-  color: #7367f0 !important; }
+  background: rgba(115, 103, 240, 0.12) ;
+  color: #7367f0 ; }
 
 .bg-light-primary.fc-h-event, .bg-light-primary.fc-v-event {
   border-color: rgba(115, 103, 240, 0.1); }
@@ -321,7 +321,7 @@ input:focus ~ .bg-light {
   color: #6e6b7b; }
 
 .avatar.bg-light-primary {
-  color: #7367f0 !important; }
+  color: #0e4582 ; }
 
 .border-primary {
   border: 1px solid #7367f0 !important; }
@@ -408,20 +408,20 @@ input:focus ~ .bg-light {
   transform: translateY(3px); }
 
 .btn-outline-primary {
-  border: 1px solid #7367f0 !important;
+  border: 1px solid #0e4582 !important;
   background-color: transparent;
-  color: #7367f0; }
+  color: #0e4582; }
 
 .btn-outline-primary:hover:not(.disabled):not(:disabled) {
   background-color: rgba(115, 103, 240, 0.04);
-  color: #7367f0; }
+  color: #0e4582; }
 
 .btn-outline-primary:not(:disabled):not(.disabled):active:focus {
   box-shadow: none; }
 
 .btn-outline-primary:not(:disabled):not(.disabled):active, .btn-outline-primary:not(:disabled):not(.disabled).active, .btn-outline-primary:not(:disabled):not(.disabled):focus {
-  background-color: rgba(115, 103, 240, 0.2);
-  color: #7367f0; }
+  background-color: rgb(98 180 235 / 20%);
+  color: #0e4582; }
 
 .btn-outline-primary.dropdown-toggle::after {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237367f0' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-chevron-down'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E"); }

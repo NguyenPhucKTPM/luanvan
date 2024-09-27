@@ -1,168 +1,169 @@
-<!-- <!DOCTYPE html>
-<html class="loading" lang="en" data-textdirection="ltr">
-<!-- BEGIN: Head-->
+<!DOCTYPE html>
+<html lang="en">
+<!--begin::Head-->
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <link rel="shortcut icon" type="image/x-icon" href="pages/images/logo.png">
+    <base href="../../../">
     <title>{{$title}}</title>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0,minimal-ui">
-    <meta name="description"
-        content="Vuexy admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
-    <meta name="keywords"
-        content="admin template, Vuexy admin template, dashboard template, flat admin template, responsive admin template, web app">
-    <meta name="author" content="PIXINVENT">
-    <title>{{$title}}</title>
-    <link rel="apple-touch-icon" href="app-assets/images/ico/apple-icon-120.png">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600"
-        rel="stylesheet">
-
-    <!-- BEGIN: Vendor CSS-->
-    <link rel="stylesheet" type="text/css" href="app-assets/vendors/css/vendors.min.css">
-    <!-- END: Vendor CSS-->
-
-    <!-- BEGIN: Theme CSS-->
-    <link rel="stylesheet" type="text/css" href="app-assets/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="app-assets/css/bootstrap-extended.css">
-    <link rel="stylesheet" type="text/css" href="app-assets/css/colors.css">
-    <link rel="stylesheet" type="text/css" href="app-assets/css/components.css">
-    <link rel="stylesheet" type="text/css" href="app-assets/css/themes/dark-layout.css">
-    <link rel="stylesheet" type="text/css" href="app-assets/css/themes/bordered-layout.css">
-    <link rel="stylesheet" type="text/css" href="app-assets/css/themes/semi-dark-layout.css">
-
-    <!-- BEGIN: Page CSS-->
-    <link rel="stylesheet" type="text/css" href="app-assets/css/core/menu/menu-types/vertical-menu.css">
-    <link rel="stylesheet" type="text/css" href="app-assets/css/plugins/forms/form-validation.css">
-    <link rel="stylesheet" type="text/css" href="app-assets/css/pages/page-auth.css">
-    <!-- END: Page CSS-->
-
-    <!-- BEGIN: Custom CSS-->
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
-    <!-- END: Custom CSS-->
-
+    <meta charset="utf-8" />
+    <link rel="shortcut icon" type="image/x-icon" href="{{asset('pages/images/logo.png')}}">
+    <meta name="description" content="The most advanced Bootstrap Admin Theme on Themeforest trusted by 94,000 beginners and professionals. Multi-demo, Dark Mode, RTL support and complete React, Angular, Vue &amp; Laravel versions. Grab your copy now and get life-time updates for free." />
+    <meta name="keywords" content="Metronic, bootstrap, bootstrap 5, Angular, VueJs, React, Laravel, admin themes, web design, figma, web development, free templates, free admin themes, bootstrap theme, bootstrap template, bootstrap dashboard, bootstrap dak mode, bootstrap button, bootstrap datepicker, bootstrap timepicker, fullcalendar, datatables, flaticon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Metronic - Bootstrap 5 HTML, VueJS, React, Angular &amp; Laravel Admin Dashboard Theme" />
+    <meta property="og:url" content="https://keenthemes.com/metronic" />
+    <meta property="og:site_name" content="Keenthemes | Metronic" />
+    <link rel="canonical" href="https://preview.keenthemes.com/metronic8" />
+    <!--begin::Fonts-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
+    <!--end::Fonts-->
+    <!--begin::Global Stylesheets Bundle(used by all pages)-->
+    <link href="{{asset('assets/plugins/global/plugins.bundle.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('assets/css/style.bundle.css')}}" rel="stylesheet" type="text/css" />
+    <!--end::Global Stylesheets Bundle-->
 </head>
-<!-- END: Head-->
+<!--end::Head-->
+<!--begin::Body-->
 
-<!-- BEGIN: Body-->
-
-<body class="vertical-layout vertical-menu-modern blank-page navbar-floating footer-static" data-open="click"
-    data-menu="vertical-menu-modern" data-col="blank-page">
-    <!-- BEGIN: Content-->
-    <div class="app-content content ">
-        <div class="content-overlay"></div>
-        <div class="header-navbar-shadow"></div>
-        <div class="content-wrapper">
-            <div class="content-header row">
-            </div>
-            <div class="content-body">
-                <div class="auth-wrapper auth-v1 px-2">
-                    <div class="auth-inner py-2">
-                        <!-- Login v1 -->
-                        <div class="card mb-0">
-                            <div class="card-body">
-                                <a href="{{route('home')}}" class="brand-logo">
-                                    <img src="pages/images/logo_ctut1.png" alt="">
-
-                                </a>
-                                <h4 class="card-title mb-1">Đăng nhập</h4>
-
-
-                                <form class="auth-login-form mt-2" action="{{route('login')}}" method="POST">
-                                    <div class="mb-1">
-                                        <label for="login-email" class="form-label">Email</label>
-                                        <input type="text" class="form-control " id="login-email" name="email"
-                                            placeholder="Nhập địa chỉ email" aria-describedby="login-email" tabindex="1"
-                                            autofocus />
-                                        @if($errors->has('email'))
-                                        <span class="error-message text-danger">*
-                                            {{$errors->first('email')}}</span>
-                                        @endif
-                                    </div>
-
-                                    <div class=" mb-1">
-                                        <div class="d-flex justify-content-between">
-                                            <label class="form-label" for="login-password">Mật khẩu</label>
-                                            <a href="{{route('forgot')}}">
-                                                <small>Quên mật khẩu?</small>
-                                            </a>
-                                        </div>
-                                        <div class="input-group input-group-merge form-password-toggle">
-                                            <input type="password" class="form-control form-control-merge"
-                                                id="login-password" name="password" tabindex="2"
-                                                placeholder="············" aria-describedby="login-password">
-                                            <span class="input-group-text cursor-pointer"><svg
-                                                    xmlns="http://www.w3.org/2000/svg" width="14" height="14"
-                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                    class="feather feather-eye">
-                                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                                                    <circle cx="12" cy="12" r="3"></circle>
-                                                </svg></span>
-                                        </div>
-                                        @if($errors->has('password'))
-                                        <span class="error-message text-danger">*
-                                            {{$errors->first('password')}}</span>
-                                        @endif
-                                    </div>
-                                    <div class="mb-1">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="remember-me"
-                                                tabindex="3" />
-                                            <label class="form-check-label" for="remember-me"> Ghi nhớ đăng nhập
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <button class="btn btn-primary w-100" tabindex="4">Đăng nhập</button>
-                                    @csrf
-                                </form>
-
-                                <p class="text-center mt-2">
-                                    <span>Bạn chưa có tài khoản?</span>
-                                    <a href="{{route('dang-ky')}}">
-                                        <span>Đăng ký ngay tại đây</span>
-                                    </a>
-                                </p>
-                            </div>
-                        </div>
-                        <!-- /Login v1 -->
+<body id="kt_body" class="bg-body">
+    <!--begin::Main-->
+    <!--begin::Root-->
+    <div class="d-flex flex-column flex-root">
+        <!--begin::Authentication - Sign-in -->
+        <div class="d-flex flex-column flex-lg-row flex-column-fluid">
+            <!--begin::Aside-->
+            <div class="d-flex flex-column flex-lg-row-auto w-xl-600px positon-xl-relative" style="background-color: #0095e8">
+                <!--begin::Wrapper-->
+                <div class="d-flex flex-column position-xl-fixed top-0 bottom-0 w-xl-600px scroll-y">
+                    <!--begin::Content-->
+                    <div class="d-flex flex-row-fluid flex-column text-center p-10 pt-lg-20">
+                        <!--begin::Logo-->
+                        <a href="{{route('home')}}" class="py-9 mb-5">
+                            <img alt="Logo" src="{{asset('pages/images/logo_ctut1.png')}}" class="h-50px" />
+                        </a>
+                        <!--end::Logo-->
+                        <!--begin::Title-->
+                        <h1 class="fw-bolder fs-2qx pb-5 pb-md-10" style="color: #fff;">Chào mừng đến với thư viện CTUT</h1>
+                        <!--end::Title-->
+                        <!--begin::Description-->
+                        <p class="fw-bold fs-2" style="color: #fff;">Hãy thư có phút giây thư giản
+                            <br />với những cuốn sách hay
+                        </p>
+                        <!--end::Description-->
                     </div>
+                    <!--end::Content-->
+                    <!--begin::Illustration-->
+                    <div class="d-flex flex-row-auto bgi-no-repeat bgi-position-x-center bgi-size-contain bgi-position-y-bottom min-h-100px min-h-lg-350px" style="background-image: url({{asset('assets/media/illustrations/sketchy-1/13.png')}}"></div>
+                    <!--end::Illustration-->
                 </div>
-
+                <!--end::Wrapper-->
             </div>
+            <!--end::Aside-->
+            <!--begin::Body-->
+            <div class="d-flex flex-column flex-lg-row-fluid py-10">
+                <!--begin::Content-->
+                <div class="d-flex flex-center flex-column flex-column-fluid">
+                    <!--begin::Wrapper-->
+                    <div class="w-lg-500px p-10 p-lg-15 mx-auto">
+                        <!--begin::Form-->
+                        <form class="form w-100" action="{{route('login')}}" method="POST">
+                            @csrf
+                            <!--begin::Heading-->
+                            <div class="text-center mb-10">
+                                <!--begin::Title-->
+                                <h1 class="text-dark mb-3">Đăng nhập</h1>
+                                <!--end::Title-->
+                                <!--begin::Link-->
+                                <div class="text-gray-400 fw-bold fs-4">Chưa có tài khoản?
+                                    <a href="{{route('dang-ky')}}" class="link-primary fw-bolder">Đăng ký ở đây</a>
+                                </div>
+                                <!--end::Link-->
+                            </div>
+                            <!--begin::Heading-->
+                            <!--begin::Input group-->
+                            <div class="fv-row mb-10">
+                                <!--begin::Label-->
+                                <label class="form-label fs-6 fw-bolder text-dark" for="email">Địa chỉ Email</label>
+                                <!--end::Label-->
+                                <!--begin::Input-->
+                                <input class="form-control form-control-lg form-control-solid" type="text" id="email" placeholder="Nhập địa chỉ email" name="email" autocomplete="off" />
+                                @if($errors->has('email'))
+                                <span class="error-message text-danger">*
+                                    {{$errors->first('email')}}</span>
+                                @endif
+                                <!--end::Input-->
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Input group-->
+                            <div class="fv-row mb-10">
+                                <!--begin::Wrapper-->
+                                <div class="d-flex flex-stack mb-2">
+                                    <!--begin::Label-->
+                                    <label class="form-label fw-bolder text-dark fs-6 mb-0" for="password">Mật khẩu</label>
+                                    <!--end::Label-->
+                                    <!--begin::Link-->
+                                    <a href="{{route('forgot')}}" class="link-primary fs-6 fw-bolder">Quên mật khẩu ?</a>
+                                    <!--end::Link-->
+                                </div>
+    
+                                <input class="form-control form-control-lg form-control-solid" name="password" placeholder="********" type="password" name="password" autocomplete="off" />
+                                @if($errors->has('password'))
+                                <span class="error-message text-danger">*
+                                    {{$errors->first('password')}}</span>
+                                @endif
+                              
+                                <!--end::Input-->
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Actions-->
+                            <div class="text-center">
+                                <!--begin::Submit button-->
+                                <button type="submit" id="kt_sign_in_submit" class="btn btn-lg btn-primary w-100 mb-5">
+                                    <span class="indicator-label">Đăng nhập</span>
+                                    <span class="indicator-progress">Chờ...
+                                        <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                                </button>
+                                <!--end::Submit button-->
+                                <!--begin::Separator-->
+
+                                <!--end::Google link-->
+                            </div>
+                            <!--end::Actions-->
+                        </form>
+                        <!--end::Form-->
+                    </div>
+                    <!--end::Wrapper-->
+                </div>
+                <!--end::Content-->
+                <!--begin::Footer-->
+                <div class="d-flex flex-center flex-wrap fs-6 p-5 pb-0">
+                    <!--begin::Links-->
+                    <!--end::Links-->
+                </div>
+                <!--end::Footer-->
+            </div>
+            <!--end::Body-->
         </div>
+        <!--end::Authentication - Sign-in-->
     </div>
-    <!-- END: Content-->
-
-
-    <!-- BEGIN: Vendor JS-->
-    <script src="app-assets/vendors/js/vendors.min.js"></script>
-    <!-- BEGIN Vendor JS-->
-
-    <!-- BEGIN: Page Vendor JS-->
-    <script src="app-assets/vendors/js/forms/validation/jquery.validate.min.js"></script>
-    <!-- END: Page Vendor JS-->
-
-    <!-- BEGIN: Theme JS-->
-    <script src="app-assets/js/core/app-menu.js"></script>
-    <script src="app-assets/js/core/app.js"></script>
-    <!-- END: Theme JS-->
-
-    <!-- BEGIN: Page JS-->
-    <script src="app-assets/js/scripts/pages/page-auth-login.js"></script>
-    <!-- END: Page JS-->
-
+    <!--end::Root-->
+    <!--end::Main-->
+    <!--begin::Javascript-->
     <script>
-    $(window).on('load', function() {
-        if (feather) {
-            feather.replace({
-                width: 14,
-                height: 14
-            });
-        }
-    })
+        var hostUrl = "assets/";
     </script>
+    <!--begin::Global Javascript Bundle(used by all pages)-->
+    <script src={{asset('assets/plugins/global/plugins.bundle.js')}}></script>
+    <script src= {{asset('assets/js/scripts.bundle.js')}}></script>
+    <!--end::Global Javascript Bundle-->
+    <!--begin::Page Custom Javascript(used by this page)-->
+    <script src={{asset('assets/js/custom/authentication/sign-in/general.js')}}></script>
+    <script src={{asset('assets/js/custom/authentication/sign-up/general.js')}}></script>
+    <!--end::Page Custom Javascript-->
+    <!--end::Javascript-->
 </body>
-<!-- END: Body-->
+<!--end::Body-->
 
-</html> -->
+</html>

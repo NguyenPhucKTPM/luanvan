@@ -31,7 +31,7 @@
                                 </div>
                             </div>
                         </div>
-                        <table class="datatables-basic table table-hover" id="table">
+                        <table class="datatables-basic table-striped table table-hover" id="table">
                             <thead>
                                 <tr>
                                     <th>ID</th>
