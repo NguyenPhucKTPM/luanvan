@@ -65,7 +65,9 @@ Route::middleware(['checkLogin'])->group(function () {
 
     //admin chuc nang quan li user
     Route::get('/thong-ke', [DashboardController::class, 'index'])->middleware('role:1,2')->name('dashboard');
-    Route::post('/thong-ke1', [DashboardController::class, 'test'])->middleware('role:1,2')->name('test');
+    Route::get('/thong-ke1', [DashboardController::class, 'getBorrowByType'])->middleware('role:1,2')->name('getBorrowByType');
+    Route::get('/thong-ke2', [DashboardController::class, 'getBorrowByStatus'])->middleware('role:1,2')->name('getBorrowByStatus');
+
     Route::get('/aa', [DashboardController::class, 'a'])->middleware('role:1,2')->name('dashboar1d');
     Route::get('/danh-sach-nguoi-dung', [UserController::class, 'listUser'])->middleware('role:1')->name('listUser');
 

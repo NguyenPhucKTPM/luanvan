@@ -51,7 +51,7 @@ class BookRecommendationService
 
     private function getPopularityScore(Book $book)
     {
-        $maxBorrows = Cache::remember('max_borrows', 3600, function () {
+        $maxBorrows = Cache::remember('max_borrows', 7776000, function () {
             return detailBorrow::select('id_Sach', DB::raw('count(*) as borrow_count'))
                 ->groupBy('id_Sach')
                 ->orderByDesc('borrow_count')
@@ -66,7 +66,7 @@ class BookRecommendationService
     private function getCategoryScore(Book $book, User $user)
     {
         // Lưu trữ danh sách thể loại ưa thích của người dùng vào cache
-        $userFavoriteCategories = Cache::remember("user_{$user->id_NguoiDung}_favorite_categories", 3600, function () use ($user) {
+        $userFavoriteCategories = Cache::remember("user_{$user->id_NguoiDung}_favorite_categories", 7776000, function () use ($user) {
             return detailBorrow::join('phieumuon', 'chitietphieumuon.id_PhieuMuon', '=', 'phieumuon.id_PhieuMuon')
                 ->join('sach', 'chitietphieumuon.id_Sach', '=', 'sach.id_Sach')
                 ->join('chitiettheloai', 'sach.id_Sach', '=', 'chitiettheloai.id_Sach')
@@ -129,7 +129,7 @@ class BookRecommendationService
 
     private function getDisciplineScore(Book $book, User $user)
     {
-        $userFavoriteDisciplines = Cache::remember("user_{$user->id_NguoiDung}_favorite_disciplines", 3600, function () use ($user) {
+        $userFavoriteDisciplines = Cache::remember("user_{$user->id_NguoiDung}_favorite_disciplines", 7776000, function () use ($user) {
             return detailBorrow::join('phieumuon', 'chitietphieumuon.id_PhieuMuon', '=', 'phieumuon.id_PhieuMuon')
                 ->join('sach', 'chitietphieumuon.id_Sach', '=', 'sach.id_Sach')
                 ->join('chitietnganhhoc', 'sach.id_Sach', '=', 'chitietnganhhoc.id_Sach')
