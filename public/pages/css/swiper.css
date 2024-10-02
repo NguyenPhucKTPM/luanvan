@@ -1,6 +1,6 @@
 swiper-container {
     width: 100%;
-    height: 100%;
+    height:auto; /* Đặt chiều cao cố định cho container */
 }
 
 swiper-slide {
@@ -10,11 +10,12 @@ swiper-slide {
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden; /* Đảm bảo không có phần thừa ra */
 }
 
 swiper-slide img {
     display: block;
-    width: 100%;
-    height: 700px;
-    object-fit: cover; /* Giữ nguyên tỉ lệ và hiển thị đầy đủ hình ảnh */
+    width: 100%; /* Đảm bảo hình ảnh chiếm toàn bộ chiều rộng */
+    height: 650px; /* Chiều cao cố định */
+    object-fit: cover; /* Giữ tỉ lệ hình ảnh và cắt phần thừa nếu cần */
 }

@@ -13817,7 +13817,7 @@ textarea.form-control {
 }
 
 .ftco-section {
-  padding: 7em 0;
+  padding: 2em 0;
   position: relative;
 }
 
@@ -13964,7 +13964,7 @@ textarea.form-control {
   -webkit-transition: all 0.6s ease;
   -ms-transition: all 0.6s ease;
   transition: all 0.6s ease;
-  background: #dbcc8f;
+  background: #0e4582;
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
   -ms-border-radius: 50%;

@@ -54,7 +54,7 @@
 
     @include('pages.header')
 
-    @yield('content', View::make('pages.home'))
+    @yield('content', View::make('pages.layouts.home'))
 
     @include('pages.footer')
 

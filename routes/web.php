@@ -19,6 +19,7 @@ use App\Http\Controllers\Backend\BorrowBookController;
 use App\Http\Controllers\Backend\RatingController;
 use App\Http\Controllers\Backend\CommentController;
 use App\Http\Controllers\Backend\DiaryController;
+use App\Http\Controllers\Backend\HomeController;
 
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
@@ -37,10 +38,10 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 // role 3 là giảng viên
 // role 4 là sinh viên
 
-Route::get('/', function () {
-    return view('pages.index');
-})->name('home');
-
+// Route::get('/', function () {
+//     return view('pages.index');
+// })->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 //khi đang đăng nhập không được phép đến trang này
 Route::middleware(['logged'])->group(function () {

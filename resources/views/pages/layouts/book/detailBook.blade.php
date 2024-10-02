@@ -75,8 +75,7 @@
                             <p class="" style="color: #000;">Lượt mượn: {{$detailBook->luotMuon}}</p>
                         </div>
                         <div class="w-100"></div>
-                        @if($detailBook-> soLuongCoSan > 1)
-                        @if(isset($user))
+                        @if($detailBook-> soLuongCoSan > 1 && isset($user) )
                         <div class="input-group col-md-8 mb-4 d-flex">
                             <span class="input-group-btn mr-2">
                                 <button type="button" class="quantity-left-minus btn" data-type="minus" data-field="">
@@ -94,12 +93,13 @@
                             @endif
                         </div>
                         <input type="hidden" name="id_Sach" value="{{ \Illuminate\Support\Facades\Crypt::encryptString($detailBook->id_Sach) }}">
+                        @endif
                     </form>
                 </div>
+                @if($detailBook-> soLuongCoSan > 1 && isset($user) )
                 <p class="">
                     <a href="javascript:void(0)" class="btn btn-primary py-3 px-5" onclick="document.getElementById('cart-form').submit();">Thêm vào giỏ</a>
                 </p>
-                @endif
                 @endif
             </div>
         </div>
@@ -202,6 +202,83 @@
                 </div>
             </div>
         </div>
+        <div class="row mt-5">
+			<div class="col-md-12 col-lg-12 order-md-last">
+				<div class="row">
+					<div class="col-md-12 mb-2">
+						<h3 style="color: #0e4582">SÁCH TƯƠNG TỰ:</h3>
+					</div>
+					<div class="col-md-12 ftco-animate fadeInUp ftco-animated d-flex p-0">
+						<div class="book-container d-flex overflow-auto">
+							@foreach ($similarBook as $data)
+							<div class="col-sm-6 col-md-6 col-lg-4 ftco-animate book-item book-recom">
+								<div class="product d-flex flex-column">
+									<a href="{{ route('pageDetailBook', $data->id_Sach) }}" class="img-prod">
+										<img class="img-fluid" src="{{ $data->duongDan }}" alt="Sách">
+										<div class="overlay"></div>
+									</a>
+									<div class="text py-3 pb-4 px-3">
+										<div class="d-flex">
+											<div class="cat">
+											</div>
+											<div class="rating">
+												<p class="text-right mb-0">
+													@php
+													$averageRating = min($data->danhGiaTrungBinh, 5);
+													@endphp
+													@for ($i = 1; $i <= 5; $i++)
+														@if ($i <=$averageRating)
+														<a href="#" style="color:#f1b609">
+														<span class="ion-ios-star"></span>
+														</a>
+														@else
+														<a href="#" style="color:#f1b609">
+															<span class="ion-ios-star-outline"></span>
+														</a>
+														@endif
+														@endfor
+												</p>
+											</div>
+										</div>
+										<h3 style="height: 66px;">
+											<a style="text-align: left; display: block;" href="{{ route('pageDetailBook', $data->id_Sach) }}">{{ $data->tenSach }} ({{ $data->tenTacGia }})</a>
+										</h3>
+										<div class="d-flex">
+											<div class="pricing" style="width:50%">
+												<p class="price text-success"><span>Số lượng: {{ $data->soLuongCoSan }}</span></p>
+											</div>
+											<div class="pricing" style="width:50%; text-align:right">
+												<p class="price text-info"><span>Lượt mượn: {{ $data->luotMuon }}</span></p>
+											</div>
+										</div>
+										<form id="cart-form-{{ $data->id_Sach }}" action="{{ route('addCart') }}" method="post">
+											@csrf
+											<input type="hidden" name="soLuong" value="1">
+											<input type="hidden" name="id_Sach" value="{{ \Illuminate\Support\Facades\Crypt::encryptString($data->id_Sach) }}">
+											<p class="bottom-area d-flex px-3">
+												@if(isset($user))
+												<a href="javascript:void(0)" class="add-to-cart text-center py-2 mr-1" onclick="document.getElementById('cart-form-{{ $data->id_Sach }}').submit();">
+													<span>Thêm vào giỏ
+														<i class="ion-ios-add ml-1"></i>
+													</span>
+												</a>
+												@endif
+												<a href="{{ route('pageDetailBook', $data->id_Sach) }}" class="buy-now text-center py-2">Chi tiết
+													<span>
+														<i class="far fa-eye ml-1"></i>
+													</span>
+												</a>
+											</p>
+										</form>
+									</div>
+								</div>
+							</div>
+							@endforeach
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
     </div>
 </section>
 <script>
@@ -223,7 +300,6 @@
     }
 </script>
 <script>
-    // ẩn hiện bình luận
     document.getElementById('toggleText').addEventListener('click', function() {
         var form = document.getElementById('commentForm');
         if (form.style.display === 'none' || form.style.display === '') {

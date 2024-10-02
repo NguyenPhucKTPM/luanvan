@@ -1,5 +1,6 @@
 @extends('pages.index')
 @section('content')
+@if (Route::currentRouteName() !== 'home')
 <div class="hero-wrap hero-bread" style="background-image: url({{ asset('pages/images/bg_6.jpg') }});">
     <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
@@ -11,5 +12,6 @@
         </div>
     </div>
 </div>
+@endif
 @yield('layouts')
 @endsection

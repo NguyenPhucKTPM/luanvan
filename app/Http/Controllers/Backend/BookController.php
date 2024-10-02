@@ -33,16 +33,6 @@ class BookController extends Controller
         $this->cloudinaryService = $cloudinaryService;
         $this->recommendationService = $recommendationService;
     }
-    // public function index(Request $request)
-    // {
-    //     $user = $request->user();
-
-    //     $limit = $request->input('limit', 10); // Số lượng sách muốn gợi ý, mặc định là 10
-
-    //     $recommendedBooks = $this->recommendationService->getComprehensiveRecommendations($user, $limit);
-
-    //     dd($recommendedBooks);
-    // }
     public function listBook()
     {
         $books = Book::getAllBook();
@@ -177,7 +167,6 @@ class BookController extends Controller
         $giaTien = number_format($detailBook->giaTien, 0, ',', '.');
         $categories = Category::getCategoryByBook($id);
         $disciplines = Discipline::getDisciplineByBook($id);
-        // dd($giaTien);
         return view('admin.layouts.book.detailBook', [
             'tab' => 'Quản lí sách',
             'title' => 'Chi tiết sách',
@@ -502,7 +491,9 @@ class BookController extends Controller
             $editView = Book::find($id);
             $editView->luotXem += 1;
             $editView->save();
+            $similarBook = Book::getSimilarBook($id);
         }
+
         return view('pages.layouts.book.detailBook', [
             'tab' => 'Sách',
             'title' => 'Chi tiết sách',
@@ -510,6 +501,7 @@ class BookController extends Controller
             'categories' => $categories,
             'disciplines' => $disciplines,
             'getComment' => $getComment,
+            'similarBook' => $similarBook,
         ]);
     }
     public function readBook($id)

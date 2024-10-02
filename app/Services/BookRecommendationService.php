@@ -14,12 +14,12 @@ class BookRecommendationService
     {
         // Định nghĩa trọng số cho từng yếu tố
         $weights = [
-            'popularity' => 0.1,
-            'category' => 0.275,
-            'personal_history' => 0.25,
-            'collaborative' => 0.075,
-            'similar_borrows' => 0.275,
-            'recency' => 0.025
+            'popularity' => 0.125,
+            'category' => 0.25,
+            'personal_history' => 0.2,
+            'collaborative' => 0.05,
+            'similar_borrows' => 0.25,
+            'recency' => 0.125
         ];
         $scores = collect();
         $allBooks = BooK::all();
@@ -42,7 +42,7 @@ class BookRecommendationService
         $recommendedBooks = DB::table('sach')
             ->join('hinhanh', 'sach.id_Sach', '=', 'hinhanh.id_Sach')
             ->whereIn('sach.id_Sach', $recommendedBookIds)
-            ->select('sach.*', 'hinhanh.duongDan') // Chọn các cột cần thiết
+            ->select('sach.*', 'hinhanh.duongDan')
             ->orderByRaw("FIELD(sach.id_Sach, " . implode(',', array_map('intval', $recommendedBookIds)) . ")")
             ->get();
         // dd($recommendedBooks);
@@ -51,7 +51,7 @@ class BookRecommendationService
 
     private function getPopularityScore(Book $book)
     {
-        $maxBorrows = Cache::remember('max_borrows', 7776000, function () {
+        $maxBorrows = Cache::remember('max_borrows', 3600, function () {
             return detailBorrow::select('id_Sach', DB::raw('count(*) as borrow_count'))
                 ->groupBy('id_Sach')
                 ->orderByDesc('borrow_count')
@@ -59,8 +59,20 @@ class BookRecommendationService
                 ->borrow_count ?? 1;
         });
 
+        $maxViews = Cache::remember('max_views', 3600, function () {
+            return Book::orderByDesc('luotXem')->first()->view_count ?? 1;
+        });
+
         $bookBorrows = $book->chiTietPhieuMuons()->count();
-        return $bookBorrows / $maxBorrows;
+        $bookViews = $book->view_count;
+        $borrowWeight = 0.7; 
+        $viewWeight = 0.3;   
+        $popularityScore = (
+            ($bookBorrows / $maxBorrows) * $borrowWeight +
+            ($bookViews / $maxViews) * $viewWeight
+        );
+
+        return $popularityScore;
     }
 
     private function getCategoryScore(Book $book, User $user)

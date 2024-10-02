@@ -16,4 +16,5 @@ class Image extends Model
     {
         return $this->belongsTo(Book::class, 'id_Sach');
     }
+   
 }
