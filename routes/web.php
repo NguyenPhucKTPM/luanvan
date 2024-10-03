@@ -20,6 +20,8 @@ use App\Http\Controllers\Backend\RatingController;
 use App\Http\Controllers\Backend\CommentController;
 use App\Http\Controllers\Backend\DiaryController;
 use App\Http\Controllers\Backend\HomeController;
+use App\Http\Controllers\Backend\ContactController;
+use App\Http\Controllers\Backend\IntroduceController;
 
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
@@ -180,6 +182,9 @@ Route::middleware(['checkLogin'])->group(function () {
 Route::get('/sach-theo-the-loai', [BookController::class, 'listBooksByCategory'])->name('listBookByCategory');
 Route::get('/chi-tiet-sach/{id}', [BookController::class, 'pageDetailBook'])->name('pageDetailBook')->middleware(['track.book.view', 'viewBook']);
 Route::post('/luot-doc-sach/{id}', [BookController::class, 'readBook'])->name('readBook');
+Route::get('/the-loai', [CategoryController::class, 'pageCategory'])->name('pageCategory');
+Route::get('/lien-he', [ContactController::class, 'index'])->name('contact');
+Route::get('/gioi-thieu', [IntroduceController::class, 'index'])->name('introduce');
 
 Route::get('/dang-xuat', [AuthController::class, 'logout'])->name('dang-xuat');
 

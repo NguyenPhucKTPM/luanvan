@@ -37,6 +37,9 @@
     <link rel="stylesheet" href="{{asset('pages/css/swiper.css')}}">
     <link rel="stylesheet" href="{{asset('pages/css/search.css')}}">
     <link rel="stylesheet" href="{{asset('pages/css/infoUser.css')}}">
+
+
+
     <!-- picker -->
     <link rel="stylesheet" type="text/css" href="app-assets/css/core/menu/menu-types/vertical-menu.css">
     <link rel="stylesheet" type="text/css" href="app-assets/css/plugins/forms/pickers/form-flat-pickr.css">
@@ -79,11 +82,12 @@
     <script src="{{asset('pages/js/jquery.animateNumber.min.js')}}"></script>
     <script src="{{asset('pages/js/bootstrap-datepicker.js')}}"></script>
     <script src="{{asset('pages/js/scrollax.min.js')}}"></script>
+  
+
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false">
     </script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-
 
     <script src="{{asset('pages/js/google-map.js')}}"></script>
     <script src="{{asset('pages/js/main.js')}}"></script>
@@ -92,6 +96,7 @@
 
     <script src="app-assets/vendors/js/vendors.min.js"></script>
     <!-- BEGIN Vendor JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <!-- BEGIN: Page Vendor JS-->
     <script src="app-assets/vendors/js/forms/select/select2.full.min.js"></script>

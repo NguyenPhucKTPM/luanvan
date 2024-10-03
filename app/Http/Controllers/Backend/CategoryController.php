@@ -64,4 +64,10 @@ class CategoryController extends Controller
             return redirect()->route('listCategory')->with('error', 'Lỗi khi xóa thể loại');
         }
     }
+    public function pageCategory(){
+        return view('pages.layouts.category.listCategory', [
+            'title' => 'Tất cả danh mục',
+            'tab' => 'Danh mục',
+        ]);
+    }
 }

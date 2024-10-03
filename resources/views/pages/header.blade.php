@@ -36,18 +36,10 @@
                 <li class="nav-item active"><a href="{{route('home')}}" class="nav-link" style="color: #0e4582;">Trang
                         chủ</a>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">Thể loại</a>
-                    <div class="dropdown-menu" aria-labelledby="dropdown04">
-                        @foreach ($menuCategories as $data)
-                        <a class="dropdown-item" href="{{ route('listBookByCategory', ['category' => $data->id_TheLoai]) }}">{{$data->tenTheLoai}}</a>
-                        @endforeach  
-                    </div>
-                </li>
-                <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-                <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
-                <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+                <li class="nav-item"><a href="{{route('pageCategory')}}" class="nav-link">Thể loại</a></li>
+                <li class="nav-item"><a href="{{route('introduce')}}" class="nav-link">Giới thiệu</a></li>
+                <li class="nav-item"><a href="blog.html" class="nav-link">Quy định</a></li>
+                <li class="nav-item"><a href="{{route('contact')}}" class="nav-link">Liên hệ</a></li>
                 @if(isset($user))
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="taikhoan" data-toggle="dropdown"

@@ -270,7 +270,7 @@ class Book extends Model
             ->join('chitietphieumuon', 'chitietphieumuon.id_PhieuMuon', '=', 'phieumuon.id_PhieuMuon')
             ->join('sach', 'chitietphieumuon.id_Sach', '=', 'sach.id_Sach')
             ->leftJoin('hinhanh', 'sach.id_Sach', '=', 'hinhanh.id_Sach')
-            ->select('sach.tenSach','sach.soLuongCoSan', DB::raw('COUNT(*) as luotMuon'), 'hinhanh.duongDan')
+            ->select('sach.tenSach','sach.soLuongCoSan','chitietphieumuon.id_Sach', DB::raw('COUNT(*) as luotMuon'), 'hinhanh.duongDan')
             ->where('phieumuon.ngayMuon', '>=', $start)
             ->where('phieumuon.ngayMuon', '<=', $end)
             ->where('phieumuon.trangThaiPhieuMuon', '<>', 2)

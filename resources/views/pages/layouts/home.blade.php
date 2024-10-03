@@ -73,7 +73,9 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6">
+                <a href="{{ route('pageDetailBook', $getHotBook->id_Sach) }}">
                 <img src="{{$getHotBook->duongDan}}" class="img-fluid" alt="">
+                </a>
             </div>
             <div class="col-md-6">
                 <div class="heading-section heading-section-white">
@@ -87,7 +89,7 @@
                     <div class="time pl-4" id="seconds"></div>
                 </div>
                 <div class="text-deal">
-                    <h2><a href="#">{{$getHotBook->tenSach}}</a></h2>
+                    <h2><a href="{{ route('pageDetailBook', $getHotBook->id_Sach) }}">{{$getHotBook->tenSach}}</a></h2>
                     <p class="price"><span class="mr-2 text-dark">Lượt mượn</span><span class="price-sale">{{$getHotBook->luotMuon}}</span>
                     </p>
                 </div>
@@ -267,7 +269,7 @@
 </section>
 @endif
 
-
+<!-- hinh ảnh -->
 <section class="ftco-gallery">
     <div class="container">
         <div class="row justify-content-center">
