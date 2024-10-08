@@ -48,6 +48,9 @@ class BookController extends Controller
     }
     public function formAddBook()
     {
+        if (Auth::user()->id_VaiTro == 1) {
+            return redirect()->back()->with('error', 'Chỉ thủ thư có thể thao tác với sách');
+        }
         $languages = Language::all();
         $publishers = Publisher::all();
         $categories = Category::all();
@@ -67,7 +70,9 @@ class BookController extends Controller
     }
     public function addBook(AddBook $request)
     {
-        // dd($request->all());    
+        if (Auth::user()->id_VaiTro == 1) {
+            return redirect()->back()->with('error', 'Chỉ thủ thư có thể thao tác với sách');
+        }
         try {
             $id_NgonNgu = $request->id_NgonNgu;
             $id_NhaXuatBan = $request->id_NhaXuatBan;
@@ -177,6 +182,9 @@ class BookController extends Controller
     }
     public function formEditBook($id)
     {
+        if (Auth::user()->id_VaiTro == 1) {
+            return redirect()->back()->with('error', 'Chỉ thủ thư có thể thao tác với sách');
+        }
         $detailBook = Book::detailBook($id);
         // dd($detailBook);
         $categories = Category::getCategoryByBook($id);
@@ -203,6 +211,9 @@ class BookController extends Controller
     }
     public function editBook(AddBook $request)
     {
+        if (Auth::user()->id_VaiTro == 1) {
+            return redirect()->back()->with('error', 'Chỉ thủ thư có thể thao tác với sách');
+        }
         try {
             $id_NgonNgu = $request->id_NgonNgu;
             $id_NhaXuatBan = $request->id_NhaXuatBan;
@@ -456,7 +467,7 @@ class BookController extends Controller
             }
         }
         if (count($validBookIds) !== count($bookviewed)) {
-            cache()->put("book_views", $validBookIds, 60 * 60 * 5); 
+            cache()->put("book_views", $validBookIds, 60 * 60 * 5);
         }
         //goi y sach
         $recommendedBooks = [];
@@ -512,5 +523,106 @@ class BookController extends Controller
             $book->save();
         }
         return response()->json(['success' => true]);
+    }
+    public function searchBook(Request $request)
+    {
+        try {
+            $query = $request->input('query');
+            $id_NgonNgu = $request->ngonngu;
+            $id_NhaXuatBan = $request->nxb;
+            $id_NganhHoc = $request->nganhhoc;
+            $id_TheLoai = $request->theloai;
+            $id_ViTri = $request->vitri;
+            session()->forget('search_results');
+            $user = $request->user();
+            $limit = $request->input('limit', 10);
+            $txtError = '';
+            session()->forget('search_results');
+            if (empty($query)) {
+                return redirect()->back()->with('error', 'Bạn chưa nhập từ khóa.');
+            }
+            $results = DB::table('sach')
+                ->join('nhaxuatban', 'sach.id_NhaXuatBan', '=', 'nhaxuatban.id_NhaXuatBan')
+                ->join('hinhanh', 'sach.id_Sach', '=', 'hinhanh.id_Sach')
+                ->join('vitri', 'sach.id_ViTri', '=', 'vitri.id_ViTri')
+                ->select('sach.*', 'nhaxuatban.tenNhaXuatBan', 'vitri.tenViTri', 'hinhanh.duongDan')
+                ->whereRaw("MATCH(sach.tenSach, sach.tenTacGia, sach.ghiChu) AGAINST(? IN BOOLEAN MODE)", [$query])
+                ->orWhereRaw("MATCH(nhaxuatban.tenNhaXuatBan) AGAINST(? IN BOOLEAN MODE)", [$query])
+                ->orWhere('vitri.tenViTri', 'LIKE', '%' . $query . '%')
+                ->orderByRaw("(
+                MATCH(sach.tenSach, sach.tenTacGia, sach.ghiChu) AGAINST(? IN BOOLEAN MODE) +
+                MATCH(nhaxuatban.tenNhaXuatBan) AGAINST(? IN BOOLEAN MODE) +
+                IF(vitri.tenViTri LIKE ?, 1, 0)
+            ) DESC", [$query, $query, '%' . $query . '%'])
+                ->get();
+
+            if ($results->isEmpty()) {
+                $txtError = 'Không tìm thấy sách với từ khóa: ' . $query;
+            } else {
+                $txtError = 'Tìm thấy ' . $results->count() . ' sách với từ khóa: ' . $query;
+            }
+            session(['search_results' => $results]);
+            $getAllLanguage = [];
+            $getAllPublishers = [];
+            $getAllDiscipline = [];
+            $getCategories = [];
+            $getAllBookLocation = [];
+            if ($results) {
+                $idNgonNguArray = $results->pluck('id_NgonNgu')->unique()->toArray();
+                $getAllLanguage = Language::whereIn('id_NgonNgu', $idNgonNguArray)->orderBy('tenNgonNgu', 'asc')->get();
+
+                $idNhaXuatBanArray = $results->pluck('id_NhaXuatBan')->unique()->toArray();
+                $getAllPublishers = Publisher::whereIn('id_NhaXuatBan', $idNhaXuatBanArray)->orderBy('tenNhaXuatBan', 'asc')->get();
+
+                $bookIds = $results->pluck('id_Sach')->toArray();
+                $getAllDiscipline = Discipline::getListDisciplineByBook($bookIds);
+                $getCategories = Category::getCategoryByResult($bookIds);
+
+                $idViTriArray = $results->pluck('id_ViTri')->unique()->toArray();
+                $getAllBookLocation = BookLocation::whereIn('id_ViTri', $idViTriArray)->orderBy('tenViTri', 'asc')->get();
+
+                if (isset($id_NgonNgu)) {
+                    $results = Book::getResultSearchByLanguage($bookIds, $id_NgonNgu);
+                }
+                if (isset($id_NhaXuatBan)) {
+                    $results = Book::getResultSearchByPublisher($bookIds, $id_NhaXuatBan);
+                }
+                if (isset($id_NganhHoc)) {
+                    $results = Book::getResultSearchByDiscipline($bookIds, $id_NganhHoc);
+                }
+                if (isset($id_TheLoai)) {
+                    $results = Book::getResultSearchByCategory($bookIds, $id_TheLoai);
+                }
+                if (isset($id_ViTri)) {
+                    $results = Book::getResultSearchByLocation($bookIds, $id_ViTri);
+                }
+            }
+
+            $recommendedBooks = [];
+            if (Auth::user()) {
+                $getBorrow = Borrow::getBorrowByUser($user->id_NguoiDung);
+                $countBorrow = $getBorrow->count();
+                $recommendedBooks = [];
+                if ($countBorrow >= 1) {
+                    $recommendedBooks = $this->recommendationService->getComprehensiveRecommendations($user, $limit);
+                }
+            }
+            return view('pages.layouts.book.resultSearch', [
+                'tab' => 'Sách',
+                'title' => 'Sách theo thể loại',
+                'getBook' => $results,
+                'getAllLanguage' => $getAllLanguage,
+                'getAllPublishers' => $getAllPublishers,
+                'getAllDiscipline' => $getAllDiscipline,
+                'getCategories' => $getCategories,
+                'getAllBookLocation' => $getAllBookLocation,
+                'error' => $txtError,
+                'recommendedBooks' => $recommendedBooks,
+            ]);
+        } catch (\Exception $e) {
+            $txtError = 'Đã có lỗi xảy ra: ' . $e->getMessage();
+            dd($txtError);
+            // return view('index', compact('txtError'));
+        }
     }
 }

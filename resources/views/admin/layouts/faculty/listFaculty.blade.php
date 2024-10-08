@@ -13,14 +13,7 @@
                             </div>
                             <div class="dt-action-buttons text-end">
                                 <div class="dt-buttons d-inline-flex">
-                                    <button
-                                        class="dt-button buttons-collection btn btn-outline-secondary dropdown-toggle me-2"
-                                        tabindex="0" aria-controls="DataTables_Table_0" type="button"
-                                        aria-haspopup="true">
-                                        <span>
-                                            <i data-feather='upload' class="me-1"></i>Export
-                                        </span>
-                                    </button>
+                                    
                                     <button class="dt-button create-new btn btn-primary" tabindex="0"
                                         aria-controls="DataTables_Table_0" type="button" data-bs-toggle="modal"
                                         data-bs-target="#modals-slide-in">
@@ -31,7 +24,7 @@
                                 </div>
                             </div>
                         </div>
-                        <table class="datatables-basic table table-hover" id="table">
+                        <table class="datatables-basic table-striped table table-hover" id="table">
                             <thead>
                                 <tr>
                                     <th>ID</th>
@@ -153,13 +146,13 @@
                     @csrf
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">×</button>
                     <div class="modal-header mb-1">
-                        <h5 class="modal-title" id="exampleModalLabel">Sửa khóa </h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Sửa Khoa </h5>
                     </div>
                     <div class="modal-body flex-grow-1">
                         <input type="hidden" id="edit-id" name="id_Khoa">
 
                         <div class="mb-1">
-                            <label class="form-label" for="tenKhoaHoc">Tên khóa </label>
+                            <label class="form-label" for="tenKhoaHoc">Tên Khoa </label>
                             <input type="text" class="form-control" id="tenKhoa1" name="tenKhoa1">
                         </div>
                         <button type="submit" class="btn btn-primary data-submit me-1">Cập nhật</button>

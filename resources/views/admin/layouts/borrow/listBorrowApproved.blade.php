@@ -13,21 +13,7 @@
                             </div>
                             <div class="dt-action-buttons text-end">
                                 <div class="dt-buttons d-inline-flex">
-                                    <button
-                                        class="dt-button buttons-collection btn btn-outline-secondary dropdown-toggle me-2"
-                                        tabindex="0" aria-controls="DataTables_Table_0" type="button"
-                                        aria-haspopup="true">
-                                        <span>
-                                            <i data-feather='upload' class="me-1"></i>Export
-                                        </span>
-                                    </button>
-                                    <!-- <button class="dt-button create-new btn btn-primary" tabindex="0"
-                                        aria-controls="DataTables_Table_0" type="button" data-bs-toggle="modal"
-                                        data-bs-target="#modals-slide-in">
-                                        <span>
-                                            <i data-feather='plus' class="me-1"></i>Thêm
-                                        </span>
-                                    </button> -->
+                               
                                 </div>
                             </div>
                         </div>

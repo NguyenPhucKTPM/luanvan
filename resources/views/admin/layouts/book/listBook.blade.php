@@ -13,20 +13,14 @@
                             </div>
                             <div class="dt-action-buttons text-end">
                                 <div class="dt-buttons d-inline-flex">
-                                    <button
-                                        class="dt-button buttons-collection btn btn-outline-secondary dropdown-toggle me-2"
-                                        tabindex="0" aria-controls="DataTables_Table_0" type="button"
-                                        aria-haspopup="true">
-                                        <span>
-                                            <i data-feather='upload' class="me-1"></i>Export
-                                        </span>
-                                    </button>
+                                    @if($user->id_VaiTro == 2)
                                     <button class="dt-button create-new btn btn-primary" tabindex="0"
                                         aria-controls="DataTables_Table_0" type="button">
                                         <span>
                                             <i data-feather='plus' class="me-1"></i><a class="text-light" href="{{route('formAddBook')}}">Thêm</a>
                                         </span>
                                     </button>
+                                    @endif
                                 </div>
                             </div>
                         </div>

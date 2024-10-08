@@ -57,18 +57,20 @@
 									<input type="hidden" name="soLuong" value="1">
 									<input type="hidden" name="id_Sach" value="{{ \Illuminate\Support\Facades\Crypt::encryptString($data->id_Sach) }}">
 									<p class="bottom-area d-flex px-3">
-										@if(isset($user))
-										<a href="javascript:void(0)" class="add-to-cart text-center py-2 mr-1" onclick="document.getElementById('cart-form-{{ $data->id_Sach }}').submit();">
-											<span>Thêm vào giỏ
-												<i class="ion-ios-add ml-1"></i>
-											</span>
-										</a>
-										@endif
-										<a href="{{ route('pageDetailBook', $data->id_Sach) }}" class="buy-now text-center py-2">Chi tiết
-											<span>
-												<i class="far fa-eye ml-1"></i>
-											</span>
-										</a>
+										@if(isset($user) && $user->soViPham < 3)
+											@if($user->trangThaiMuonSach < 1)
+												<a href="javascript:void(0)" class="add-to-cart text-center py-2 mr-1" onclick="document.getElementById('cart-form-{{ $data->id_Sach }}').submit();">
+												<span>Thêm vào giỏ
+													<i class="ion-ios-add ml-1"></i>
+												</span>
+												</a>
+												@endif
+												@endif
+												<a href="{{ route('pageDetailBook', $data->id_Sach) }}" class="buy-now text-center py-2">Chi tiết
+													<span>
+														<i class="far fa-eye ml-1"></i>
+													</span>
+												</a>
 									</p>
 								</form>
 							</div>
@@ -233,18 +235,20 @@
 											<input type="hidden" name="soLuong" value="1">
 											<input type="hidden" name="id_Sach" value="{{ \Illuminate\Support\Facades\Crypt::encryptString($data->id_Sach) }}">
 											<p class="bottom-area d-flex px-3">
-												@if(isset($user))
-												<a href="javascript:void(0)" class="add-to-cart text-center py-2 mr-1" onclick="document.getElementById('cart-form-{{ $data->id_Sach }}').submit();">
-													<span>Thêm vào giỏ
-														<i class="ion-ios-add ml-1"></i>
-													</span>
-												</a>
-												@endif
-												<a href="{{ route('pageDetailBook', $data->id_Sach) }}" class="buy-now text-center py-2">Chi tiết
-													<span>
-														<i class="far fa-eye ml-1"></i>
-													</span>
-												</a>
+												@if(isset($user) && $user->soViPham < 3)
+													@if($user->trangThaiMuonSach < 1)
+														<a href="javascript:void(0)" class="add-to-cart text-center py-2 mr-1" onclick="document.getElementById('cart-form-{{ $data->id_Sach }}').submit();">
+														<span>Thêm vào giỏ
+															<i class="ion-ios-add ml-1"></i>
+														</span>
+														</a>
+														@endif
+														@endif
+														<a href="{{ route('pageDetailBook', $data->id_Sach) }}" class="buy-now text-center py-2">Chi tiết
+															<span>
+																<i class="far fa-eye ml-1"></i>
+															</span>
+														</a>
 											</p>
 										</form>
 									</div>
@@ -312,18 +316,20 @@
 											<input type="hidden" name="soLuong" value="1">
 											<input type="hidden" name="id_Sach" value="{{ \Illuminate\Support\Facades\Crypt::encryptString($data->id_Sach) }}">
 											<p class="bottom-area d-flex px-3">
-												@if(isset($user))
-												<a href="javascript:void(0)" class="add-to-cart text-center py-2 mr-1" onclick="document.getElementById('cart-form-{{ $data->id_Sach }}').submit();">
-													<span>Thêm vào giỏ
-														<i class="ion-ios-add ml-1"></i>
-													</span>
-												</a>
-												@endif
-												<a href="{{ route('pageDetailBook', $data->id_Sach) }}" class="buy-now text-center py-2">Chi tiết
-													<span>
-														<i class="far fa-eye ml-1"></i>
-													</span>
-												</a>
+												@if(isset($user) && $user->soViPham < 3)
+													@if($user->trangThaiMuonSach < 1)
+														<a href="javascript:void(0)" class="add-to-cart text-center py-2 mr-1" onclick="document.getElementById('cart-form-{{ $data->id_Sach }}').submit();">
+														<span>Thêm vào giỏ
+															<i class="ion-ios-add ml-1"></i>
+														</span>
+														</a>
+														@endif
+														@endif
+														<a href="{{ route('pageDetailBook', $data->id_Sach) }}" class="buy-now text-center py-2">Chi tiết
+															<span>
+																<i class="far fa-eye ml-1"></i>
+															</span>
+														</a>
 											</p>
 										</form>
 									</div>

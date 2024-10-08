@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="{{asset('pages/css/magnific-popup.css')}}">
 
     <link rel="stylesheet" href="{{asset('pages/css/aos.css')}}">
+    <link rel="stylesheet" href="{{asset('pages/css/viewChat.css')}}">
 
     <link rel="stylesheet" href="{{asset('pages/css/ionicons.min.css')}}">
 
@@ -37,6 +38,7 @@
     <link rel="stylesheet" href="{{asset('pages/css/swiper.css')}}">
     <link rel="stylesheet" href="{{asset('pages/css/search.css')}}">
     <link rel="stylesheet" href="{{asset('pages/css/infoUser.css')}}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
 
 
 
@@ -57,8 +59,10 @@
 
     @include('pages.header')
 
-    @yield('content', View::make('pages.layouts.home'))
+    @include('pages.layouts.chatBox')
 
+    @yield('content', View::make('pages.layouts.home'))
+    
     @include('pages.footer')
 
     <!-- loader -->
@@ -82,7 +86,7 @@
     <script src="{{asset('pages/js/jquery.animateNumber.min.js')}}"></script>
     <script src="{{asset('pages/js/bootstrap-datepicker.js')}}"></script>
     <script src="{{asset('pages/js/scrollax.min.js')}}"></script>
-  
+    <script src="{{asset('pages/js/viewChat.js')}}"></script>
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false">
     </script>

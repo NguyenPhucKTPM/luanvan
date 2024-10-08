@@ -47,4 +47,14 @@ class Category extends Model
             ->where('chitiettheloai.id_Sach', $id)
             ->get();
     }
+    public static function getCategoryByResult($bookIds)
+    {
+        return DB::table('theloai')
+            ->join('chitiettheloai', 'chitiettheloai.id_TheLoai', '=', 'theloai.id_TheLoai')
+            ->whereIn('chitiettheloai.id_Sach', $bookIds)
+            ->select('theloai.*')
+            ->distinct()
+            ->orderBy('tenTheLoai', 'asc')
+            ->get();
+    }
 }

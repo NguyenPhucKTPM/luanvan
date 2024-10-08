@@ -64,7 +64,7 @@
                                                 <i data-feather='book'></i>
                                             </div>
                                             <div class="ms-1">
-                                                <h5 class="mb-0">0</h5>
+                                                <h5 class="mb-0">{{$userDetail -> soLanMuonSach}}</h5>
                                                 <small>Số lần mượn</small>
                                             </div>
                                         </div>

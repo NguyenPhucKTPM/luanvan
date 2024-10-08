@@ -27,9 +27,14 @@ class BorrowBookController extends Controller
     public function formCheckout()
     {
         $myCart = Cart::getAllCartByUser(Auth::user()->id_NguoiDung);
-        // dd($myCart);
         if (empty($myCart) || count($myCart) === 0) {
-            return redirect()->back();
+            return redirect()->back()->with('error', 'Giỏ hàng rỗng không thể tiến hành mượn.');
+        }
+        if (Auth::user()->soViPham >= 3) {
+            return redirect()->back()->with('error', 'Bạn vi phạm sách nhiều lần nên không thể mượn.');
+        }
+        if (Auth::user()->trangThaiMuonSach == 1) {
+            return redirect()->back()->with('error', 'Bạn đang mượn sách không thể mượn thêm.');
         }
         $totalPrice = 0;
         foreach ($myCart as $data) {
@@ -44,7 +49,12 @@ class BorrowBookController extends Controller
     }
     public function borrowBook(Request $request)
     {
-        // dd($request->all());
+        if (Auth::user()->soViPham >= 3) {
+            return redirect()->back()->with('error', 'Bạn vi phạm sách nhiều lần nên không thể mượn.');
+        }
+        if (Auth::user()->trangThaiMuonSach == 1) {
+            return redirect()->back()->with('error', 'Bạn đang mượn sách không thể mượn thêm.');
+        }
         $request->validate([
             'diaChi' => 'required|string|max:255',
             'methodBorrow' => 'required|in:remote,school',
@@ -395,7 +405,9 @@ class BorrowBookController extends Controller
     {
         $id_NguoiDung = Auth::user()->id_NguoiDung;
         $getBorrow = Borrow::getBorrowByUser($id_NguoiDung);
-        if(!$getBorrow){ return redirect()->back()->with('error', 'Chưa có phiếu mượn nào');}
+        if (!$getBorrow) {
+            return redirect()->back()->with('error', 'Chưa có phiếu mượn nào');
+        }
         foreach ($getBorrow as $data) {
 
             $statuses = [
@@ -420,11 +432,14 @@ class BorrowBookController extends Controller
             'getBorrow' => $getBorrow,
         ]);
     }
-    public function borrowReturnByUser(){
+    public function borrowReturnByUser()
+    {
         $id_NguoiDung = Auth::user()->id_NguoiDung;
         $getBorrow = Borrow::getReturnBorrowByUser($id_NguoiDung);
         // dd($getBorrow);
-        if(!$getBorrow){ return redirect()->back()->with('error', 'Chưa có phiếu mượn nào');}
+        if (!$getBorrow) {
+            return redirect()->back()->with('error', 'Chưa có phiếu mượn nào');
+        }
         foreach ($getBorrow as $data) {
 
             $statuses = [
@@ -442,7 +457,7 @@ class BorrowBookController extends Controller
             foreach ($data->details as $categories) {
                 $categories->category = Category::getCategoryByBook($categories->id_Sach);
             }
-            $data->mistakes = Mistake::getMistake($data -> id_PhieuTra);
+            $data->mistakes = Mistake::getMistake($data->id_PhieuTra);
         }
         return view('pages.layouts.borrow.listReturnBorrowByUser', [
             'tab' => 'Phiếu trả',

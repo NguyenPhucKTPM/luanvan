@@ -6,12 +6,12 @@
                     <div class="col-md pr-4 d-flex topper align-items-center">
                         <div class="icon mr-2 d-flex justify-content-center align-items-center"><span
                                 class="fas fa-phone"></span></div>
-                        <span class="text">+ 1235 2355 98</span>
+                        <span class="text">0852 34 8684</span>
                     </div>
                     <div class="col-md pr-4 d-flex topper align-items-center">
                         <div class="icon mr-2 d-flex justify-content-center align-items-center"><span
                                 class="fas fa-paper-plane"></span></div>
-                        <span class="text">youremail@email.com</span>
+                        <span class="text">htnha2000231@student.ctuet.edu.vn</span>
                     </div>
                     <div class="col-md-5 pr-4 d-flex topper align-items-center text-lg-right">
                         <span class="text">Tất Cả Vì Sinh Viên Thân Yêu</span>
@@ -38,7 +38,7 @@
                 </li>
                 <li class="nav-item"><a href="{{route('pageCategory')}}" class="nav-link">Thể loại</a></li>
                 <li class="nav-item"><a href="{{route('introduce')}}" class="nav-link">Giới thiệu</a></li>
-                <li class="nav-item"><a href="blog.html" class="nav-link">Quy định</a></li>
+                <!-- <li class="nav-item"><a href="blog.html" class="nav-link">Quy định</a></li> -->
                 <li class="nav-item"><a href="{{route('contact')}}" class="nav-link">Liên hệ</a></li>
                 @if(isset($user))
                 <li class="nav-item dropdown">
@@ -58,7 +58,7 @@
                         <a class="dropdown-item" href="{{route('borrowReturnByUser')}}">Phiếu trả</a>        
                     </div>
                 </li>
-                <li class="nav-item cta cta-colored"><a href="{{route('showCart')}}" class="nav-link"><span
+                <li class="nav-item cta cta-colored mr-4"><a href="{{route('showCart')}}" class="nav-link"><span
                 class="icon-shopping_cart" style="color: #0e4582;"></span>[{{$sumCart}}]</a></li>
                 @else
                 <li class="nav-item dropdown">
@@ -78,13 +78,13 @@
         </div>
 
         <div class="collapse navbar-collapse" id="ftco-nav">
-            <div class="action-menu ml-4">
+            <div class="action-menu">
                 <div class="search-bar" id="search-bar">
                     <a href="#" class="search-button search-toggle" data-selector="#header-wrap">
                         <i class="fas fa-search"></i>
                     </a>
-                    <form role="search" method="get" class="search-box">
-                        <input class="search-field text search-input" placeholder="Search" type="search">
+                    <form role="search" method="GET" action="{{route('searchBook')}}" id="search-form">
+                        <input class="search-field text search-input" style="color: white;" name="query"  placeholder="Search" type="text">
                     </form>
                 </div>
             </div>

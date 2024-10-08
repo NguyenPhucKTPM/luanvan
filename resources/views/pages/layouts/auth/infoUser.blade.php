@@ -49,7 +49,7 @@
                                 <i class="fas fa-exclamation" style="color: red;"></i>
                             </div>
                             <div class="ml-3">
-                                <h5 class="mb-0" style="line-height: 0.5;color: red;">0</h5>
+                                <h5 class="mb-0" style="line-height: 0.5;color: red;">{{$userInfo -> soViPham}}</h5>
                                 <small>Số vi phạm</small>
                             </div>
                         </div>

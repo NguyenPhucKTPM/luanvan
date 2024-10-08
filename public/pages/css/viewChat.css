@@ -1,0 +1,128 @@
+#chatButton {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #fff;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+#chatButton img {
+    width: 40px;
+    height: 40px;
+}
+
+#chatBox {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    width: 320px;
+    height: 450px;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 1001;
+}
+
+.chat-header {
+    background-color: #009ef7;
+    color: white;
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chat-header h5 {
+    margin: 0;
+    font-size: 16px;
+}
+
+.chat-body {
+    flex-grow: 1;
+    padding: 10px;
+    overflow-y: auto;
+}
+
+.chat-footer {
+    padding: 10px;
+    border-top: 1px solid #e9ecef;
+    display: flex;
+    align-items: center;
+}
+
+.chat-footer input {
+    flex-grow: 1;
+    border: none;
+    outline: none;
+    padding: 5px;
+}
+
+.chat-footer .send-button {
+    background: none;
+    border: none;
+    color: #009ef7;
+    font-size: 20px;
+    cursor: pointer;
+    display: none;
+    outline: none;
+}
+
+.chat-footer .emoji-button {
+    background: none;
+    border: none;
+    color: #6c757d;
+    font-size: 20px;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.logo {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+}
+
+.message {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: flex-start;
+}
+
+.message.bot {
+    justify-content: flex-start; /* Bot ở bên trái */
+}
+
+.message.user {
+    justify-content: flex-end; /* Người dùng ở bên phải */
+}
+
+.message img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.message-content {
+    background-color: #f1f0f0; /* Màu nền cho tin nhắn bot */
+    padding: 8px 12px;
+    border-radius: 18px;
+    max-width: 70%;
+}
+
+.message.user .message-content {
+    background-color: #009ef7; /* Màu nền cho tin nhắn người dùng */
+    color: white; /* Màu chữ cho tin nhắn người dùng */
+}

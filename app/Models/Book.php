@@ -278,5 +278,104 @@ class Book extends Model
             ->orderBy('luotMuon', 'DESC')
             ->first();
     }
+
+    public static function getResultSearchByLanguage($id, $id_NgonNgu)
+    {
+        return DB::table('sach')
+            ->join('chitiettheloai', 'chitiettheloai.id_Sach', '=', 'sach.id_Sach')
+            ->join('hinhanh', 'hinhanh.id_Sach', '=', 'sach.id_Sach')
+            ->join('vitri', 'sach.id_ViTri', '=', 'vitri.id_ViTri')
+            ->join('nhaxuatban', 'sach.id_NhaXuatBan', '=', 'nhaxuatban.id_NhaXuatBan')
+            ->join('ngonngu', 'ngonngu.id_NgonNgu', '=', 'sach.id_NgonNgu')
+            ->whereIn('sach.id_Sach', $id)
+            ->where('sach.id_NgonNgu', $id_NgonNgu)
+            ->distinct()
+            ->orderBy('sach.id_Sach', 'desc')
+            ->select(
+                'sach.*',
+                'hinhanh.duongDan',
+                'nhaxuatban.tenNhaXuatBan',
+                'vitri.tenViTri',
+            )
+            ->get();
+    }
+    public static function getResultSearchByPublisher($id, $id_NhaXuatBan)
+    {
+        return DB::table('sach')
+            ->join('chitiettheloai', 'chitiettheloai.id_Sach', '=', 'sach.id_Sach')
+            ->join('hinhanh', 'hinhanh.id_Sach', '=', 'sach.id_Sach')
+            ->join('vitri', 'sach.id_ViTri', '=', 'vitri.id_ViTri')
+            ->join('nhaxuatban', 'sach.id_NhaXuatBan', '=', 'nhaxuatban.id_NhaXuatBan')
+            ->whereIn('sach.id_Sach', $id)
+            ->where('nhaxuatban.id_NhaXuatBan', $id_NhaXuatBan)
+            ->distinct()
+            ->orderBy('sach.id_Sach', 'desc')
+            ->select(
+                'sach.*',
+                'hinhanh.duongDan',
+                'nhaxuatban.tenNhaXuatBan',
+                'vitri.tenViTri',
+            )
+            ->get();
+    }
+    public static function getResultSearchByDiscipline($id, $id_NganhHoc)
+    {
+        return DB::table('sach')
+            ->join('chitiettheloai', 'chitiettheloai.id_Sach', '=', 'sach.id_Sach')
+            ->join('hinhanh', 'hinhanh.id_Sach', '=', 'sach.id_Sach')
+            ->join('vitri', 'sach.id_ViTri', '=', 'vitri.id_ViTri')
+            ->join('nhaxuatban', 'sach.id_NhaXuatBan', '=', 'nhaxuatban.id_NhaXuatBan')
+            ->join('chitietnganhhoc', 'sach.id_Sach', '=', 'chitietnganhhoc.id_Sach')
+            ->join('nganhhoc', 'nganhhoc.id_NganhHoc', '=', 'chitietnganhhoc.id_NganhHoc')
+            ->whereIn('sach.id_Sach', $id)
+            ->where('nganhhoc.id_NganhHoc', $id_NganhHoc)
+            ->distinct()
+            ->orderBy('sach.id_Sach', 'desc')
+            ->select(
+                'sach.*',
+                'hinhanh.duongDan',
+                'nhaxuatban.tenNhaXuatBan',
+                'vitri.tenViTri',
+            )
+            ->get();
+    }
+    public static function getResultSearchByCategory($id, $id_TheLoai)
+    {
+        return DB::table('sach')
+            ->join('hinhanh', 'hinhanh.id_Sach', '=', 'sach.id_Sach')
+            ->join('vitri', 'sach.id_ViTri', '=', 'vitri.id_ViTri')
+            ->join('nhaxuatban', 'sach.id_NhaXuatBan', '=', 'nhaxuatban.id_NhaXuatBan')
+            ->join('chitiettheloai', 'sach.id_Sach', '=', 'chitiettheloai.id_Sach')
+            ->join('theloai', 'theloai.id_TheLoai', '=', 'chitiettheloai.id_TheLoai')
+            ->whereIn('sach.id_Sach', $id)
+            ->where('theloai.id_TheLoai', $id_TheLoai)
+            ->distinct()
+            ->orderBy('sach.id_Sach', 'desc')
+            ->select(
+                'sach.*',
+                'hinhanh.duongDan',
+                'nhaxuatban.tenNhaXuatBan',
+                'vitri.tenViTri',
+            )
+            ->get();
+    }
+    public static function getResultSearchByLocation($id, $id_ViTri)
+    {
+        return DB::table('sach')
+            ->join('hinhanh', 'hinhanh.id_Sach', '=', 'sach.id_Sach')
+            ->join('vitri', 'sach.id_ViTri', '=', 'vitri.id_ViTri')
+            ->join('nhaxuatban', 'sach.id_NhaXuatBan', '=', 'nhaxuatban.id_NhaXuatBan')
+            ->whereIn('sach.id_Sach', $id)
+            ->where('vitri.id_ViTri', $id_ViTri)
+            ->distinct()
+            ->orderBy('sach.id_Sach', 'desc')
+            ->select(
+                'sach.*',
+                'hinhanh.duongDan',
+                'nhaxuatban.tenNhaXuatBan',
+                'vitri.tenViTri',
+            )
+            ->get();
+    }
     
 }

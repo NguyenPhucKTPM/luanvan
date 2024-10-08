@@ -31,7 +31,7 @@
                                 </div>
                             </div> -->
                         </div>
-                        <table class="datatables-basic table table-hover" id="table">
+                        <table class="datatables-basic table-striped table table-hover" id="table">
                             <thead>
                                 <tr>
                                     <th>Tên Người Dùng</th>
@@ -64,7 +64,7 @@
                                                 style="padding-left: 0px;">
                                                 {{$data -> tenVaiTro}}
                                             </button>
-                                            @if($data -> id_VaiTro > 1 && $data -> id_VaiTro < 4 )
+                                            @if($data -> id_VaiTro > 1 && $data -> id_VaiTro < 4 && $user->id_VaiTro == 1 )
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton300">                                                                                            
                                                 <a
                                                     class="dropdown-item"

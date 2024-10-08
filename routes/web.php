@@ -22,6 +22,7 @@ use App\Http\Controllers\Backend\DiaryController;
 use App\Http\Controllers\Backend\HomeController;
 use App\Http\Controllers\Backend\ContactController;
 use App\Http\Controllers\Backend\IntroduceController;
+use App\Http\Controllers\Backend\ChatController;
 
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
@@ -71,27 +72,26 @@ Route::middleware(['checkLogin'])->group(function () {
     Route::get('/thong-ke1', [DashboardController::class, 'getBorrowByType'])->middleware('role:1,2')->name('getBorrowByType');
     Route::get('/thong-ke2', [DashboardController::class, 'getBorrowByStatus'])->middleware('role:1,2')->name('getBorrowByStatus');
 
-    Route::get('/aa', [DashboardController::class, 'a'])->middleware('role:1,2')->name('dashboar1d');
-    Route::get('/danh-sach-nguoi-dung', [UserController::class, 'listUser'])->middleware('role:1')->name('listUser');
+    Route::get('/danh-sach-nguoi-dung', [UserController::class, 'listUser'])->middleware('role:1,2')->name('listUser');
 
-    Route::get('/cap-nhat-trang-thai/{id}/{status}', [UserController::class, 'updateStatus'])->middleware('role:1')->name('updataStatus');
+    Route::get('/cap-nhat-trang-thai/{id}/{status}', [UserController::class, 'updateStatus'])->middleware('role:1,2')->name('updataStatus');
     Route::get('/thay-doi-vai-tro/{id}/{role}', [UserController::class, 'changeRole'])->middleware('role:1')->name('changeRole');
-    Route::get('/chi-tiet-thong-tin-nguoi-dung/{id}', [UserController::class, 'detailUser'])->middleware('role:1')->name('detailUser');
+    Route::get('/chi-tiet-thong-tin-nguoi-dung/{id}', [UserController::class, 'detailUser'])->middleware('role:1,2')->name('detailUser');
 
-    Route::get('/danh-sach-khoa-hoc', [CourseController::class, 'listCourse'])->middleware('role:1')->name('listCourse');
-    Route::post('/them-khoa-hoc', [CourseController::class, 'addCourse'])->middleware('role:1')->name('addCourse');
-    Route::post('/sua-khoa-hoc', [CourseController::class, 'editCourse'])->middleware('role:1')->name('editCourse');
-    Route::delete('/xoa-khoa-hoc/{id}', [CourseController::class, 'deleteCourse'])->middleware('role:1')->name('deleteCourse');
+    Route::get('/danh-sach-khoa-hoc', [CourseController::class, 'listCourse'])->middleware('role:1,2')->name('listCourse');
+    Route::post('/them-khoa-hoc', [CourseController::class, 'addCourse'])->middleware('role:1,2')->name('addCourse');
+    Route::post('/sua-khoa-hoc', [CourseController::class, 'editCourse'])->middleware('role:1,2')->name('editCourse');
+    Route::delete('/xoa-khoa-hoc/{id}', [CourseController::class, 'deleteCourse'])->middleware('role:1,2')->name('deleteCourse');
 
-    Route::get('/danh-sach-khoa', [FacultyController::class, 'listFaculty'])->middleware('role:1')->name('listFaculty');
-    Route::post('/them-khoa', [FacultyController::class, 'addFaculty'])->middleware('role:1')->name('addFaculty');
-    Route::post('/sua-khoa', [FacultyController::class, 'editFaculty'])->middleware('role:1')->name('editFaculty');
-    Route::delete('/xoa-khoa/{id}', [FacultyController::class, 'deleteFaculty'])->middleware('role:1')->name('deleteFaculty');
+    Route::get('/danh-sach-khoa', [FacultyController::class, 'listFaculty'])->middleware('role:1,2')->name('listFaculty');
+    Route::post('/them-khoa', [FacultyController::class, 'addFaculty'])->middleware('role:1,2')->name('addFaculty');
+    Route::post('/sua-khoa', [FacultyController::class, 'editFaculty'])->middleware('role:1,2')->name('editFaculty');
+    Route::delete('/xoa-khoa/{id}', [FacultyController::class, 'deleteFaculty'])->middleware('role:1,2')->name('deleteFaculty');
 
-    Route::get('/danh-sach-lop', [ClassRoomController::class, 'listClassRoom'])->middleware('role:1')->name('listClassRoom');
-    Route::post('/them-lop', [ClassRoomController::class, 'addClassRoom'])->middleware('role:1')->name('addClassRoom');
-    Route::post('/sua-lop', [ClassRoomController::class, 'editClassRoom'])->middleware('role:1')->name('editClassRoom');
-    Route::delete('/xoa-lop/{id}', [ClassRoomController::class, 'deleteClassRoom'])->middleware('role:1')->name('deleteClassRoom');
+    Route::get('/danh-sach-lop', [ClassRoomController::class, 'listClassRoom'])->middleware('role:1,2')->name('listClassRoom');
+    Route::post('/them-lop', [ClassRoomController::class, 'addClassRoom'])->middleware('role:1,2')->name('addClassRoom');
+    Route::post('/sua-lop', [ClassRoomController::class, 'editClassRoom'])->middleware('role:1,2')->name('editClassRoom');
+    Route::delete('/xoa-lop/{id}', [ClassRoomController::class, 'deleteClassRoom'])->middleware('role:1,2')->name('deleteClassRoom');
 
     Route::get('/chi-tiet-thong-tin', [UserController::class, 'myInfoSessionUser'])->name('thong-tin');
 
@@ -133,7 +133,7 @@ Route::middleware(['checkLogin'])->group(function () {
     Route::post('/cap-nhat-sach', [BookController::class, 'editBook'])->middleware('role:1,2')->name('editBook');
 
     //nhat ki muon cua thu thu
-    Route::get('/danh-sach-hoat-dong', [DiaryController::class, 'listDiary'])->middleware('role:1')->name('listDiary');
+    Route::get('/danh-sach-hoat-dong', [DiaryController::class, 'listDiary'])->middleware('role:1,2')->name('listDiary');
 
     //duyet phieu muon
     Route::get('/danh-sach-phieu-muon-cho-duyet', [BorrowBookController::class, 'listBorrowPending'])->middleware('role:1,2')->name('listBorrowPending');
@@ -185,6 +185,11 @@ Route::post('/luot-doc-sach/{id}', [BookController::class, 'readBook'])->name('r
 Route::get('/the-loai', [CategoryController::class, 'pageCategory'])->name('pageCategory');
 Route::get('/lien-he', [ContactController::class, 'index'])->name('contact');
 Route::get('/gioi-thieu', [IntroduceController::class, 'index'])->name('introduce');
+
+Route::get('/tim-kiem', [BookController::class, 'searchBook'])->name('searchBook');
+
+
+Route::post('/chat', [ChatController::class, 'handleRequest'])->name('handleRequest');
 
 Route::get('/dang-xuat', [AuthController::class, 'logout'])->name('dang-xuat');
 

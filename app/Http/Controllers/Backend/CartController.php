@@ -17,6 +17,17 @@ class CartController extends Controller
 
     public function showCart()
     {
+        $myCart = Cart::getAllCartByUser(Auth::user()->id_NguoiDung);
+        // dd($myCart);
+        if (empty($myCart) || count($myCart) === 0) {
+            return redirect()->back()->with('error','Giỏ hàng rỗng không thể xem.');
+        }
+        if(Auth::user()->soViPham >= 3){
+            return redirect()->back()->with('error','Bạn vi phạm sách nhiều lần nên không thể mượn.');
+        }
+        if(Auth::user()->trangThaiMuonSach == 1){
+            return redirect()->back()->with('error','Bạn đang mượn sách không thể mượn thêm.');
+        }
         $id_NguoiDung = Auth::user()->id_NguoiDung;
         $carts = Cart::getAllCartByUser($id_NguoiDung);
         return view('pages.layouts.cart.listCart', [

@@ -2608,7 +2608,7 @@ footer.footer-border {
   width: 1.5rem; }
 
 .customizer .customizer-toggle {
-  background: #7367f0;
+  background: #0e4582 ;
   color: #fff !important;
   display: block;
   box-shadow: -3px 0px 8px rgba(34, 41, 47, 0.1);
@@ -3190,7 +3190,7 @@ div.dataTables_wrapper div.dataTables_length label {
 
 div.dataTables_wrapper div.dataTables_filter select,
 div.dataTables_wrapper div.dataTables_length select {
-  background-position: calc(100% - 3px) 11px, calc(100% - 20px) 13px, 100% 0;
+  background-position: calc(100% - 3px) 6px, calc(100% - 20px) 13px, 100% 0;
   width: 5rem;
   margin: 0 0.5rem; }
 

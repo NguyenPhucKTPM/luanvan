@@ -74,13 +74,13 @@
         <div class="row">
             <div class="col-md-6">
                 <a href="{{ route('pageDetailBook', $getHotBook->id_Sach) }}">
-                <img src="{{$getHotBook->duongDan}}" class="img-fluid" alt="">
+                    <img src="{{$getHotBook->duongDan}}" class="img-fluid" alt="">
                 </a>
             </div>
             <div class="col-md-6">
                 <div class="heading-section heading-section-white">
-                    <span class="subheading">Lượt mượn cao nhất trong tháng</span>
-                    <h2 class="mb-3">Lượt mượn cao nhất trong tháng</h2>
+                    <span class="subheading">Lượt mượn cao nhất trong tháng {{ date('m/Y') }} </span>
+                    <h2 class="mb-3">Lượt mượn cao nhất trong tháng {{ date('m/Y') }} </h2>
                 </div>
                 <div id="timer" class="d-flex mb-4">
                     <div class="time pl-4" id="days"></div>
@@ -163,18 +163,20 @@
                             <input type="hidden" name="soLuong" value="1">
                             <input type="hidden" name="id_Sach" value="{{ \Illuminate\Support\Facades\Crypt::encryptString($data->id_Sach) }}">
                             <p class="bottom-area d-flex px-3">
-                                @if(isset($user))
-                                <a href="javascript:void(0)" class="add-to-cart text-center py-2 mr-1" onclick="document.getElementById('cart-form-{{ $data->id_Sach }}').submit();">
-                                    <span>Thêm vào giỏ
-                                        <i class="ion-ios-add ml-1"></i>
-                                    </span>
-                                </a>
-                                @endif
-                                <a href="{{ route('pageDetailBook', $data->id_Sach) }}" class="buy-now text-center py-2">Chi tiết
-                                    <span>
-                                        <i class="far fa-eye ml-1"></i>
-                                    </span>
-                                </a>
+                                @if(isset($user) && $user->soViPham < 3)
+                                    @if($user->trangThaiMuonSach < 1)
+                                        <a href="javascript:void(0)" class="add-to-cart text-center py-2 mr-1" onclick="document.getElementById('cart-form-{{ $data->id_Sach }}').submit();">
+                                        <span>Thêm vào giỏ
+                                            <i class="ion-ios-add ml-1"></i>
+                                        </span>
+                                        </a>
+                                        @endif
+                                        @endif
+                                        <a href="{{ route('pageDetailBook', $data->id_Sach) }}" class="buy-now text-center py-2">Chi tiết
+                                            <span>
+                                                <i class="far fa-eye ml-1"></i>
+                                            </span>
+                                        </a>
                             </p>
                         </form>
                     </div>
@@ -186,7 +188,7 @@
 </section>
 
 <!-- goi y sach phu hop -->
- @if(isset($user))
+@if(isset($user))
 <section class="ftco-section bg-light">
     <div class="container">
         <div class="row justify-content-center mb-3 pb-3">
@@ -246,18 +248,20 @@
                             <input type="hidden" name="soLuong" value="1">
                             <input type="hidden" name="id_Sach" value="{{ \Illuminate\Support\Facades\Crypt::encryptString($data->id_Sach) }}">
                             <p class="bottom-area d-flex px-3">
-                                @if(isset($user))
-                                <a href="javascript:void(0)" class="add-to-cart text-center py-2 mr-1" onclick="document.getElementById('cart-form-{{ $data->id_Sach }}').submit();">
-                                    <span>Thêm vào giỏ
-                                        <i class="ion-ios-add ml-1"></i>
-                                    </span>
-                                </a>
-                                @endif
-                                <a href="{{ route('pageDetailBook', $data->id_Sach) }}" class="buy-now text-center py-2">Chi tiết
-                                    <span>
-                                        <i class="far fa-eye ml-1"></i>
-                                    </span>
-                                </a>
+                                @if(isset($user) && $user->soViPham < 3)
+                                    @if($user->trangThaiMuonSach < 1)
+                                        <a href="javascript:void(0)" class="add-to-cart text-center py-2 mr-1" onclick="document.getElementById('cart-form-{{ $data->id_Sach }}').submit();">
+                                        <span>Thêm vào giỏ
+                                            <i class="ion-ios-add ml-1"></i>
+                                        </span>
+                                        </a>
+                                        @endif
+                                        @endif
+                                        <a href="{{ route('pageDetailBook', $data->id_Sach) }}" class="buy-now text-center py-2">Chi tiết
+                                            <span>
+                                                <i class="far fa-eye ml-1"></i>
+                                            </span>
+                                        </a>
                             </p>
                         </form>
                     </div>

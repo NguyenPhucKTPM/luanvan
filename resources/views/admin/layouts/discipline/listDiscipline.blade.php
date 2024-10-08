@@ -13,14 +13,7 @@
                             </div>
                             <div class="dt-action-buttons text-end">
                                 <div class="dt-buttons d-inline-flex">
-                                    <button
-                                        class="dt-button buttons-collection btn btn-outline-secondary dropdown-toggle me-2"
-                                        tabindex="0" aria-controls="DataTables_Table_0" type="button"
-                                        aria-haspopup="true">
-                                        <span>
-                                            <i data-feather='upload' class="me-1"></i>Export
-                                        </span>
-                                    </button>
+                                 
                                     <button class="dt-button create-new btn btn-primary" tabindex="0"
                                         aria-controls="DataTables_Table_0" type="button" data-bs-toggle="modal"
                                         data-bs-target="#modals-slide-in">
@@ -31,7 +24,7 @@
                                 </div>
                             </div>
                         </div>
-                        <table class="datatables-basic table table-hover" id="table">
+                        <table class="datatables-basic table-striped table table-hover" id="table">
                             <thead>
                                 <tr>
                                     <th>ID</th>
