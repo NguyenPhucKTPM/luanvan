@@ -142,8 +142,6 @@ class Book extends Model
             )
             ->paginate(12);
     }
-   
-
     public static function getBookByLanguage($id, $id_NgonNgu)
     {
         return DB::table('sach')

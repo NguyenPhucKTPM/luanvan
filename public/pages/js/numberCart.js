@@ -23,16 +23,13 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
 
-        // Kiểm tra giá trị nhập vào ô input
         quantityInput.addEventListener('input', function () {
             var currentValue = Number(quantityInput.value);
 
-            // Nếu giá trị không phải là số hoặc lớn hơn max thì gán bằng max
             if (isNaN(currentValue) || currentValue > maxValue) {
                 quantityInput.value = maxValue;
             }
 
-            // Nếu giá trị nhỏ hơn min thì gán bằng min
             if (currentValue < minValue) {
                 quantityInput.value = minValue;
             }

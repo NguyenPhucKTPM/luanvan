@@ -50,18 +50,5 @@ class LanguageController extends Controller
         $language->save();
         return redirect()->route('listLanguage')->with('success', 'Cập nhật ngôn ngữ thành công');
     }
-    public function deleteLanguage($id)
-    {
-        try {         
-            $language = Language::find($id);
-            if ($language) {
-                $language->delete();
-                return redirect()->route('listLanguage')->with('success', 'Xóa ngôn ngữ ' . '"' . $language->tenNgonNgu . '"' . ' thành công');
-            } else {
-                return redirect()->route('listLanguage')->with('error', 'Lỗi khi xóa ngôn ngữ');
-            }
-        } catch (\Exception) {
-            return redirect()->route('listLanguage')->with('error', 'Lỗi khi xóa ngôn ngữ');
-        }
-    }
+   
 }

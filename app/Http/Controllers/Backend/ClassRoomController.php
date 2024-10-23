@@ -52,21 +52,4 @@ class ClassRoomController extends Controller
         $class->save();
         return redirect()->route('listClassRoom')->with('success', 'Cập nhật tên lớp học thành công');
     }
-    public function deleteClassRoom($id)
-    {
-        try {
-            if ($id == 1) {
-                return redirect()->route('listClassRoom')->with('error', 'Mặc định không thể xóa');
-            }
-            $class = ClassRoom::find($id);
-            if ($class) {
-                $class->delete();
-                return redirect()->route('listClassRoom')->with('success', 'Xóa lớp học ' . '"' . $class->tenLop . '"' . ' thành công');
-            } else {
-                return redirect()->route('listClassRoom')->with('error', 'Lỗi khi xóa lớp học');
-            }
-        } catch (\Exception) {
-            return redirect()->route('listClassRoom')->with('error', 'Lỗi khi xóa lớp học');
-        }
-    }
 }

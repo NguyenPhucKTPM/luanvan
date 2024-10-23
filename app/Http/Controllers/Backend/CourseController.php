@@ -53,21 +53,4 @@ class CourseController extends Controller
         $course->save();
         return redirect()->route('listCourse')->with('success', 'Cập nhật tên khóa học thành công');
     }
-    public function deleteCourse($id)
-    {
-        try {
-            if ($id == 1) {
-                return redirect()->route('listCourse')->with('error', 'Mặc định không thể xóa');
-            }
-            $course = Course::find($id);
-            if ($course) {
-                $course->delete();
-                return redirect()->route('listCourse')->with('success', 'Xóa khóa học ' . '"' . $course->tenKhoaHoc . '"' . ' thành công');
-            } else {
-                return redirect()->route('listCourse')->with('error', 'Lỗi khi xóa khóa học');
-            }
-        } catch (\Exception) {
-            return redirect()->route('listCourse')->with('error', 'Lỗi khi xóa khóa học');
-        }
-    }
 }

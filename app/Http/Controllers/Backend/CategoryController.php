@@ -50,20 +50,6 @@ class CategoryController extends Controller
         $category->save();
         return redirect()->route('listCategory')->with('success', 'Cập nhật tên thể loại thành công');
     }
-    public function deleteCategory($id)
-    {
-        try {
-            $category = Category::find($id);
-            if ($category) {
-                $category->delete();
-                return redirect()->route('listCategory')->with('success', 'Xóa thể loại ' . '"' . $category->tenTheLoai . '"' . ' thành công');
-            } else {
-                return redirect()->route('listCategory')->with('error', 'Lỗi khi xóa thể loại');
-            }
-        } catch (\Exception) {
-            return redirect()->route('listCategory')->with('error', 'Lỗi khi xóa thể loại');
-        }
-    }
     public function pageCategory(){
         return view('pages.layouts.category.listCategory', [
             'title' => 'Tất cả danh mục',

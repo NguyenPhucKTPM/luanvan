@@ -66,81 +66,49 @@
                 <!--begin::Content-->
                 <div class="d-flex flex-center flex-column flex-column-fluid">
                     <!--begin::Wrapper-->
-                    <div class="w-lg-500px p-10 p-lg-15 mx-auto">
-                        <!--begin::Form-->
+                    <div class="w-lg-500px p-10 p-lg-15 mx-auto">     
                         <form class="form w-100" action="{{route('login')}}" method="POST">
-                            @csrf
-                            <!--begin::Heading-->
+                            @csrf           
                             <div class="text-center mb-10">
-                                <!--begin::Title-->
+                            
                                 <h1 class="text-dark mb-3">Đăng nhập</h1>
-                                <!--end::Title-->
-                                <!--begin::Link-->
+                             
                                 <div class="text-gray-400 fw-bold fs-4">Chưa có tài khoản?
                                     <a href="{{route('dang-ky')}}" class="link-primary fw-bolder">Đăng ký ở đây</a>
                                 </div>
-                                <!--end::Link-->
                             </div>
-                            <!--begin::Heading-->
-                            <!--begin::Input group-->
                             <div class="fv-row mb-10">
-                                <!--begin::Label-->
-                                <label class="form-label fs-6 fw-bolder text-dark" for="email">Địa chỉ Email</label>
-                                <!--end::Label-->
-                                <!--begin::Input-->
+                                <label class="form-label fs-6 fw-bolder text-dark" for="email">Địa chỉ Email</label>            
                                 <input class="form-control form-control-lg form-control-solid" type="text" id="email" placeholder="Nhập địa chỉ email" name="email" autocomplete="off" />
                                 @if($errors->has('email'))
                                 <span class="error-message text-danger">*
                                     {{$errors->first('email')}}</span>
-                                @endif
-                                <!--end::Input-->
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="fv-row mb-10">
-                                <!--begin::Wrapper-->
-                                <div class="d-flex flex-stack mb-2">
-                                    <!--begin::Label-->
-                                    <label class="form-label fw-bolder text-dark fs-6 mb-0" for="password">Mật khẩu</label>
-                                    <!--end::Label-->
-                                    <!--begin::Link-->
-                                    <a href="{{route('forgot')}}" class="link-primary fs-6 fw-bolder">Quên mật khẩu ?</a>
-                                    <!--end::Link-->
+                                @endif      
+                            </div>                  
+                            <div class="fv-row mb-10">                       
+                                <div class="d-flex flex-stack mb-2">           
+                                    <label class="form-label fw-bolder text-dark fs-6 mb-0" for="password">Mật khẩu</label>               
+                                    <a href="{{route('forgot')}}" class="link-primary fs-6 fw-bolder">Quên mật khẩu ?</a>                               
                                 </div>
     
                                 <input class="form-control form-control-lg form-control-solid" name="password" placeholder="********" type="password" name="password" autocomplete="off" />
                                 @if($errors->has('password'))
                                 <span class="error-message text-danger">*
                                     {{$errors->first('password')}}</span>
-                                @endif
-                              
-                                <!--end::Input-->
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Actions-->
+                                @endif                           
+                            </div>                     
                             <div class="text-center">
-                                <!--begin::Submit button-->
                                 <button type="submit" id="kt_sign_in_submit" class="btn btn-lg btn-primary w-100 mb-5">
                                     <span class="indicator-label">Đăng nhập</span>
                                     <span class="indicator-progress">Chờ...
                                         <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                                </button>
-                                <!--end::Submit button-->
-                                <!--begin::Separator-->
-
-                                <!--end::Google link-->
+                                </button>   
                             </div>
-                            <!--end::Actions-->
                         </form>
-                        <!--end::Form-->
                     </div>
-                    <!--end::Wrapper-->
-                </div>
-                <!--end::Content-->
-                <!--begin::Footer-->
+                </div> 
                 <div class="d-flex flex-center flex-wrap fs-6 p-5 pb-0">
-                    <!--begin::Links-->
-                    <!--end::Links-->
+                   
                 </div>
                 <!--end::Footer-->
             </div>

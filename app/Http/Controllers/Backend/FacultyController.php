@@ -54,21 +54,5 @@ class FacultyController extends Controller
         $faculty->save();
         return redirect()->route('listFaculty')->with('success', 'Cập nhật tên khóa học thành công');
     }
-    public function deleteFaculty($id)
-    {
-        try{
-            if($id == 1){
-                return redirect()->route('listFaculty')->with('error', 'Mặc định không thể xóa');
-            }
-            $faculty = Faculty::find($id);
-            if($faculty){
-                $faculty->delete();
-                return redirect()->route('listFaculty')->with('success', 'Xóa khoa ' . '"' . $faculty->tenKhoa . '"' . ' thành công');
-            }else{
-                return redirect()->route('listFaculty')->with('error', 'Lỗi khi xóa khoa');
-            }    
-        }catch(\Exception){
-            return redirect()->route('listFaculty')->with('error', 'Lỗi khi xóa khoa');
-        }
-    }
+   
 }

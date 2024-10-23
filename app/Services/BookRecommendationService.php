@@ -12,7 +12,6 @@ class BookRecommendationService
 {
     public function getComprehensiveRecommendations(User $user, $limit = 5)
     {
-        // Định nghĩa trọng số cho từng yếu tố
         $weights = [
             'popularity' => 0.125,
             'category' => 0.25,
@@ -26,8 +25,6 @@ class BookRecommendationService
 
         foreach ($allBooks as $book) {
             $score = 0;
-
-            // Tính các điểm số theo từng yếu tố
             $score += $weights['popularity'] * $this->getPopularityScore($book);
             $score += $weights['category'] * $this->getCategoryScore($book, $user);
             $score += $weights['personal_history'] * $this->getPersonalHistoryScore($book, $user);
@@ -45,7 +42,6 @@ class BookRecommendationService
             ->select('sach.*', 'hinhanh.duongDan')
             ->orderByRaw("FIELD(sach.id_Sach, " . implode(',', array_map('intval', $recommendedBookIds)) . ")")
             ->get();
-        // dd($recommendedBooks);
         return $recommendedBooks;
     }
 
@@ -99,7 +95,6 @@ class BookRecommendationService
 
     private function getPersonalHistoryScore(Book $book, User $user)
     {
-        // Kiểm tra xem người dùng đã mượn cuốn sách này chưa
         $hasRead = detailBorrow::join('phieumuon', 'chitietphieumuon.id_PhieuMuon', '=', 'phieumuon.id_PhieuMuon')
             ->where('phieumuon.id_NguoiDung', $user->id_NguoiDung)
             ->where('chitietphieumuon.id_Sach', $book->id_Sach)
@@ -158,8 +153,7 @@ class BookRecommendationService
         // Tính điểm dựa trên ngành học
         $disciplineScore = $bookDisciplines->map(fn($discipline) => $userFavoriteDisciplines->get($discipline, 0))->sum() / ($totalBorrows ?: 1);
 
-        // Trả về điểm số dựa trên ngành học (có thể điều chỉnh trọng số nếu cần)
-        return $disciplineScore; // Chỉ trả về điểm số ngành học
+        return $disciplineScore; 
     }
 
     private function getRecencyScore(Book $book)

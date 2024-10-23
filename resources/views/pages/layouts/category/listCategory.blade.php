@@ -25,7 +25,9 @@
                             </a>
                             <div class="text py-2 pb-2 px-2">
                                 <h3>
-                                    <a style="text-align: center; display: block;" href="{{ route('listBookByCategory', ['category' => $data->id_TheLoai]) }}">{{$data -> tenTheLoai}}</a>
+                                    <a style="text-align: center; display: block;" href="{{ route('listBookByCategory', ['category' => $data->id_TheLoai]) }}"
+                                    >{{$data -> tenTheLoai}}
+                                    </a>
                                 </h3>
                             </div>
                         </div>

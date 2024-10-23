@@ -211,7 +211,6 @@
         }
     });
 
-    // Xử lý sự kiện khi nhấn nút xóa sản phẩm
     document.addEventListener('click', function(e) {
         if (e.target && e.target.matches('.product-remove a')) {
             e.preventDefault();

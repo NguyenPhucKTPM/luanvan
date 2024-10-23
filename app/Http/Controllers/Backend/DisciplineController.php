@@ -49,19 +49,5 @@ class DisciplineController extends Controller
         $discipline->save();
         return redirect()->route('listDiscipline')->with('success', 'Cập nhật ngành học thành công');
     }
-    public function deleteDiscipline($id)
-    {
-        try {
-            $discipline = Discipline::find($id);
-            if ($discipline) {
-                $discipline->delete();
-                return redirect()->route('listDiscipline')->with('success', 'Xóa ngành học ' . '"' . $discipline->tenNganhHoc . '"' . ' thành công');
-            } else {
-                return redirect()->route('listDiscipline')->with('error', 'Lỗi khi xóa ngành học');
-            }
-        } catch (\Exception) {
-            return redirect()->route('listDiscipline')->with('error', 'Lỗi khi xóa ngành học');
-        }
-    }
 
 }

@@ -59,18 +59,5 @@ class PublisherController extends Controller
             return redirect()->route('listPublisher')->with('error', 'Lỗi khi cập nhật nhà xuất bản');
         }
     }
-    public function deletePublisher($id){
-        try{
-          $publisher = Publisher::find($id);
-          if($publisher){
-            $publisher->delete();
-            return redirect()->route('listPublisher')->with('success', 'Xóa ' . '"' . $publisher->tenNhaXuatBan . '"' . ' thành công');
-        }else{
-            return redirect()->route('listPublisher')->with('error', 'Lỗi khi xóa nhà xuất bản');
-        }    
-        }catch(\Exception){
-            return redirect()->route('listPublisher')->with('error', 'Lỗi khi xóa nhà xuất bản');
-        }
-    }
     
 }

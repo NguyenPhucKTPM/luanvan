@@ -70,25 +70,7 @@
                                                     </svg>
                                                     Chi tiết
                                                 </a>
-                                                @if($data -> id_Lop != 1)
-                                                <a href="javascript:;" class="dropdown-item delete-record text-danger"
-                                                    data-bs-toggle="modal" data-bs-target="#modals-delete"
-                                                    data-id="{{ $data->id_Lop }}"
-                                                    data-ten="{{ $data->tenLop }}">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
-                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                        class="feather feather-trash-2 me-1">
-                                                        <polyline points="3 6 5 6 21 6"></polyline>
-                                                        <path
-                                                            d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
-                                                        </path>
-                                                        <line x1="10" y1="11" x2="10" y2="17"></line>
-                                                        <line x1="14" y1="11" x2="14" y2="17"></line>
-                                                    </svg>
-                                                    Xóa
-                                                </a>
-                                                @endif
+                                               
                                             </div>
                                         </div>
                                         <a href="javascript:;" class="item-edit" data-bs-toggle="modal"
@@ -163,30 +145,6 @@
             </div>
         </div>
     </section>
-
-    <!-- Modal Delete -->
-    <div class="modal fade modal-danger text-start" id="modals-delete" tabindex="-1" aria-labelledby="myModalLabel120"
-        style="display: none;" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="myModalLabel120">Bạn có chắc muốn xóa ?</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    Bạn có chắc muốn xóa khóa học: <span id="course-name"></span>
-                </div>
-                <div class="modal-footer">
-                    <form id="delete-form" method="POST" action="#">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger waves-effect waves-float waves-light">Đồng
-                            ý</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
     <!--/ Basic table -->
 
 
@@ -201,19 +159,6 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('edit-id').value = id_Lop;
             document.getElementById('tenLop1').value = tenLop1;
         });
-    });
-    // Xử lý sự kiện khi modal delete được hiển thị
-    var deleteModal = document.getElementById('modals-delete');
-    var deleteForm = document.getElementById('delete-form');
-    var nameSpan = document.getElementById('course-name');
-    deleteModal.addEventListener('show.bs.modal', function(event) {
-        var button = event.relatedTarget;
-        var Id = button.getAttribute('data-id');
-        var className = button.getAttribute('data-ten');
-
-        nameSpan.textContent = className;
-
-        deleteForm.action = '{{ route("deleteClassRoom", ":id") }}'.replace(':id', Id);
     });
 });
 </script>
