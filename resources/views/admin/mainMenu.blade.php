@@ -23,7 +23,7 @@
             <li class=" nav-item  {{ Route::currentRouteName() == 'listUser' ? 'active' : '' }}">
                 <a class="d-flex align-items-center" href="{{route('listUser')}}">
                     <i data-feather="user"></i>
-                    <span class="menu-title text-truncate" data-i18n="Email">Quản lí người
+                    <span class="menu-title text-truncate" data-i18n="Email">Quản lý người
                         dùng
                     </span>
                 </a>
@@ -32,7 +32,7 @@
                 <a class="d-flex align-items-center" href="{{route('listCourse')}}">
                     <i data-feather="flag"></i>
                     <span class="menu-title text-truncate" data-i18n="Chat">Quản
-                        lí khóa học
+                        lý khóa học
                     </span>
                 </a>
             </li>
@@ -40,7 +40,7 @@
                 <a class="d-flex align-items-center" href="{{route('listFaculty')}}">
                     <i data-feather='layers'></i>
                     <span class="menu-title text-truncate" data-i18n="Todo">Quản
-                        lí khoa
+                        lý khoa
                     </span>
                 </a>
             </li>
@@ -49,7 +49,7 @@
                     <i
                         data-feather="grid"></i>
                     <span class="menu-title text-truncate"
-                        data-i18n="Calendar">Quản lí lớp học
+                        data-i18n="Calendar">Quản lý lớp học
                     </span>
                 </a>
             </li>
@@ -57,7 +57,7 @@
                 <a class="d-flex align-items-center" href="{{route('listDiary')}}">
                     <i data-feather="database"></i>
                     <span class="menu-title text-truncate" data-i18n="Chat">Quản
-                        lí hoạt động
+                        lý hoạt động
                     </span>
                 </a>
             </li>
@@ -74,7 +74,7 @@
                 </a>
             </li>
             <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i data-feather="book-open"></i><span
-                        class="menu-title text-truncate" data-i18n="Form Elements">Quản lí sách</span></a>
+                        class="menu-title text-truncate" data-i18n="Form Elements">Quản lý sách</span></a>
                 <ul class="menu-content">
                     <li class="{{ Route::currentRouteName() == 'listBook' ? 'active' : '' }}">
                         <a class="d-flex align-items-center" href="{{ route('listBook') }}">
@@ -98,7 +98,7 @@
                 <a class="d-flex align-items-center" href="{{route('listPublisher')}}">
                     <i data-feather='feather'></i>
                     <span class="menu-title text-truncate"
-                        data-i18n="Feather">Quản lí nhà xuất bản
+                        data-i18n="Feather">Quản lý nhà xuất bản
                     </span>
                 </a>
             </li>
@@ -106,7 +106,7 @@
                 <a class="d-flex align-items-center" href="{{route('listLanguage')}}">
                     <i data-feather='type'></i>
                     <span class="menu-title text-truncate"
-                        data-i18n="Feather">Quản lí ngôn ngữ
+                        data-i18n="Feather">Quản lý ngôn ngữ
                     </span>
                 </a>
             </li>
@@ -114,7 +114,7 @@
                 <a class="d-flex align-items-center" href="{{route('listCategory')}}">
                     <i data-feather='tag'></i>
                     <span class="menu-title text-truncate"
-                        data-i18n="Feather">Quản lí thể loại
+                        data-i18n="Feather">Quản lý thể loại
                     </span>
                 </a>
             </li>
@@ -122,12 +122,12 @@
                 <a class="d-flex align-items-center" href="{{route('listDiscipline')}}">
                     <i data-feather='hexagon'></i>
                     <span class="menu-title text-truncate"
-                        data-i18n="Feather">Quản lí ngành học
+                        data-i18n="Feather">Quản lý ngành học
                     </span>
                 </a>
             </li>
             <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i data-feather="codepen"></i><span
-                        class="menu-title text-truncate" data-i18n="Form Elements">Quản lí kho để sách</span></a>
+                        class="menu-title text-truncate" data-i18n="Form Elements">Quản lý kho để sách</span></a>
                 <ul class="menu-content">
                     <li class="{{ Route::currentRouteName() == 'listBookCase' ? 'active' : '' }}">
                         <a class="d-flex align-items-center" href="{{ route('listBookCase') }}">
@@ -161,7 +161,7 @@
                     <li class="{{ Route::currentRouteName() == 'listBorrowApproved' ? 'active' : '' }}">
                         <a class="d-flex align-items-center" href="{{route('listBorrowApproved')}}">
                             <i data-feather="circle"></i>
-                            <span class="menu-item text-truncate" data-i18n="Second Level">Đang đã duyệt</span>
+                            <span class="menu-item text-truncate" data-i18n="Second Level">Đã duyệt</span>
                         </a>
                     </li>
                     <li class="{{ Route::currentRouteName() == 'listBorrowing' ? 'active' : '' }}">
@@ -173,7 +173,7 @@
                     <li class="{{ Route::currentRouteName() == 'listBorrowCancel' ? 'active' : '' }}">
                         <a class="d-flex align-items-center" href="{{route('listBorrowCancel')}}">
                             <i data-feather="circle"></i>
-                            <span class="menu-item text-truncate" data-i18n="Second Level">Đang đã hủy</span>
+                            <span class="menu-item text-truncate" data-i18n="Second Level">Đã hủy</span>
                         </a>
                     </li>
                     <li class="{{ Route::currentRouteName() == 'listBorrowReturn' ? 'active' : '' }}">
