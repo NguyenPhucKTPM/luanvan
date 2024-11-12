@@ -473,12 +473,7 @@ class BookController extends Controller
         //goi y sach
         $recommendedBooks = [];
         if (Auth::user()) {
-            $getBorrow = Borrow::getBorrowByUser($user->id_NguoiDung);
-            $countBorrow = $getBorrow->count();
-            $recommendedBooks = [];
-            if ($countBorrow >= 1) {
-                $recommendedBooks = $this->recommendationService->getComprehensiveRecommendations($user, $limit);
-            }
+            $recommendedBooks = $this->recommendationService->getComprehensiveRecommendations($user, $limit);
         }
 
         return view('pages.layouts.book.bookBycategory', [
