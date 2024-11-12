@@ -159,6 +159,7 @@ class BorrowBookController extends Controller
         }
         Cache::forget("user_{$request->user()->id_NguoiDung}_favorite_categories");
         Cache::forget("user_{$request->user()->id_NguoiDung}_favorite_disciplines");
+        // Cache::forget("user_{$request->user()->id_NguoiDung}_book_views");
         return redirect()->route('infoBorrow', ['token' => $token])->with('success', 'Đăng kí mượn sách thành công đơn mượn của bạn đang đợi duyệt');
     }
     public function infoBorrow(Request $request)

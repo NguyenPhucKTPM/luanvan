@@ -183,7 +183,7 @@ class AuthController extends Controller
         Session::forget('verification_code');
         Session::forget('verification_code_created_at');
         Session::forget('email');
-        return redirect()->route('code')->with('success', 'Mật khẩu của bạn đã được gửi qua email: ' . $request->email);
+        return redirect()->route('dang-nhap')->with('success', 'Mật khẩu của bạn đã được gửi qua email: ' . $request->email);
     }
 
     public function formUpdatePassword()

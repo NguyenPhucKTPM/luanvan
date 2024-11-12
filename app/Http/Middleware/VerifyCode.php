@@ -18,7 +18,7 @@ class VerifyCode
     public function handle(Request $request, Closure $next): Response
     {
         if(empty(session('verification_code'))){
-            return redirect()->back();
+            return redirect()->route('forgot');
         }
         return $next($request);
     }

@@ -9,7 +9,7 @@
                 <div class="col-xl-6 col-lg-12 d-flex flex-column justify-content-between border-container-lg">
                     <div class="user-avatar-section">
                         <div class="d-flex justify-content-start">
-                            <img class="img-fluid rounded " src="app-assets/images/avatars/7.png" height="104"
+                            <img class="img-fluid rounded " src="app-assets/images/avatars/4.png" height="104"
                                 width="104" alt="User avatar">
                             <div class="d-flex flex-column ms-1 info-card">
                                 <div class="user-info mb-2">

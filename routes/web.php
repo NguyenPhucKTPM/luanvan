@@ -57,7 +57,7 @@ Route::middleware(['logged'])->group(function () {
     Route::get('/quen-mat-khau', [AuthController::class, 'formForgotPassword'])->name('forgot');
     Route::post('/gui-ma', [AuthController::class, 'sendEmailResetPassword'])->name('sendEmailResetPassword');
 
-    Route::get('/ma-xac-nhan', [AuthController::class, 'formCodePassword'])->middleware('codeVerify')->name('code');
+    Route::get('/ma-xac-nhan', [AuthController::class, 'formCodePassword'])->name('code');
     Route::post('/gui-ma-xac-nhan', [AuthController::class, 'sendCodeResetPassword'])->middleware('codeVerify')->name('sendCodeResetPassword');
 
    

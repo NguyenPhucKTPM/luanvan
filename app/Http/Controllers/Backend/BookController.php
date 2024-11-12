@@ -23,6 +23,7 @@ use App\Models\Comment;
 use App\Models\User;
 use App\Models\Borrow;
 use App\Services\BookRecommendationService;
+use Illuminate\Support\Facades\Cache;
 
 class BookController extends Controller
 {
@@ -431,7 +432,7 @@ class BookController extends Controller
         $id_NhaXuatBan = $request->nxb;
         $id_NganhHoc = $request->nganhhoc;
         $user = $request->user();
-        $limit = $request->input('limit', 10);
+        $limit = $request->input('limit', 15);
         $getBook = Book::getBookByCategory($id_TheLoai);
         $idNgonNguArray = $getBook->pluck('id_NgonNgu')->unique()->toArray();
         $getAllLanguage = Language::whereIn('id_NgonNgu', $idNgonNguArray)->orderBy('tenNgonNgu', 'asc')->get();
@@ -503,6 +504,9 @@ class BookController extends Controller
             $editView->luotXem += 1;
             $editView->save();
             $similarBook = Book::getSimilarBook($id);
+            Cache::forget("user_" . request()->user()->id_NguoiDung . "_favorite_categories");
+            Cache::forget("user_" . request()->user()->id_NguoiDung . "_favorite_disciplines");
+            // Cache::forget("user_" . request()->user()->id_NguoiDung . "_book_views");
         }
 
         return view('pages.layouts.book.detailBook', [

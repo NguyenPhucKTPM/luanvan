@@ -32,8 +32,7 @@ class Book extends Model
         'luotMuon',
         'id_NhaXuatBan',
         'id_NgonNgu',
-        '
-        id_NganhHoc',
+        'id_NganhHoc',
         'id_ViTri',
         'ngayTaoSach',
         'ngaySuaSach'
@@ -64,6 +63,7 @@ class Book extends Model
     {
         return $this->hasOne(Image::class, 'id_Sach', 'id_Sach');
     }
+   
 
     public static function getAllBook()
     {
@@ -226,7 +226,7 @@ class Book extends Model
             })
             // JOIN bảng hinhanh
             ->join('hinhanh', 'hinhanh.id_Sach', '=', 'sach.id_Sach')
-            ->select('sach.*', 'hinhanh.duongDan') // Chọn tất cả cột từ sach và cột duongDan từ hinhanh
+            ->select('sach.*', 'hinhanh.duongDan') 
             ->get();
 
         $bookCounts = [];
