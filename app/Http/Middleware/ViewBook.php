@@ -26,9 +26,6 @@ class ViewBook
                 $views = array_filter($views, 'is_numeric');
                 $views = array_map('intval', $views);
     
-                // if (($key = array_search($bookId, $views)) !== false) {
-                //     unset($views[$key]);
-                // }
                 array_unshift($views, $bookId);
                 if (count($views) > 20) {
                     array_pop($views); 

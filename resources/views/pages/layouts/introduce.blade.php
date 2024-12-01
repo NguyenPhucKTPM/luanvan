@@ -44,41 +44,50 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12 ftco-animate fadeInUp ftco-animated">
-                <h2 class="mb-3">#1. Thành viên nhóm</h2>
-                <p>Huỳnh Thanh Nhã - 2000321: Phụ trách phân tích và thiết kế phần mềm, đảm bảo xây dựng kiến trúc hệ thống và các chức năng đáp ứng yêu cầu kỹ thuật.</p>
-                <p>Nguyễn Nhâm Phúc - 2000378: Đảm nhận vai trò lập trình hệ thống phần mềm, hiện thực các chức năng đã được thiết kế và tối ưu mã nguồn để đạt hiệu suất cao nhất.</p>
+                <h2 class="mb-3">#1.Quy Tắc Mượn Sách</h2>
+                <p>Trong hệ thống quản lý thư viện hiện đại, việc quy định rõ ràng các điều kiện mượn sách là một yếu tố quan trọng nhằm đảm bảo sự công bằng và hiệu quả trong việc quản lý nguồn tài liệu. Chúng tôi đã thiết kế một hệ thống mượn sách linh hoạt nhưng có cơ chế quản lý chặt chẽ, phù hợp với nhu cầu của từng đối tượng độc giả.</p>
+                
+                <p>Đối với sinh viên, chúng tôi áp dụng chính sách mượn sách với số lượng tối đa là 3 cuốn và thời hạn mượn là 10 ngày. Điều này giúp sinh viên có đủ thời gian để nghiên cứu và tiếp cận các tài liệu học tập, đồng thời vẫn đảm bảo nguồn sách được luân chuyển và chia sẻ một cách hiệu quả giữa các sinh viên.</p>
+                
+                <p>Riêng với giảng viên, do đặc thù công việc và nhu cầu nghiên cứu chuyên sâu, chúng tôi cho phép mượn tối đa 5 cuốn sách với thời hạn mượn lên đến 15 ngày. Chế độ ưu tiên này nhằm tạo điều kiện cho đội ngũ giảng viên có thể tiếp cận các nguồn tài liệu phục vụ cho công tác giảng dạy và nghiên cứu khoa học.</p>
+
                 <p>
-                    <img src="{{asset('pages/images/hoptac.jpg')}}" alt="" class="img-fluid">
+                    <img src="{{asset('pages/images/quytac.jpg')}}" alt="" class="img-fluid">
                 </p>
+
+                <p>Việc quy định rõ ràng số lượng và thời hạn mượn sách không chỉ giúp quản lý nguồn tài liệu một cách khoa học mà còn tạo nên sự minh bạch và công bằng. Mỗi độc giả đều được tiếp cận nguồn tài nguyên một cách bình đẳng, đồng thời góp phần nâng cao văn hóa sử dụng thư viện.</p>
+
+                <h2 class="mb-3 mt-5">#2. Trách Nhiệm Bảo Quản Sách</h2>
+                
+                <p>Bảo quản sách là trách nhiệm quan trọng của mỗi độc giả, thể hiện sự tôn trọng đối với tri thức và nguồn tài liệu chung. Chúng tôi đặt ra các quy định nghiêm ngặt nhằm bảo vệ và gìn giữ nguồn sách quý giá của thư viện.</p>
+                
+                <p>Việc làm mất hoặc làm hỏng sách được coi là vi phạm nghiêm trọng. Bất kỳ độc giả nào để xảy ra tình trạng này đều phải chịu trách nhiệm bồi thường. Mức bồi thường được tính toán một cách công bằng và minh bạch dựa trên giá trị thị trường của cuốn sách tại thời điểm xảy ra sự cố.</p>
                 <p>
-                    Để hệ thống phần mềm hoạt động hiệu quả và đáp ứng đúng yêu cầu, quá trình phân tích và thiết kế phần mềm và lập trình hệ thống cần có sự phối hợp chặt chẽ. Ban đầu, công việc phân tích và thiết kế sẽ thu thập yêu cầu, phân tích và đưa ra kiến trúc tổng thể, bao gồm việc xác định các mô-đun, chức năng và luồng xử lý. Tiếp theo, lập trình viên sẽ dựa trên thiết kế này để lập trình và hiện thực hóa các chức năng theo kế hoạch đã định. Trong quá trình triển khai, hai bên sẽ liên tục trao đổi để đảm bảo mã nguồn không chỉ tuân thủ thiết kế mà còn có khả năng mở rộng, bảo trì và tối ưu. Sự tương tác này giúp hệ thống được xây dựng từ giai đoạn nền tảng đến triển khai chi tiết một cách liền mạch và hiệu quả.
+                    <img src="{{asset('pages/images/baoquan.jpg')}}" alt="" class="img-fluid">
                 </p>
-                <h2 class="mb-3 mt-5">#2. Lý do chọn đề tài</h2>
+                <p>Chúng tôi tin rằng, việc áp dụng chính sách bồi thường này không chỉ là biện pháp bảo vệ tài sản của thư viện mà còn là cơ hội để giáo dục ý thức trách nhiệm và sự tôn trọng đối với tri thức ở mỗi độc giả.</p>
+
+                <h2 class="mb-3 mt-5">#3. Hình Thức Mượn Sách</h2>
+                
+                <p>Nhằm đáp ứng nhu cầu đa dạng của độc giả, chúng tôi phát triển hai hình thức mượn sách linh hoạt và tiện lợi: mượn tại trường và mượn từ xa.</p>
+                
+                <p><strong>Mượn Tại Trường:</strong></p>
+                <p>Đây là hình thức truyền thống nhưng vẫn được cải tiến để tối ưu trải nghiệm người dùng. Độc giả cần thực hiện quy trình đăng ký và được duyệt phiếu mượn. Sau khi được phê duyệt, độc giả sẽ trực tiếp đến thư viện để nhận sách, mang theo đầy đủ thông tin mượn sách.</p>
                 <p>
-                    Trong những năm gần đây, công nghệ thông tin đã có sự phát triển vượt bậc và ứng dụng rộng rãi trong nhiều lĩnh vực của xã hội, trong đó có giáo dục. Các thành tựu của công nghệ thông tin đã mang lại những thay đổi sâu sắc cho mọi khía cạnh của đời sống, đặc biệt là trong việc nâng cao chất lượng và hiệu quả quản lý. Đối với các thư viện, việc ứng dụng công nghệ thông tin đây là xu hướng tất yếu nhằm hiện đại hóa và nâng cao hiệu quả hoạt động.
+                    <img src="{{asset('pages/images/taitruong.jpg')}}" alt="" class="img-fluid">
                 </p>
+                <p>Quy trình này giúp thư viện kiểm soát chặt chẽ nguồn sách, đồng thời tạo cơ hội trực tiếp tương tác và hỗ trợ độc giả.</p>
+                
+                <p><strong>Mượn Từ Xa:</strong></p>
+                <p>Để đáp ứng xu thế công nghệ và nhu cầu thuận tiện, chúng tôi phát triển hình thức mượn từ xa với các điều khoản cụ thể:</p>
+                
+                <p>- Độc giả phải thanh toán đầy đủ giá sách theo niêm yết của thư viện</p>
+                <p>- Chi trả toàn bộ chi phí vận chuyển (cả lượt mượn và trả)</p>
+                <p>- Được gia hạn thêm 5 ngày so với thời hạn ban đầu để tăng tính linh hoạt</p>
                 <p>
-                    <img src="{{asset('pages/images/detai.jpg')}}" alt="" class="img-fluid">
+                    <img src="{{asset('pages/images/tuxa.jpg')}}" alt="" class="img-fluid">
                 </p>
-                <p>
-                    Quản lý thư viện là một chuỗi công việc phức tạp, đòi hỏi sự chính xác và khối lượng công việc khá lớn, tốn nhiều công sức. Việc tin học hóa các hoạt động này sẽ giúp đơn giản hóa quy trình quản lý, quản lý nguồn tư liệu, quản lý hoạt động sử dụng tư liệu của độc giả, các hoạt động liên kết, trao đổi với các thư viện lớn có nguồn tư liệu dồi dào nhằm đạt được hiệu quả cao. Một hệ thống quản lý thư viện hiện đại sẽ giúp giảm thiểu tối đa những khó khăn và vất vả trong công việc, đồng thời tăng khả năng tiếp cận của độc giả với nguồn tư liệu.
-                    Nhận thấy những lợi ích và tầm quan trọng của việc ứng dụng công nghệ thông tin trong quản lý thư viện, nhóm chúng em đã quyết định nghiên cứu và thực hiện đề tài "Xây dựng Hệ thống quản lý thư viện". Đề tài này không chỉ nhằm khắc phục những khó khăn hiện tại mà còn hướng đến việc nâng cao khả năng tiếp cận của độc giả, tăng cường hiệu quả và chất lượng dịch vụ thư viện.
-                </p>
-                <p>
-                    Đề tài "Xây dựng hệ thống quản lý thư viện " được xây dựng dựa trên cơ sở khảo sát và phân tích hiện trạng của thư viện, nhằm đáp ứng các nhu cầu của các trường đại học trong việc nâng cao chất lượng quản lý.
-                </p>
-                <h2 class="mb-3 mt-5">#3. Hướng phát triển</h2>
-                <p>Cải thiện giao diện sao cho thân thiện với người dùng hơn như sử dụng màu sắc, bố cục hợp lý, sử dụng các icon, hình ảnh một cách trực quan. </p>
-                <p>Tích hợp thêm các tính năng mới.</p>
-                <p>Liên kết hệ thống với các hệ thống thư viện khác để đa dạng nguồn tài liệu.</p>
-                <p><img src="{{asset('pages/images/phatrien.jpg')}}" alt="" class="img-fluid"></p>
-                <p>
-                    Phân tích dữ liệu người dùng: Dựa trên lịch sử mượn sách, hành vi tìm kiếm và các đánh giá, hệ thống có thể tự động gợi ý sách theo sở thích cá nhân, giúp người dùng dễ dàng khám phá những cuốn sách mới phù hợp.
-                </p>
-                <p>
-                    Gợi ý theo xu hướng: Đưa ra gợi ý dựa trên những sách được mượn nhiều nhất hoặc đánh giá cao từ cộng đồng người đọc, giúp người dùng tiếp cận với các tác phẩm phổ biến.
-                </p>
-                <p>Những hướng phát triển này sẽ giúp hệ thống trở nên thông minh và hữu ích hơn, mang lại trải nghiệm đọc sách tốt hơn cho người dùng.</p>
+                <p>Hình thức mượn từ xa không chỉ mang lại sự tiện lợi cho độc giả mà còn mở rộng khả năng tiếp cận nguồn tri thức, vượt qua giới hạn không gian và thời gian.</p>       
             </div>
         </div>
     </div>

@@ -18,7 +18,6 @@ class CartController extends Controller
     public function showCart()
     {
         $myCart = Cart::getAllCartByUser(Auth::user()->id_NguoiDung);
-        // dd($myCart);
         if (empty($myCart) || count($myCart) === 0) {
             return redirect()->back()->with('error','Giỏ hàng rỗng không thể xem.');
         }
@@ -38,7 +37,6 @@ class CartController extends Controller
     }
     public function addCart(Request $request)
     {
-        // dd($request->all());
         $request->validate([
             'soLuong' => 'required|integer|min:1',
         ], [

@@ -96,6 +96,7 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         $request->session()->forget('book_views');
+        Cache::forget("book_views");
         return redirect()->route('home');
     }
 

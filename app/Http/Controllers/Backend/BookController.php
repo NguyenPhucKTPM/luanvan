@@ -432,7 +432,7 @@ class BookController extends Controller
         $id_NhaXuatBan = $request->nxb;
         $id_NganhHoc = $request->nganhhoc;
         $user = $request->user();
-        $limit = $request->input('limit', 15);
+        $limit = $request->input('limit', 20);
         $getBook = Book::getBookByCategory($id_TheLoai);
         $idNgonNguArray = $getBook->pluck('id_NgonNgu')->unique()->toArray();
         $getAllLanguage = Language::whereIn('id_NgonNgu', $idNgonNguArray)->orderBy('tenNgonNgu', 'asc')->get();
@@ -454,8 +454,7 @@ class BookController extends Controller
         if (isset($id_NganhHoc)) {
             $getBook = Book::getBookByDiscipline($id_TheLoai, $id_NganhHoc);
         }
-        //sach da xem
-        // cache()->forget("book_views");
+       
         $bookviewed = [];
         $getBooksViewed = [];
         $bookviewed = cache()->get("book_views", []);
@@ -499,8 +498,8 @@ class BookController extends Controller
             $editView->luotXem += 1;
             $editView->save();
             $similarBook = Book::getSimilarBook($id);
-            Cache::forget("user_" . request()->user()->id_NguoiDung . "_favorite_categories");
-            Cache::forget("user_" . request()->user()->id_NguoiDung . "_favorite_disciplines");
+            // Cache::forget("user_" . request()->user()->id_NguoiDung . "_favorite_categories");
+            // Cache::forget("user_" . request()->user()->id_NguoiDung . "_favorite_disciplines");
             // Cache::forget("user_" . request()->user()->id_NguoiDung . "_book_views");
         }
 
@@ -534,7 +533,7 @@ class BookController extends Controller
             $id_ViTri = $request->vitri;
             session()->forget('search_results');
             $user = $request->user();
-            $limit = $request->input('limit', 10);
+            $limit = $request->input('limit', 15);
             $txtError = '';
             session()->forget('search_results');
             if (empty($query)) {

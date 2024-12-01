@@ -33,7 +33,7 @@ class TrackBookView
 
             $views = array_slice($views, 0, 20);
 
-            cache()->put("book_views", $views, 60 * 60 * 5);
+            cache()->put("book_views", $views, 3600);
         }
 
         return $next($request);

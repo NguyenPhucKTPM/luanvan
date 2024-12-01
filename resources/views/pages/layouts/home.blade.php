@@ -74,7 +74,7 @@
         <div class="row">
             <div class="col-md-6">
                 <a href="{{ route('pageDetailBook', $getHotBook->id_Sach) }}">
-                    <img src="{{$getHotBook->duongDan}}" class="img-fluid" alt="">
+                    <img src="{{$getHotBook->duongDan}}" style="height: 460px;" class="img-fluid" alt="">
                 </a>
             </div>
             <div class="col-md-6">

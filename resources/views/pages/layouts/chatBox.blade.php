@@ -30,15 +30,14 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function() {
-        // Khi người dùng nhấn nút gửi
         $('.send-button').on('click', function() {
             sendMessage();
         });
 
-        // Khi người dùng nhấn Enter trong ô nhập
+      
         $('#chatInput').on('keypress', function(e) {
             if (e.which === 13) { // Phím Enter
-                e.preventDefault(); // Ngăn không cho form gửi lại (nếu có)
+                e.preventDefault(); 
                 sendMessage();
             }
         });
@@ -53,7 +52,7 @@
 
             // Gửi tin nhắn đến server
             $.ajax({
-                url: '{{ route("handleRequest") }}', // Đường dẫn đến controller của bạn
+                url: '{{ route("handleRequest") }}', 
                 method: 'POST',
                 data: {
                     message: userMessage,

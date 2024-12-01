@@ -211,7 +211,7 @@ class Book extends Model
         $getDeciplines = DB::table('chitietnganhhoc')->where('id_Sach', $id)->pluck('id_NganhHoc');
         $getCategories = DB::table('chitiettheloai')->where('id_Sach', $id)->pluck('id_TheLoai');
 
-        $similarBooks = self::where('sach.id_Sach', '!=', $id) // Chỉ định rõ tên bảng
+        $similarBooks = self::where('sach.id_Sach', '!=', $id)
             ->where(function ($query) use ($getDeciplines, $getCategories) {
                 $query->whereIn('sach.id_Sach', function ($query) use ($getDeciplines) {
                     $query->select('id_Sach')
@@ -224,11 +224,10 @@ class Book extends Model
                             ->whereIn('id_TheLoai', $getCategories);
                     });
             })
-            // JOIN bảng hinhanh
             ->join('hinhanh', 'hinhanh.id_Sach', '=', 'sach.id_Sach')
             ->select('sach.*', 'hinhanh.duongDan') 
             ->get();
-
+        // dd($getCategories);
         $bookCounts = [];
         foreach ($similarBooks as $book) {
             $count = 0;
